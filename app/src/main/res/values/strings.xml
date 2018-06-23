@@ -84,6 +84,11 @@
     <string name="text17">设备管理</string>
     <string name="text18">陈某某</string>
     <string name="text19">&#8195;ID:YF0987654&#8195;</string>
+    <string name="text20">16:57:30</string>
+    <string name="text21">岗位：</string>
+    <string name="text22">杂工</string>
+    <string name="text23">修改密码</string>
+    <string name="text24">退出/切换账号</string>
 
     <!--出库-->
     <string name="edittext_title">请输入出库单号</string>
