@@ -1,0 +1,124 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
+    </style>
+    <!-- action bar icon style -->
+    <style name="ActionButtonStyle" parent="@android:style/Widget.Holo.Light.ActionButton">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+
+    <!--适用于整个应用程序的普通字体的样式 -->
+    <style name="style_normal_font">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearance</item>
+    </style>
+    <!-- Button for Home Screen -->
+    <style name="DashboardButton">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearance</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@drawable/button_home_text_style</item>
+        <item name="android:textSize">40px</item>
+        <item name="android:background">@drawable/button_home_style</item>
+    </style>
+    <!--Style for the normal font to be used across the application -->
+    <style name="style_medium_font">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <!--Style for the large font to be used in titles -->
+    <style name="style_large_font">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+    <style name="style_head">
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+    <style name="head_margin">
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+    <style name="head_time_magin">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+    <style name="dialog_title">
+        <item name="android:textSize">36px</item>
+        <item name="android:textColor">@color/colorAboutText</item>
+        <item name="android:text">@string/dialog_title</item>
+    </style>
+    <style name="dialog_content_text">
+     <item name="android:textSize">40px</item>
+    <item name="android:textColor">@color/colorDialogContent</item>
+    </style>
+    <style name="dialog_carrier">
+        <item name="android:textSize">30px</item>
+        <item name="android:textColor">@color/colorDialogContent</item>
+    </style>
+    <style name="dialog_button_no">
+        <item name="android:layout_width">280px</item>
+        <item name="android:layout_height">100px</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginLeft">20px</item>
+        <item name="android:layout_marginBottom">20px</item>
+        <item name="android:textSize">40px</item>
+        <item name="android:textColor">@color/colorDialogContent</item>
+        <item name="android:background">@drawable/dialog_button_no</item>
+    </style>
+    <style name="dialog_button_yes">
+        <item name="android:layout_width">280px</item>
+        <item name="android:layout_height">100px</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">20px</item>
+        <item name="android:layout_marginBottom">20px</item>
+        <item name="android:textSize">40px</item>
+        <item name="android:textColor">@color/colorHomeButton1</item>
+        <item name="android:background">@drawable/dialog_button_yes</item>
+    </style>
+    <style name="button_style5">
+        <item name="android:layout_height">100px</item>
+        <item name="android:textSize">40px</item>
+        <item name="android:textColor">@color/colorHomeButton1</item>
+        <item name="android:background">@drawable/button_style_1</item>
+    </style>
+    <style name="button_style6">
+        <item name="android:layout_height">100px</item>
+        <item name="android:textSize">40px</item>
+        <item name="android:textColor">@color/colorHomeButton1</item>
+        <item name="android:background">@drawable/dialog_button_yes</item>
+    </style>
+
+    <style name="edit_style1">
+    <item name="android:textSize">40px</item>
+    <item name="android:textColor">@color/colorHomeButton2</item>
+    <item name="android:background">@drawable/edit_style1</item>
+    </style>
+
+    <style name="text_style1">
+        <item name="android:textColor">@color/colorHomeButton1</item>
+        <item name="android:textSize">40px</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="text_style2">
+        <item name="android:textColor">@color/colorHomeButton2</item>
+        <item name="android:textSize">36px</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+
+
+</resources>

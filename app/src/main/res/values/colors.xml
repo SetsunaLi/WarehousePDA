@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorAboutText">#adb9e5</color>
+    <color name="colorUserBG">#a9a9a2</color>
+    <color name="colerUserText">#555555</color>
+    <color name="colorHomeButton1">#ffffff</color>
+    <color name="colorHomeButton2">#adb9e5</color>
+    <color name="colorZERO">#00000000</color>
+    <color name="colorHalfZERO">#e0000000</color>
+    <color name="colorEditText">#04a0ff</color>
+    <color name="colorDialogTitleBG">#0078ff</color>
+    <color name="colorDialogContent">#3a4e7b</color>
+    <color name="colorDialogContent2">#314672</color>
+    <color name="colorDialogButtonYes1">#489eff</color>
+    <color name="colorStroke1">#1c2338</color>
+    <color name="colorQuiet">#ff2879</color>
+
+
+</resources>

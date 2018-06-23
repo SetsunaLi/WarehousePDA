@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">仓库PDA</string>
+
+    <!-- Options available in the Navigation Drawer of the application -->
+    <!--导航栏的选项名称-->
+    <string-array name="options_array">
+        <item>主页</item>
+        <item>特殊入库</item>
+        <item>解绑与绑定</item>
+        <item>剪布管理</item>
+        <item>查布管理</item>
+        <item>备货管理</item>
+        <item>出库管理</item>
+        <item>设备管理</item>
+        <item>关于</item>
+    </string-array>
+    <!--系统提示-->
+    <!-- Strings for the navigation drawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="drawer_image_desc">Icon for the Navigation drawer item</string>
+    <string name="drawer_item_text">Drawer Item</string>
+
+    <!--Home Button-->
+    <string name="btn_special_storage">特特殊入库</string>
+    <string name="btn_unBindOrBind">解绑与绑定</string>
+    <string name="btn_cuttingCloth">剪布</string>
+    <string name="btn_checkingCloth">查布</string>
+    <string name="btn_stockUp">备货</string>
+    <string name="btn_stockRemoval">出库</string>
+    <string name="btn_deviceManagment">设备管理</string>
+    <string name="btn_about">关于</string>
+<!--about-->
+    <string name="RFID_demo_app">WareHouse RFID PDA Application</string>
+    <string name="moto_solutions">RIDKO Technologies</string>
+    <string name="app_version_title">Application Version</string>
+    <string name="colon">:</string>
+    <string name="app_version">18.0.1</string>
+    <string name="system_version_title">System Version</string>
+    <string name="system_version">18.0.1</string>
+    <string name="device_number_title">Device Number</string>
+    <string name="device_number">JiaQian_01</string>
+    <string name="system_sled">System Sled</string>
+    <string name="copyright_info">Copyright © 2018</string>
+
+    <string name="user_managment_group">用户管理</string>
+    <string name="system_managment_group">系统管理</string>
+    <string name="device_managment_group">设备管理</string>
+    <string name="user_managment_title">用户管理</string>
+    <string name="system_managment_title">系统管理</string>
+    <string name="device_managment_title">设备管理</string>
+<!--设备管理-->
+    <string name="system_version_key">系统版本</string>
+    <string name="system_ip_key">IP</string>
+    <string name="system_ip_summary">192.168.0.1</string>
+    <string name="system_port_key">端口</string>
+    <string name="system_port_summary">8080</string>
+    <string name="system_device_number_key">设备号</string>
+    <string name="system_device_number_summary">080521</string>
+    <string name="system_push_title">推送</string>
+    <string name="system_push_key">系统推送</string>
+    <string name="system_push_summary">当有系统消息通知时提醒</string>
+    <string name="all_volume_title">Title</string>
+    <string name="device_prower_key">功率</string>
+    <string name="device_work_time_key">工作时间</string>
+    <string name="device_interval_time_key">间隔时间</string>
+    <string name="user_message_key">用户信息</string>
+    <string name="user_jurisdiction_summary">权限</string>
+    <string name="user_in_storage_key">入库</string>
+    <string name="user_stock_up_key">备货</string>
+    <string name="user_out_storage_key">出库</string>
+    <string name="user_move_key">剪布/查布/合仓</string>
+    <string name="user_time_title">登录时间：</string>
+    <string name="user_time">time</string>
+    <string name="user_name_title">用户名：</string>
+    <string name="user_name">Administrator</string>
+    <string name="user_id_title">用户编号：</string>
+    <string name="user_id">JQ20180511</string>
+
+    <string name="text15">用户管理</string>
+    <string name="text16">系统管理</string>
+    <string name="text17">设备管理</string>
+    <string name="text18">陈某某</string>
+    <string name="text19">&#8195;ID:YF0987654&#8195;</string>
+
+    <!--出库-->
+    <string name="edittext_title">请输入出库单号</string>
+    <string name="text_search">搜索</string>
+    <string name="text_noresult">暂无搜索结果</string>
+    <string name="stockRemoval_hint">请输入正确出库信息</string>
+    <string name="dialog_title">提醒</string>
+    <string name="dialog_blink">是否激活LED显示屏</string>
+    <string name="button_yes">确定</string>
+    <string name="button_no">取消</string>
+    <string name="button_1">闪烁</string>
+    <string name="button_2">完成</string>
+    <string name="text1">出库单号：</string>
+    <string name="text2">状&#8195;态&#8195;：</string>
+    <string name="text3">看板数量：</string>
+    <!--备货-->
+    <string name="text4">请输入采购单号</string>
+    <string name="text5">采购单号：JQ123456789</string>
+    <string name="text6">确定完成备货？</string>
+    <string name="button3">备货操作</string>
+    <string name="button4">完成备货</string>
+    <!--绑定与解绑-->
+    <string name="button5">解绑</string>
+    <string name="button6">绑定</string>
+    <string name="text7">绑定布匹信息</string>
+    <string name="text8">解绑布匹信息</string>
+    <string name="text9">总数：10</string>
+    <string name="text10">绑定载具编号：</string>
+    <string name="text11">绑定载具EPC&#8197;：</string>
+    <string name="text12">布号</string>
+    <string name="text13">布匹名称</string>
+    <string name="text14">布票号</string>
+
+
+</resources>
