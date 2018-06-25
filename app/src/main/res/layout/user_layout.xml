@@ -9,36 +9,38 @@
         android:layout_width="match_parent"
         android:layout_height="350px"
         android:background="@drawable/bg_top">
+
         <ImageView
             android:id="@+id/iv"
             android:layout_width="180px"
             android:layout_height="180px"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20px"
-            android:background="@drawable/img_style_1"/>
+            android:background="@drawable/img_style_1" />
+
         <TextView
             android:id="@+id/tv1"
+            style="@style/text_style1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/iv"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20px"
-            style="@style/text_style1"
-            android:textStyle="bold"
             android:text="@string/text18"
-            />
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tv2"
+            style="@style/text_style2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/tv1"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20px"
             android:background="@drawable/text_style_1"
-            style="@style/text_style2"
-            android:text="@string/text19"
-            />
+            android:text="@string/text19" />
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="90px"
@@ -95,6 +97,8 @@
             android:text="@string/text22"
             />
     </LinearLayout>
+
+
     <LinearLayout
         android:id="@+id/linearlayout"
         android:layout_width="match_parent"
@@ -112,10 +116,12 @@
             android:text="@string/text23"
             />
         </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></RelativeLayout>
+
     <Button
         android:id="@+id/button"
         android:layout_width="540px"
