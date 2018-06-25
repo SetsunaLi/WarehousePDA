@@ -89,7 +89,11 @@
     <string name="text22">杂工</string>
     <string name="text23">修改密码</string>
     <string name="text24">退出/切换账号</string>
-
+    <string name="text25">原密码：</string>
+    <string name="text26">新密码：</string>
+    <string name="text27">确认密码：</string>
+    <string name="text28">请输入相同的新密码</string>
+    <string name="text29">请输入正确的原密码</string>
     <!--出库-->
     <string name="edittext_title">请输入出库单号</string>
     <string name="text_search">搜索</string>
