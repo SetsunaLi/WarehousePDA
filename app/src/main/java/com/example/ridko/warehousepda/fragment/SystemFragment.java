@@ -43,6 +43,8 @@ public class SystemFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        访问服务器跟新系统信息
+
     }
 
     //    这里加载视图
@@ -76,6 +78,11 @@ public class SystemFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 App.SYSTEM_PUSH=b;
+                if(b){
+//                    打开推送
+                }else{
+//                    关闭推送
+                }
             }
         });
     }
@@ -96,7 +103,22 @@ public class SystemFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.button)
-    public void onViewClicked() {
+    @OnClick({R.id.button,})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.button:
+//                重新访问服务器更新信息
+//                 fuction
+
+                if (App.SYSTEM_VERSION!=null)
+                    tv1.setText(App.SYSTEM_VERSION+"");
+                if (App.IP!=null)
+                    tv2.setText(App.IP+"");
+                if (App.PORT!=null)
+                    tv3.setText(App.PORT+"");
+                if (App.DEVICE_NO!=null)
+                    tv4.setText(App.DEVICE_NO+"");
+                break;
+        }
     }
 }
