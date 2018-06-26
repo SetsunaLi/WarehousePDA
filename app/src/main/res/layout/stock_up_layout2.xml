@@ -31,7 +31,6 @@
             android:fadingEdgeLength="0.0sp" android:layout_width="1400.0dip"
             android:layout_height="fill_parent" android:drawSelectorOnTop="false"
             android:cacheColorHint="@null" android:dividerHeight="1.0dip">
-
         </com.example.ridko.warehousepda.view.HVListView>
     </LinearLayout>
     <LinearLayout

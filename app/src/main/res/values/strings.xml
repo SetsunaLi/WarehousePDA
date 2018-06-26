@@ -53,12 +53,13 @@
     <string name="device_managment_title">设备管理</string>
 <!--设备管理-->
     <string name="system_version_key">系统版本</string>
+    <string name="system_version_summary">V2018.6.26</string>
     <string name="system_ip_key">IP</string>
     <string name="system_ip_summary">192.168.0.1</string>
     <string name="system_port_key">端口</string>
     <string name="system_port_summary">8080</string>
     <string name="system_device_number_key">设备号</string>
-    <string name="system_device_number_summary">080521</string>
+    <string name="system_device_number_summary">S.B.H.1234</string>
     <string name="system_push_title">推送</string>
     <string name="system_push_key">系统推送</string>
     <string name="system_push_summary">当有系统消息通知时提醒</string>
@@ -85,15 +86,16 @@
     <string name="text18">陈某某</string>
     <string name="text19">&#8195;ID:YF0987654&#8195;</string>
     <string name="text20">16:57:30</string>
-    <string name="text21">岗位：</string>
+    <string name="text21">岗位</string>
     <string name="text22">杂工</string>
     <string name="text23">修改密码</string>
     <string name="text24">退出/切换账号</string>
-    <string name="text25">原密码：</string>
-    <string name="text26">新密码：</string>
-    <string name="text27">确认密码：</string>
+    <string name="text25">原密码</string>
+    <string name="text26">新密码</string>
+    <string name="text27">确认密码</string>
     <string name="text28">请输入相同的新密码</string>
     <string name="text29">请输入正确的原密码</string>
+    <string name="text30">重置</string>
     <!--出库-->
     <string name="edittext_title">请输入出库单号</string>
     <string name="text_search">搜索</string>

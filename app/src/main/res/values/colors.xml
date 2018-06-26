@@ -13,10 +13,11 @@
     <color name="colorEditText">#04a0ff</color>
     <color name="colorDialogTitleBG">#0078ff</color>
     <color name="colorDialogContent">#3a4e7b</color>
+    <color name="colorAlphaDialogContent">#3a4e7b59</color>
     <color name="colorDialogContent2">#314672</color>
+    <color name="colorAlphaDialogContent2">#31467259</color>
     <color name="colorDialogButtonYes1">#489eff</color>
     <color name="colorStroke1">#1c2338</color>
     <color name="colorQuiet">#ff2879</color>
-
 
 </resources>

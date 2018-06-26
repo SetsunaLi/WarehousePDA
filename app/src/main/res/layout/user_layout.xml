@@ -44,8 +44,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="90px"
-        tools:mockup_opacity="0.35"
-        android:background="@drawable/layout_style_1"
+        android:background="@drawable/bg_layout"
         android:layout_marginTop="20px"
         android:orientation="horizontal">
         <TextView
@@ -72,8 +71,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="90px"
-        tools:mockup_opacity="0.35"
-        android:background="@drawable/layout_style_1"
+        android:background="@drawable/bg_layout"
         android:layout_marginTop="20px"
         android:orientation="horizontal">
         <TextView
@@ -103,8 +101,7 @@
         android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="90px"
-        tools:mockup_opacity="0.35"
-        android:background="@drawable/layout_style_1"
+        android:background="@drawable/bg_layout"
         android:layout_marginTop="20px"
         android:orientation="horizontal">
         <TextView
@@ -126,7 +123,8 @@
         android:id="@+id/button"
         android:layout_width="540px"
         android:layout_height="100px"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/button_style_2"
         android:text="@string/text24"
         style="@style/text_style1"/>
