@@ -10,20 +10,36 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.ridko.warehousepda.R;
-import com.example.ridko.warehousepda.entity.Managment;
+import com.example.ridko.warehousepda.application.App;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by mumu on 2018/6/22.
  */
 
 public class SystemFragment extends Fragment {
+    @Bind(R.id.tv1)
+    TextView tv1;
+    @Bind(R.id.tv2)
+    TextView tv2;
+    @Bind(R.id.tv3)
+    TextView tv3;
+    @Bind(R.id.tv4)
+    TextView tv4;
+    @Bind(R.id.switch1)
+    Switch switch1;
+    @Bind(R.id.button)
+    Button button;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +64,20 @@ public class SystemFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(getActivity());
+        if (App.SYSTEM_VERSION!=null)
+            tv1.setText(App.SYSTEM_VERSION+"");
+        if (App.IP!=null)
+            tv2.setText(App.IP+"");
+        if (App.PORT!=null)
+            tv3.setText(App.PORT+"");
+        if (App.DEVICE_NO!=null)
+            tv4.setText(App.DEVICE_NO+"");
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                App.SYSTEM_PUSH=b;
+            }
+        });
     }
 
     @Override
@@ -64,5 +94,9 @@ public class SystemFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @OnClick(R.id.button)
+    public void onViewClicked() {
     }
 }

@@ -16,9 +16,12 @@ public class App extends  android.app.Application {
     public static String USER_NAME;
     public static String USER_ID;
     public static String LOADTIME;
-    public static String DEPARTMENT;
     public static String STATION;
-    public static String STATUS;
+    public static String SYSTEM_VERSION;
+    public static String IP;
+    public static String PORT;
+    public static String DEVICE_NO;
+    public static boolean SYSTEM_PUSH=true;
 
     public static boolean BIND=true;
 

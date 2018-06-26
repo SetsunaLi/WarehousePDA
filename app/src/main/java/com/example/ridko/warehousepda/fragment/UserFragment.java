@@ -74,6 +74,14 @@ public class UserFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(getActivity());
+        if (App.USER_NAME!=null)
+        tv1.setText(App.USER_NAME+"");
+        if ((App.USER_ID!=null))
+            tv2.setText(App.USER_ID+"");
+        if(App.LOADTIME!=null)
+            tv3.setText(App.LOADTIME+"");
+        if (App.STATION!=null)
+            tv4.setText(App.STATION+"");
     }
 
     @Override
