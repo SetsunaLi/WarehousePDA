@@ -147,7 +147,7 @@ public class DeviceManagmentFragment extends Fragment implements BRecyclerAdapte
         @Override
         public void convert(RecyclerHolder holder, Managment item, int position) {
             if (item!=null){
-                holder.setBackground(R.id.linearlayout,getResources().getDrawable(R.drawable.device_style_1));
+                holder.setBackground(R.id.linearlayout,getResources().getDrawable(R.drawable.bg_layout2));
                 if (item.getIvNO()!=0) {
                     holder.setImageResource(R.id.iv, item.getIvNO());
                 }
