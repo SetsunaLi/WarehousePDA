@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--背景图-->
+
+    <!--全部能量图-->
+    <!--进和能量图-->
+    <item >
+        <clip>
+            <shape>
+                <size android:height="5dp" />
+                <corners android:radius="5dip" />
+                <gradient
+                    android:startColor="@color/colorDialogContent2"
+                    android:centerColor="@color/colorDialogContent2"
+                    android:centerY="0.75"
+                    android:endColor="@color/colorDialogContent2"
+                    android:angle="270"
+                    />
+            </shape>
+        </clip>
+    </item>
+
+    <item >
+        <clip>
+            <shape>
+                <size android:height="5dp" />
+                <corners android:radius="5dip" />
+                <gradient
+                    android:startColor="@color/colorDialogTitleBG"
+                    android:centerColor="@color/colorDialogTitleBG"
+                    android:centerY="0.75"
+                    android:endColor="@color/colorDialogTitleBG"
+                    android:angle="270"
+                    />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

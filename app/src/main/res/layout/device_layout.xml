@@ -1,44 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2">
-    <LinearLayout
+    android:background="@drawable/bg2"
+    android:orientation="vertical">
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="90px"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="90px"
-            style="@style/text_style2"
-            android:textSize="40px"
-            android:layout_marginLeft="40px"
-            android:gravity="center_vertical"
-            android:text="@string/device_prower_key"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="90px"
-            style="@style/text_style1"
-            android:textSize="40px"
-            android:layout_marginRight="40dp"
-            android:gravity="center_vertical"
-            android:text="@string/text31"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="90px"
-        android:background="@drawable/bg_layout"
-        android:orientation="horizontal">
-        <android.support.v7.widget.AppCompatSeekBar
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:max="100"
-            android:progress="50"
-            android:thumb="@drawable/switch_open"/>
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_style2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_marginLeft="40px"
+                    android:gravity="center_vertical"
+                    android:text="@string/device_prower_key"
+                    android:textSize="40px" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/text1"
+                    style="@style/text_style1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/text31"
+                    android:textSize="40px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@drawable/bg_layout"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatSeekBar
+                    android:id="@+id/seekbar1"
+                    style="@style/seekbar_style_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="24px" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_style2"
+                android:layout_width="wrap_content"
+                android:layout_height="90px"
+                android:layout_marginLeft="40px"
+                android:gravity="center_vertical"
+                android:text="@string/text32"
+                android:textSize="40px" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_layout2">
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="90px"></Spinner>
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_style2"
+                android:layout_width="wrap_content"
+                android:layout_height="90px"
+                android:layout_marginLeft="40px"
+                android:gravity="center_vertical"
+                android:text="@string/text33"
+                android:textSize="40px" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_layout2">
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_style2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_marginLeft="40px"
+                    android:gravity="center_vertical"
+                    android:text="@string/device_work_time_key"
+                    android:textSize="40px" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/text2"
+                    style="@style/text_style1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center_vertical"
+                    android:text="300ms"
+                    android:textSize="40px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@drawable/bg_layout"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatSeekBar
+                    android:id="@+id/seekbar2"
+                    style="@style/seekbar_style_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="24px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/text_style2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_marginLeft="40px"
+                    android:gravity="center_vertical"
+                    android:text="@string/device_interval_time_key"
+                    android:textSize="40px" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/text3"
+                    style="@style/text_style1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center_vertical"
+                    android:text="0ms"
+                    android:textSize="40px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90px"
+                android:background="@drawable/bg_layout"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatSeekBar
+                    android:id="@+id/seekbar3"
+                    style="@style/seekbar_style_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxHeight="24px" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

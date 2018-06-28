@@ -97,6 +97,8 @@
     <string name="text29">请输入正确的原密码</string>
     <string name="text30">重置</string>
     <string name="text31">30dBM</string>
+    <string name="text32">GEN2</string>
+    <string name="text33">区域</string>
 
     <!--出库-->
     <string name="edittext_title">请输入出库单号</string>
