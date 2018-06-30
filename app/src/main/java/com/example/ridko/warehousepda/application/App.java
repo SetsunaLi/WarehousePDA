@@ -22,8 +22,15 @@ public class App extends  android.app.Application {
     public static String PORT;
     public static String DEVICE_NO;
     public static boolean SYSTEM_PUSH=true;
+    public static int ARITHMETIC=1;
+    public static int START_Q=4;
+    public static int MIN_Q=0;
+    public static int MAX_Q=15;
+    public static int STORAGE=0;
+    public static int AREA=3;
 
     public static boolean BIND=true;
+
 
     public static void activityResumed(){
         activityVisible=true;

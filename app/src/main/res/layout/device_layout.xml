@@ -55,7 +55,8 @@
                     style="@style/seekbar_style_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:maxHeight="24px" />
+                    android:maxHeight="24px"
+                    android:max="100"/>
             </LinearLayout>
 
             <TextView
@@ -69,10 +70,92 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_layout2">
-                <Spinner
+                android:background="@drawable/bg_layout2"
+                android:orientation="vertical">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="90px"></Spinner>
+                    android:layout_height="90px"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:layout_marginLeft="40px"
+                        android:gravity="center_vertical"
+                        style="@style/text_style2"
+                        android:text="@string/text34"
+                        />
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"></Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90px"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:layout_marginLeft="40px"
+                        android:gravity="center_vertical"
+                        style="@style/text_style2"
+                        android:text="@string/text35"
+                        />
+                    <Spinner
+                        android:id="@+id/spinner2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"></Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90px"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:layout_marginLeft="40px"
+                        android:gravity="center_vertical"
+                        style="@style/text_style2"
+                        android:text="@string/text36"
+                        />
+                    <Spinner
+                        android:id="@+id/spinner3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"></Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90px"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:layout_marginLeft="40px"
+                        android:gravity="center_vertical"
+                        style="@style/text_style2"
+                        android:text="@string/text37"
+                        />
+                    <Spinner
+                        android:id="@+id/spinner4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"></Spinner>
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -86,8 +169,50 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_layout2">
-
+                android:background="@drawable/bg_layout2"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90px"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:layout_marginLeft="40px"
+                        android:gravity="center_vertical"
+                        style="@style/text_style2"
+                        android:text="@string/text38"
+                        />
+                    <Spinner
+                        android:id="@+id/spinner5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"></Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90px"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:layout_marginLeft="40px"
+                        android:gravity="center_vertical"
+                        style="@style/text_style2"
+                        android:text="@string/text39"
+                        />
+                    <Spinner
+                        android:id="@+id/spinner6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"></Spinner>
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,7 +255,8 @@
                     style="@style/seekbar_style_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:maxHeight="24px" />
+                    android:maxHeight="24px"
+                    android:max="100"/>
             </LinearLayout>
 
             <LinearLayout
@@ -174,7 +300,8 @@
                     style="@style/seekbar_style_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:maxHeight="24px" />
+                    android:maxHeight="24px"
+                    android:max="100"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

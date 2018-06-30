@@ -99,7 +99,46 @@
     <string name="text31">30dBM</string>
     <string name="text32">GEN2</string>
     <string name="text33">区域</string>
-
+    <string name="text34">算法</string>
+    <string name="text35">起始</string>
+    <string name="text36">最小Q</string>
+    <string name="text37">最大Q</string>
+    <string name="text38">存储</string>
+    <string name="text39">区域</string>
+    <string-array name="arithmetic_array">
+        <item>固态</item>
+        <item>动态</item>
+    </string-array>
+    <string-array name="Q_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+    </string-array>
+    <string-array name="storage_array">
+        <item>不保存</item>
+        <item>保存</item>
+    </string-array>
+    <string-array name="area_array">
+        <item>China1</item>
+        <item>China2</item>
+        <item>Europe</item>
+        <item>USA</item>
+        <item>Korea</item>
+        <item>Japan</item>
+    </string-array>
     <!--出库-->
     <string name="edittext_title">请输入出库单号</string>
     <string name="text_search">搜索</string>
