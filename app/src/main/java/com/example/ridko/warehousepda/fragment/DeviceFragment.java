@@ -151,7 +151,13 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemSelect
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        if (spinner1.getAdapter().equals(adapterView)){
+            spinner1.setSelection(0);
+        }else if(spinner2.getAdapter().equals(adapterView)){
+            spinner2.setSelection(0);
+        }else if (spinner3.getAdapter().equals(adapterView)){
+            spinner3.setSelection(0);
+        }
     }
 //改变时候调用
     @Override
@@ -167,6 +173,10 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemSelect
                     text2.setText(progress+"ms");
                 }
                 break;
+            case R.id.seekbar3:
+                if (fromUser){
+                    text3.setText(progress+"ms");
+                }
         }
     }
 //拖动变化时候调用
