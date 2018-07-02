@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ import butterknife.ButterKnife;
  * Created by mumu on 2018/6/22.
  */
 
-public class DeviceFragment extends Fragment implements AdapterView.OnItemSelectedListener{
+public class DeviceFragment extends Fragment implements AdapterView.OnItemSelectedListener,SeekBar.OnSeekBarChangeListener{
     @Bind(R.id.text1)
     TextView text1;
     @Bind(R.id.seekbar1)
@@ -98,6 +99,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemSelect
         spinner4.setOnItemSelectedListener(this);
         spinner5.setOnItemSelectedListener(this);
         spinner6.setOnItemSelectedListener(this);
+
     }
 
     @Override
@@ -149,6 +151,32 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemSelect
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+//改变时候调用
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        switch (seekBar.getId()){
+            case R.id.seekbar1:
+                if (fromUser){
+                    text1.setText(progress+"dBM");
+                }
+                break;
+            case R.id.seekbar2:
+                if (fromUser){
+                    text2.setText(progress+"ms");
+                }
+                break;
+        }
+    }
+//拖动变化时候调用
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+//停止拖动时候调用
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
 
