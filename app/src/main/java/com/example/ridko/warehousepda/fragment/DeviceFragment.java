@@ -117,7 +117,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemSelect
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
+//设置手持机参数1
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 //        测试一下id是父布局还是textview
@@ -160,22 +160,26 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemSelect
         }
     }
 //改变时候调用
+//设置手持机参数2
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()){
             case R.id.seekbar1:
                 if (fromUser){
-                    text1.setText(progress+"dBM");
+                    text1.setText(progress+5+"dBM");
+                    App.PRWOER=progress+5;
                 }
                 break;
             case R.id.seekbar2:
                 if (fromUser){
                     text2.setText(progress+"ms");
+                    App.WORK_TIME=progress;
                 }
                 break;
             case R.id.seekbar3:
                 if (fromUser){
                     text3.setText(progress+"ms");
+                    App.FREE_TIME=progress;
                 }
         }
     }

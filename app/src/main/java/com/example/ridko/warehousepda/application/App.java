@@ -28,6 +28,9 @@ public class App extends  android.app.Application {
     public static int MAX_Q=15;
     public static int STORAGE=0;
     public static int AREA=3;
+    public static int PRWOER=30;
+    public static int WORK_TIME=65535;
+    public static int FREE_TIME=65535;
 
     public static boolean BIND=true;
 

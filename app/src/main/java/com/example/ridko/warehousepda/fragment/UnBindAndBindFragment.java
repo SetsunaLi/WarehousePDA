@@ -63,17 +63,12 @@ public class UnBindAndBindFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    private ArrayList<ListEntity> mlist = new ArrayList<>();
-    private ListDataAdapter mAdapter;
-
     //    这里加载视图
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.unbind_and_bind, container, false);
         ButterKnife.bind(this, view);
-
         return view;
     }
 
