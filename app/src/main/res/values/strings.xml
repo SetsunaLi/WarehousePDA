@@ -170,6 +170,10 @@
     <string name="text12">布号</string>
     <string name="text13">布匹名称</string>
     <string name="text14">布票号</string>
-
+<!--特殊入库-->
+    <string name="text40">请输入采购单号：</string>
+    <string name="text41">请输入退货单号：</string>
+    <string name="button7">请输入退货单号：</string>
+    <string name="button8">请输入退货单号：</string>
 
 </resources>

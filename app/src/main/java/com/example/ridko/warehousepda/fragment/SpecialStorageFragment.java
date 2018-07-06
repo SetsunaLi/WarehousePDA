@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,8 +17,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ridko.warehousepda.R;
+import com.example.ridko.warehousepda.application.App;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -75,6 +78,7 @@ public class SpecialStorageFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(getActivity());
+        text1.setText(getResources().getString(R.string.text40));
         ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy1));
         ib2.setImageDrawable(getResources().getDrawable(R.drawable.stock2));
         ib1.setOnTouchListener(new View.OnTouchListener() {
@@ -83,6 +87,13 @@ public class SpecialStorageFragment extends Fragment {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.buy3));
                 }
+                return false;
+            }
+        });
+        ib2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.stock3));
                 return false;
             }
         });
@@ -110,13 +121,35 @@ public class SpecialStorageFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
-    @OnClick({R.id.ib1, R.id.ib2})
+    private String strNO = "";
+    private Fragment f1;
+    @OnClick({R.id.ib1, R.id.ib2,R.id.tvSearch})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ib1:
+                ((ImageButton)view).setImageDrawable(getResources().getDrawable(R.drawable.buy1));
+                ib2.setImageDrawable(getResources().getDrawable(R.drawable.stock2));
+                App.ISBUY=true;
+                text1.setText(getResources().getString(R.string.text40));
                 break;
             case R.id.ib2:
+                ((ImageButton)view).setImageDrawable(getResources().getDrawable(R.drawable.stock1));
+                ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy2));
+                App.ISBUY=false;
+                text1.setText(getResources().getString(R.string.text41));
+                break;
+            case R.id.tvSearch:
+                strNO = edit1.getText().toString() + "";
+                if (strNO!=null) {
+                    if (f1==null)
+                        f1=new SpecialFragment2();
+                    FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.add(R.id.content_frame,f1);
+                    transaction.show(f1);
+                    transaction.commit();
+                } else {
+                    App.toastShow(getContext(), getResources().getString(R.string.stockRemoval_hint), Toast.LENGTH_SHORT);
+                }
                 break;
         }
     }

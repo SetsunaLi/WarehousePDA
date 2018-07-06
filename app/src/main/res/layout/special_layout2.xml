@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/bg8"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="@style/text_style1"
+            android:text="@string/text5"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:alpha="0.6"
+        android:background="@color/colorDialogContent"
+        android:layout_weight="3"
+        android:layout_marginTop="20px">
+        <include layout="@layout/no_table_item_layout"></include>
+        <com.example.ridko.warehousepda.view.HVListView
+            android:id="@+id/list"
+            android:fastScrollEnabled="true"
+            android:fadingEdgeLength="0.0sp" android:layout_width="1400.0dip"
+            android:layout_height="fill_parent" android:drawSelectorOnTop="false"
+            android:cacheColorHint="@null" android:dividerHeight="1.0dip">
+        </com.example.ridko.warehousepda.view.HVListView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6">
+        <Button
+            android:id="@+id/button_blink"
+            style="@style/button_style5"
+            android:layout_width="match_parent"
+            android:text="@string/button3"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="40px"
+            android:layout_marginRight="20px"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/button_ok"
+            style="@style/button_style6"
+            android:layout_width="match_parent"
+            android:text="@string/button4"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="40px"
+            android:layout_marginRight="40px"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -32,6 +32,7 @@ public class App extends  android.app.Application {
     public static int WORK_TIME=65535;
     public static int FREE_TIME=65535;
 
+    public static boolean  ISBUY=true;
     public static boolean BIND=true;
 
 
