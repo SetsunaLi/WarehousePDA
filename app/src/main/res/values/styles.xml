@@ -70,7 +70,7 @@
     </style>
     <style name="dialog_button_no">
         <item name="android:layout_width">280px</item>
-        <item name="android:layout_height">100px</item>
+        <item name="android:layout_height">120px</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_marginLeft">20px</item>
         <item name="android:layout_marginBottom">20px</item>
@@ -80,7 +80,7 @@
     </style>
     <style name="dialog_button_yes">
         <item name="android:layout_width">280px</item>
-        <item name="android:layout_height">100px</item>
+        <item name="android:layout_height">120px</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_marginRight">20px</item>
@@ -90,13 +90,13 @@
         <item name="android:background">@drawable/dialog_button_yes</item>
     </style>
     <style name="button_style5">
-        <item name="android:layout_height">100px</item>
+        <item name="android:layout_height">120px</item>
         <item name="android:textSize">40px</item>
         <item name="android:textColor">@color/colorHomeButton1</item>
         <item name="android:background">@drawable/button_style_1</item>
     </style>
     <style name="button_style6">
-        <item name="android:layout_height">100px</item>
+        <item name="android:layout_height">120px</item>
         <item name="android:textSize">40px</item>
         <item name="android:textColor">@color/colorHomeButton1</item>
         <item name="android:background">@drawable/dialog_button_yes</item>

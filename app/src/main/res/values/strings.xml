@@ -173,7 +173,9 @@
 <!--特殊入库-->
     <string name="text40">请输入采购单号：</string>
     <string name="text41">请输入退货单号：</string>
-    <string name="button7">请输入退货单号：</string>
-    <string name="button8">请输入退货单号：</string>
+    <string name="button7">录入缸号</string>
+    <string name="button8">入库明细</string>
+    <string name="button9">入库操作</string>
+    <string name="button10">完成入库</string>
 
 </resources>

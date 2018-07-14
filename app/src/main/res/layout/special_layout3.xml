@@ -17,6 +17,7 @@
             style="@style/text_style1"
             android:text="@string/text5"/>
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -42,7 +43,7 @@
             android:id="@+id/button_blink"
             style="@style/button_style5"
             android:layout_width="match_parent"
-            android:text="@string/button7"
+            android:text="@string/button9"
             android:layout_marginLeft="40px"
             android:layout_marginTop="45px"
             android:layout_marginRight="20px"
@@ -52,12 +53,11 @@
             android:id="@+id/button_ok"
             style="@style/button_style6"
             android:layout_width="match_parent"
-            android:text="@string/button8"
+            android:text="@string/button10"
             android:layout_marginLeft="20px"
             android:layout_marginTop="45px"
             android:layout_marginRight="40px"
             android:layout_weight="1"
             />
     </LinearLayout>
-
 </LinearLayout>

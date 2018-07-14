@@ -1,12 +1,9 @@
 package com.example.ridko.warehousepda.fragment;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.adapter.ListDataAdapter;
@@ -30,33 +26,32 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by mumu on 2018/6/11.
+ * Created by mumu on 2018/7/14.
  */
 
-public class StockUPTwo extends Fragment {
-    @Bind(R.id.head)
-    LinearLayout head;
+public class SpecialFragment3 extends Fragment {
     @Bind(R.id.list)
     HVListView list;
     @Bind(R.id.button_blink)
     Button buttonBlink;
     @Bind(R.id.button_ok)
     Button buttonOk;
+    @Bind(R.id.head)
+    LinearLayout head;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
     private ArrayList<ListEntity> mlist=new ArrayList<>();
     private ListDataAdapter mAdapter;
+    private int selectID=0;
     //    这里加载视图
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.stock_up_layout2, container, false);
+        View view = inflater.inflate(R.layout.special_layout3, container, false);
         ButterKnife.bind(this, view);
-//        list.mListHead=(LinearLayout)getActivity().findViewById(R.id.head);
         list.mListHead=head;
         mAdapter=new ListDataAdapter(mlist,getContext());
         list.setAdapter(mAdapter);
@@ -67,6 +62,7 @@ public class StockUPTwo extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 mAdapter.notifyDataSetChanged();
                 view.setBackground(getResources().getDrawable(R.color.colorDialogTitleBG));
+                selectID=i;
             }
         });
         return view;
@@ -100,46 +96,15 @@ public class StockUPTwo extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
- StockUPThree f3=new StockUPThree();
+
     @OnClick({R.id.button_blink, R.id.button_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_blink:
-                FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content_frame,f3);
-                transaction.show(f3);
-                transaction.commit();
+
                 break;
             case R.id.button_ok:
-                if (true){
-                    blinkDialog();
-                }
                 break;
         }
-    }
-    private void blinkDialog(){
-        final Dialog dialog;
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View blinkView = inflater.inflate(R.layout.dialog_stock_removal, null);
-        Button no=(Button) blinkView.findViewById(R.id.dialog_no);
-        Button yes=(Button) blinkView.findViewById(R.id.dialog_yes);
-        dialog = new AlertDialog.Builder(getActivity()).create();
-        TextView text=(TextView)blinkView.findViewById(R.id.dialog_text);
-        text.setText(R.string.text6);
-        dialog.show();
-        dialog.getWindow().setContentView(blinkView);
-        no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-//                发送完成订单单号，生成出库单
-            }
-        });
     }
 }

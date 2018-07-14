@@ -24,40 +24,18 @@
         android:background="@color/colorDialogContent"
         android:layout_weight="3"
         android:layout_marginTop="20px">
-        <!--每一个listview Table 都要重构-->
-        <include layout="@layout/no_table_item_layout"></include>
-        <com.example.ridko.warehousepda.view.HVListView
-            android:id="@+id/list"
-            android:fastScrollEnabled="true"
-            android:fadingEdgeLength="0.0sp" android:layout_width="1400.0dip"
-            android:layout_height="fill_parent" android:drawSelectorOnTop="false"
-            android:cacheColorHint="@null" android:dividerHeight="1.0dip">
-        </com.example.ridko.warehousepda.view.HVListView>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="6">
         <Button
-            android:id="@+id/button_blink"
-            style="@style/button_style5"
-            android:layout_width="match_parent"
-            android:text="@string/button7"
-            android:layout_marginLeft="40px"
-            android:layout_marginTop="45px"
-            android:layout_marginRight="20px"
-            android:layout_weight="1"
-            />
-        <Button
             android:id="@+id/button_ok"
             style="@style/button_style6"
             android:layout_width="match_parent"
             android:text="@string/button8"
-            android:layout_marginLeft="20px"
-            android:layout_marginTop="45px"
-            android:layout_marginRight="40px"
             android:layout_weight="1"
             />
     </LinearLayout>
-
 </LinearLayout>
