@@ -1,41 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2">
+    android:background="@drawable/bg2"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/bg8"
-        android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg8">
         <TextView
+            style="@style/text_style1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            style="@style/text_style1"
-            android:text="@string/text5"/>
+            android:text="@string/text5" />
     </RelativeLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.6"
-        android:background="@color/colorDialogContent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="3"
-        android:layout_marginTop="20px">
-
+        android:background="@drawable/bg_layout"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="95px"
+            android:background="@drawable/bg_layout3"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="45px"
+                android:text="@string/text42"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="@string/text43"/>
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="123"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="@string/text44"/>
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="丝光爽棉"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="@string/text45"/>
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="HF-114680"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="@string/text46"/>
+            <TextView
+                android:id="@+id/text5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="16"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="@string/text47"/>
+            <TextView
+                android:id="@+id/text6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px"
+                android:text="180kg"/>
+        </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorHomeButton2"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:textSize="36px"
+            android:text="@string/text48"
+            />
+        <EditText
+            android:id="@+id/edit2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/edit_style1"
+            android:focusable="false"/>
+        </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="6">
+
         <Button
             android:id="@+id/button_ok"
             style="@style/button_style6"
             android:layout_width="match_parent"
-            android:text="@string/button8"
+            android:layout_marginTop="45px"
             android:layout_weight="1"
-            />
+            android:text="@string/button8" />
     </LinearLayout>
 </LinearLayout>

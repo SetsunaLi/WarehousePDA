@@ -177,5 +177,11 @@
     <string name="button8">入库明细</string>
     <string name="button9">入库操作</string>
     <string name="button10">完成入库</string>
-
+    <string name="text42">入库信息</string>
+    <string name="text43">布&#8195;号&#8195;：</string>
+    <string name="text44">布匹名称：</string>
+    <string name="text45">染厂色号：</string>
+    <string name="text46">条&#8195;数&#8195;：</string>
+    <string name="text47">克&#8195;重&#8195;：</string>
+    <string name="text48">缸&#8195;号&#8195;：</string>
 </resources>

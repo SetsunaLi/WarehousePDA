@@ -50,8 +50,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.6"
-        android:background="@color/colorDialogContent"
+        android:background="@drawable/bg_layout"
         android:layout_weight="3"
         android:layout_marginTop="20px">
         <ImageView
