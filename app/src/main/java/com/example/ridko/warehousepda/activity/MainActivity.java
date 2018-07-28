@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 super.onDrawerOpened(drawerView);
                 drawerView.setClickable(true);
                 getSupportActionBar().setTitle(mDrawerTitle);
-                getSupportActionBar().setIcon(R.drawable.emoji9);
+                getSupportActionBar().setIcon(R.drawable.about);
                 supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
@@ -312,25 +312,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int getActionBarIcon() {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
         if (fragment instanceof HomeFragment)
-            return R.drawable.emoji0;
+            return R.drawable.about;
         else if (fragment instanceof SpecialStorageFragment)
-            return R.drawable.emoji1;
+            return R.drawable.about;
         else if (fragment instanceof UnBindAndBindFragment)
-            return R.drawable.emoji2;
+            return R.drawable.about;
         else if (fragment instanceof CutClothFragment)
-            return R.drawable.emoji3;
+            return R.drawable.about;
         else if (fragment instanceof CheckClothFragment)
-            return R.drawable.emoji4;
+            return R.drawable.about;
         else if (fragment instanceof StockUpFragment)
-            return R.drawable.emoji5;
+            return R.drawable.about;
         else if (fragment instanceof DeviceManagmentFragment)
-            return R.drawable.emoji6;
+            return R.drawable.about;
         else if (fragment instanceof StockRemovalFragment)
-            return R.drawable.emoji7;
+            return R.drawable.about;
         else if (fragment instanceof AboutFragment)
-            return R.drawable.emoji8;
+            return R.drawable.about;
         else
-            return R.drawable.emoji9;
+            return R.drawable.about;
     }
 
     @Override

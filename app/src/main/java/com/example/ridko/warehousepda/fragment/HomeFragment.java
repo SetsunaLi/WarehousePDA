@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
             //Change the icon
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setIcon(R.drawable.emoji0);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setIcon(R.drawable.about);
         }
     }
     public void onBackPressed(){}

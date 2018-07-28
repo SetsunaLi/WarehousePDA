@@ -153,26 +153,28 @@
                 android:textSize="36px"
                 android:text="180kg"/>
         </LinearLayout>
-    <LinearLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textColor="@color/colorHomeButton2"
-            android:layout_marginLeft="20px"
-            android:layout_marginRight="20px"
-            android:textSize="36px"
-            android:text="@string/text48"
-            />
-        <EditText
-            android:id="@+id/edit2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/edit_style1"
-            android:focusable="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:gravity="center_vertical"
+                android:text="@string/text48"
+                android:textColor="@color/colorHomeButton2"
+                android:textSize="36px" />
+
+            <EditText
+                android:id="@+id/edit1"
+                style="@style/edit_style1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false" />
         </LinearLayout>
     </LinearLayout>
 
@@ -187,6 +189,8 @@
             android:layout_width="match_parent"
             android:layout_marginTop="45px"
             android:layout_weight="1"
-            android:text="@string/button8" />
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/button7" />
     </LinearLayout>
 </LinearLayout>

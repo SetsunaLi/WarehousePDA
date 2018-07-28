@@ -21,15 +21,15 @@ public class DrawerListContent {
     static {
         // Add items.
         //addItem(new DrawerItem("1", "Home", R.drawable.app_icon));
-        addItem(new DrawerItem("1", "主页", R.drawable.emoji1));
-        addItem(new DrawerItem("2", "特殊入库", R.drawable.emoji2));
-        addItem(new DrawerItem("3", "解绑与绑定", R.drawable.emoji3));
-        addItem(new DrawerItem("4", "剪布管理", R.drawable.emoji4));
-        addItem(new DrawerItem("5", "查布管理", R.drawable.emoji5));
-        addItem(new DrawerItem("6", "备货管理", R.drawable.emoji6));
-        addItem(new DrawerItem("7", "出库管理", R.drawable.emoji7));
-        addItem(new DrawerItem("8", "设备管理", R.drawable.emoji8));
-        addItem(new DrawerItem("9", "关于", R.drawable.emoji9));
+        addItem(new DrawerItem("1", "主页", R.drawable.about));
+        addItem(new DrawerItem("2", "特殊入库", R.drawable.about));
+        addItem(new DrawerItem("3", "解绑与绑定", R.drawable.about));
+        addItem(new DrawerItem("4", "剪布管理", R.drawable.about));
+        addItem(new DrawerItem("5", "查布管理", R.drawable.about));
+        addItem(new DrawerItem("6", "备货管理", R.drawable.about));
+        addItem(new DrawerItem("7", "出库管理", R.drawable.about));
+        addItem(new DrawerItem("8", "设备管理", R.drawable.about));
+        addItem(new DrawerItem("9", "关于", R.drawable.about));
     }
 
     /**

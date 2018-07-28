@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_weight="15"
         android:layout_height="wrap_content"
-        android:src="@drawable/emoji1"
+        android:src="@drawable/about"
         android:contentDescription="@string/drawer_image_desc" />
 
     <TextView

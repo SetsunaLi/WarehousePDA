@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,34 +11,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.adapter.ListDataAdapter;
 import com.example.ridko.warehousepda.entity.ListEntity;
-import com.example.ridko.warehousepda.view.HVListView;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
- * Created by mumu on 2018/7/14.
+ * Created by mumu on 2018/7/24.
  */
 
-public class SpecialFragment3 extends Fragment {
-    @Bind(R.id.list)
-    HVListView list;
-    @Bind(R.id.button_blink)
-    Button buttonBlink;
-    @Bind(R.id.button_ok)
-    Button buttonOk;
-    @Bind(R.id.head)
-    LinearLayout head;
-
+public class RuKuFragement extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,21 +36,8 @@ public class SpecialFragment3 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.special_layout3, container, false);
+        View view = inflater.inflate(R.layout.ru_ku_layout, container, false);
         ButterKnife.bind(this, view);
-        list.mListHead=head;
-        mAdapter=new ListDataAdapter(mlist,getContext());
-        list.setAdapter(mAdapter);
-        mAdapter.setData(mlist);
-        mAdapter.notifyDataSetChanged();
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mAdapter.notifyDataSetChanged();
-                view.setBackground(getResources().getDrawable(R.color.colorDialogTitleBG));
-                selectID=i;
-            }
-        });
         return view;
     }
 
@@ -98,19 +70,4 @@ public class SpecialFragment3 extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.button_blink, R.id.button_ok})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.button_blink:
-//                录入mlist中selectID的缸号
-                IntoID intoID=new IntoID();
-                FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content_frame,intoID);
-                transaction.show(intoID);
-                transaction.commit();
-                break;
-            case R.id.button_ok:
-                break;
-        }
-    }
 }
