@@ -118,7 +118,6 @@ public class RuKuFragement extends Fragment {
         Button yes = (Button) blinkView.findViewById(R.id.dialog_yes);
         final EditText editNo = (EditText) blinkView.findViewById(R.id.editNO);
         ImageView img = (ImageView) blinkView.findViewById(R.id.imgSearch);
-
         dialog = new AlertDialog.Builder(getActivity()).create();
         dialog.show();
         dialog.getWindow().setContentView(blinkView);
