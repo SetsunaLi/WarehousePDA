@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.ridko.warehousepda.R;
@@ -110,12 +112,19 @@ public class UnBindAndBindFragment extends Fragment {
                 return false;
             }
         });
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View blinkView = inflater.inflate(R.layout.list_table_1, null);
-        LinearLayout ll = (LinearLayout) blinkView.findViewById(R.id.linearlayout);
-        listview.addHeaderView(ll);
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View viewHeader = inflater.inflate(R.layout.list_table_1, null);
+//        View ll = viewHeader.findViewById(R.id.linearlayout);
+        //初始化RadioGroup
+        LinearLayout group = (LinearLayout) viewHeader.findViewById(R.id.linearlayout);
+        //在listView的头上添加View必须用listView类型的layoutParams给欲添加的view设置一下，便于布局管理器给它测量位置
+        AbsListView.LayoutParams lp
+                = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT);
+        group.setLayoutParams(lp);
+        //将RadioGroup布局添加到listView顶部
+        listview.addHeaderView(group);
         mylist=new ArrayList<>();
-        myAdapter=new ArrayAdapter(getContext(),R.layout.list_item_1){
+        myAdapter=new ArrayAdapter(getContext(),R.layout.list_item_1,mylist){
             @NonNull
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -128,6 +137,7 @@ public class UnBindAndBindFragment extends Fragment {
                 return super.getView(position, convertView, parent);
             }
         };
+        listview.setAdapter(myAdapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,21 +18,24 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
  * Created by mumu on 2018/6/5.
  */
 
-public class RecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class RecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener{
     private final SparseArray<View> mViews;
     MyItemOnClickListener mListener;
+    MyOnTouchListener myTouchListener;
 
     public RecyclerHolder(View itemView) {
         super(itemView);
         //一般不会超过8个吧
         this.mViews = new SparseArray<>(8);
     }
-    public RecyclerHolder(View itemView,MyItemOnClickListener mListener) {
+    public RecyclerHolder(View itemView,MyItemOnClickListener mListener, MyOnTouchListener myTouchListener) {
         super(itemView);
         //一般不会超过8个吧
         this.mViews = new SparseArray<>(12);
         this.mListener=mListener;
+        this.myTouchListener=myTouchListener;
         itemView.setOnClickListener(this);
+        itemView.setOnTouchListener(this);
     }
 
     public SparseArray<View> getAllView() {
@@ -172,5 +176,15 @@ public class RecyclerHolder extends RecyclerView.ViewHolder implements View.OnCl
     public void onClick(View v) {
         if (mListener!=null)
             mListener.onItemOnClick(v,getPosition());
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if (myTouchListener!=null)
+            myTouchListener.onItemTouch(view,motionEvent,getPosition());
+        return false;
+    }
+    public interface MyOnTouchListener{
+       void onItemTouch(View view, MotionEvent motionEvent,int postion);
     }
 }
