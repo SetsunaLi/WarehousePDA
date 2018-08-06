@@ -9,6 +9,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,7 +43,7 @@ import butterknife.ButterKnife;
  * Created by mumu on 2018/3/31.
  */
 
-public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyclerAdapter.OnItemClickListener,MyItemOnTouchListener {
+public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyclerAdapter.OnItemClickListener {
 
     @Bind(R.id.rv_list)
     RecyclerView rvList;
@@ -62,7 +63,7 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.user_management_layout, container, false);
         ButterKnife.bind(this, view);
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         return view;
     }
 
@@ -70,9 +71,11 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
+
     private List<Managment> list;
     private ManagementAdapter mgAdapter;
-//    private ArrayAdapter adapter;
+
+    //    private ArrayAdapter adapter;
     //这里写界面
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -81,21 +84,22 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
         initList();
         initView();
     }
-    public void initList(){
-        Managment m1=new Managment();
+
+    public void initList() {
+        Managment m1 = new Managment();
         m1.setIvNO(R.drawable.user);
         m1.setTvStr(getResources().getString(R.string.text15));
-        Managment m2=new Managment();
+        Managment m2 = new Managment();
         m2.setIvNO(R.drawable.system);
         m2.setTvStr(getResources().getString(R.string.text16));
-        Managment m3=new Managment();
+        Managment m3 = new Managment();
         m3.setIvNO(R.drawable.device);
         m3.setTvStr(getResources().getString(R.string.text17));
         list.add(m1);
         list.add(m2);
         list.add(m3);
     }
-    public void initView(){
+    public void initView() {
        /* if (list!=null){
             adapter=new ArrayAdapter(getActivity(),R.layout.list_item_2,list);
             listview.setAdapter(adapter);
@@ -105,31 +109,72 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvList.setLayoutManager(linearLayoutManager);
         //        如果RecyclerView不能实现onTouch效果，换成ListView
-        mgAdapter=new ManagementAdapter(rvList,list,R.layout.list_item_2,this);
+        mgAdapter = new ManagementAdapter(rvList, list, R.layout.list_item_2);
         mgAdapter.setState(BasePullUpRecyclerAdapter.STATE_INVISIBLE);
         mgAdapter.notifyDataSetChanged();
         mgAdapter.setOnItemClickListener(this);
-        mgAdapter.setMyItemOnTouchListener(this);
-        rvList.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+        rvList.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-                View child = rv.findChildViewUnder(e.getX(), e.getY());
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                int action=motionEvent.getActionMasked();
+                View child = ((RecyclerView) view).findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                switch (motionEvent.getActionMasked()) {
+                    case MotionEvent.ACTION_UP:
+                        TextView flagText1 = (TextView) child.findViewById(R.id.text1);
+                        int position1 = Integer.parseInt(flagText1.getText().toString());
+                        switch (position1) {
+                            case 0:
+                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg_layout2));
+                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.user));
+                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton2));
+                                break;
+                            case 1:
+                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg_layout2));
+                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.system));
+                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton2));
+                                break;
+                            case 2:
+                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg_layout2));
+                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.device));
+                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton2));
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        TextView flagText2 = (TextView) child.findViewById(R.id.text1);
+                        int position2 = Integer.parseInt(flagText2.getText().toString());
+                        switch (position2) {
+                            case 0:
+                                LinearLayout ll1 = ((LinearLayout) child.findViewById(R.id.linearlayout));
+                                ll1.setBackground(getResources().getDrawable(R.drawable.bg11));
+                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.user_selected));
+                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton1));
+                                break;
+                            case 1:
+                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg10));
+                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.system_selected));
+                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton1));
+                                break;
+                            case 2:
+                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg9));
+                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.device_selected));
+                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton1));
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return true;
             }
         });
         rvList.setAdapter(mgAdapter);
-
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -148,25 +193,25 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
 
     @Override
     public void onItemClick(View view, Object data, int position) {
-        switch (position){
+        switch (position) {
             case 0:
-                UserFragment  f1=new UserFragment();
-                FragmentTransaction transaction1=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction1.add(R.id.content_frame,f1);
+                UserFragment f1 = new UserFragment();
+                FragmentTransaction transaction1 = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction1.add(R.id.content_frame, f1);
                 transaction1.show(f1);
                 transaction1.commit();
                 break;
             case 1:
-                SystemFragment f2=new SystemFragment();
-                FragmentTransaction transaction2=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction2.add(R.id.content_frame,f2);
+                SystemFragment f2 = new SystemFragment();
+                FragmentTransaction transaction2 = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction2.add(R.id.content_frame, f2);
                 transaction2.show(f2);
                 transaction2.commit();
                 break;
             case 2:
-                DeviceFragment f3=new DeviceFragment();
-                FragmentTransaction transaction3=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction3.add(R.id.content_frame,f3);
+                DeviceFragment f3 = new DeviceFragment();
+                FragmentTransaction transaction3 = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction3.add(R.id.content_frame, f3);
                 transaction3.show(f3);
                 transaction3.commit();
                 break;
@@ -174,7 +219,7 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
         mgAdapter.notifyDataSetChanged();
     }
 
-    @Override
+/*    @Override
     public void onItemClick(RecyclerView.ViewHolder holder) {
         int i=0;
 
@@ -249,23 +294,24 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
                 break;
         }
         return false;
-    }
+    }*/
 //
    /* @Override
     public void onItemTouchClick(View view, int postion,MotionEvent motionEvent) {
 
     }*/
 
-    class ManagementAdapter extends BasePullUpRecyclerAdapter<Managment> implements RecyclerView.OnItemTouchListener{
-//        在适配器做做item 触摸监听监听
+    class ManagementAdapter extends BasePullUpRecyclerAdapter<Managment> {
+        //        在适配器做做item 触摸监听监听
         private MyItemOnTouchListener myItemOnTouchListener;
-        private GestureDetectorCompat mGestureDetector;
+
+        //        private GestureDetectorCompat mGestureDetector;
         public ManagementAdapter(final RecyclerView rv, Collection<Managment> datas, int itemLayoutId
-        ,final MyItemOnTouchListener myItemOnTouchListener) {
+        ) {
             super(rv, datas, itemLayoutId);
-            this.myItemOnTouchListener=myItemOnTouchListener;
+//            this.myItemOnTouchListener=myItemOnTouchListener;
 //            铺抓触摸动作
-            GestureDetector.OnGestureListener gestureListener=new GestureDetector.SimpleOnGestureListener(){
+          /*  GestureDetector.OnGestureListener gestureListener=new GestureDetector.SimpleOnGestureListener(){
                 @Override
                 public boolean onSingleTapUp(MotionEvent e) {
                     android.util.Log.d("wesley", "RecyclerItemTouchHandler.onSingleTapUp");
@@ -295,12 +341,12 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
                     return handled || super.onDown(e);
                 }
             };
-            mGestureDetector=new GestureDetectorCompat(rv.getContext().getApplicationContext(),gestureListener);
+            mGestureDetector=new GestureDetectorCompat(rv.getContext().getApplicationContext(),gestureListener);*/
         }
 
         @Override
         public void convert(RecyclerHolder holder, Managment item, final int position) {
-            if (item!=null){
+            if (item != null) {
               /*  TextView ll=holder.getView(R.id.tv);
                 ll.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -324,21 +370,23 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
                         return false;
                     }
                 });*/
-                holder.setBackground(R.id.linearlayout,getResources().getDrawable(R.drawable.bg_layout2));
-                if (item.getIvNO()!=0) {
+                holder.setBackground(R.id.linearlayout, getResources().getDrawable(R.drawable.bg_layout2));
+                if (item.getIvNO() != 0) {
                     holder.setImageResource(R.id.iv, item.getIvNO());
                 }
-                if (item.getTvStr()!=null) {
+                if (item.getTvStr() != null) {
                     holder.setText(R.id.tv, item.getTvStr() + "");
-                    holder.setTextColor(R.id.tv,getResources().getColor(R.color.colorHomeButton2));
+                    holder.setTextColor(R.id.tv, getResources().getColor(R.color.colorHomeButton2));
                 }
+                holder.setText(R.id.text1, position + "");
             }
         }
-        public void setMyItemOnTouchListener(MyItemOnTouchListener myItemOnTouchListener){
-            this.myItemOnTouchListener=myItemOnTouchListener;
+
+        public void setMyItemOnTouchListener(MyItemOnTouchListener myItemOnTouchListener) {
+            this.myItemOnTouchListener = myItemOnTouchListener;
         }
 
-        @Override
+     /*   @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
             return mGestureDetector.onTouchEvent(e);
         }
@@ -351,7 +399,7 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
         @Override
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
-        }
+        }*/
     }
 
 }
