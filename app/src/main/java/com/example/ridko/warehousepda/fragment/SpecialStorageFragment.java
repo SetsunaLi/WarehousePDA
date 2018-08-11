@@ -1,6 +1,9 @@
 package com.example.ridko.warehousepda.fragment;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.application.App;
+import com.example.ridko.warehousepda.picture.CutToBitmap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -79,13 +83,31 @@ public class SpecialStorageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(getActivity());
         text1.setText(getResources().getString(R.string.text40));
-        ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy1));
-        ib2.setImageDrawable(getResources().getDrawable(R.drawable.stock2));
+        ib1.setImageBitmap(cutToBitmap(ib1,R.drawable.buy1));
+        ib2.setImageBitmap(cutToBitmap(ib2,R.drawable.stock2));
+//        ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy1));
+//        ib2.setImageDrawable(getResources().getDrawable(R.drawable.stock2));
         ib1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.buy3));
+//                    ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.buy3));
+                    ib1.setImageBitmap(cutToBitmap(ib1,R.drawable.buy3));
+                }else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+                    int[] locatioin=new int[2];
+                    view.getLocationOnScreen(locatioin);
+                    if ((motionEvent.getRawX() >= locatioin[0] && motionEvent.getRawX()<=locatioin[0]+view.getWidth())
+                            &&(motionEvent.getRawY()>= locatioin[1] &&motionEvent.getRawY()<= locatioin[1]+view.getHeight())){
+//                        ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy3));
+                    }else {
+                        if (App.ISBUY){
+//                            ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy1));
+                            ib1.setImageBitmap(cutToBitmap(ib1,R.drawable.buy1));
+                        }else {
+//                            ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy2));
+                            ib1.setImageBitmap(cutToBitmap(ib1,R.drawable.buy2));
+                        }
+                    }
                 }
                 return false;
             }
@@ -93,7 +115,25 @@ public class SpecialStorageFragment extends Fragment {
         ib2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.stock3));
+                if (motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
+//                    ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.stock3));
+                    ib2.setImageBitmap(cutToBitmap(ib2,R.drawable.stock3));
+                }else if (motionEvent.getAction()==MotionEvent.ACTION_MOVE) {
+                    int[] locatioin = new int[2];
+                    view.getLocationOnScreen(locatioin);
+                    if ((motionEvent.getRawX() >= locatioin[0] && motionEvent.getRawX() <= locatioin[0] + view.getWidth())
+                            && (motionEvent.getRawY() >= locatioin[1] && motionEvent.getRawY() <= locatioin[1] + view.getHeight())) {
+//                        ib2.setImageDrawable(getResources().getDrawable(R.drawable.stock3));
+                    } else {
+                        if (App.ISBUY) {
+//                            ib2.setImageDrawable(getResources().getDrawable(R.drawable.stock2));
+                            ib2.setImageBitmap(cutToBitmap(ib2,R.drawable.stock2));
+                        } else {
+//                            ib2.setImageDrawable(getResources().getDrawable(R.drawable.stock1));
+                            ib2.setImageBitmap(cutToBitmap(ib2,R.drawable.stock1));
+                        }
+                    }
+                }
                 return false;
             }
         });
@@ -127,14 +167,18 @@ public class SpecialStorageFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ib1:
-                ((ImageButton)view).setImageDrawable(getResources().getDrawable(R.drawable.buy1));
-                ib2.setImageDrawable(getResources().getDrawable(R.drawable.stock2));
+//                ((ImageButton)view).setImageDrawable(getResources().getDrawable(R.drawable.buy1));
+//                ib2.setImageDrawable(getResources().getDrawable(R.drawable.stock2));
+                ib1.setImageBitmap(cutToBitmap(ib1,R.drawable.buy1));
+                ib2.setImageBitmap(cutToBitmap(ib2,R.drawable.stock2));
                 App.ISBUY=true;
                 text1.setText(getResources().getString(R.string.text40));
                 break;
             case R.id.ib2:
-                ((ImageButton)view).setImageDrawable(getResources().getDrawable(R.drawable.stock1));
-                ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy2));
+//                ((ImageButton)view).setImageDrawable(getResources().getDrawable(R.drawable.stock1));
+//                ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy2));
+                ib1.setImageBitmap(cutToBitmap(ib1,R.drawable.buy2));
+                ib2.setImageBitmap(cutToBitmap(ib2,R.drawable.stock1));
                 App.ISBUY=false;
                 text1.setText(getResources().getString(R.string.text41));
                 break;
@@ -152,5 +196,27 @@ public class SpecialStorageFragment extends Fragment {
                 }
                 break;
         }
+    }
+    /** 图片转化Bitmap **/
+    public Bitmap cutToBitmap(View view, int resId) {
+        Resources res = getResources();
+        int imageViewWidth = view.getWidth();
+        int imageViewHeight = view.getHeight();
+        return CutToBitmap.decodeResourceBySampleRate(res, resId,
+                imageViewWidth, imageViewHeight);
+    }
+
+    /** 重置图片大小 **/
+    public Bitmap resetBitmap(View view, Bitmap oldBitmap) {
+        int viewWidth = view.getMeasuredWidth();
+        int bitHeight = view.getMeasuredHeight();
+        // 第一种方法
+        return Bitmap.createScaledBitmap(oldBitmap, viewWidth, bitHeight, true);
+        // 第二种方法
+        // Matrix matrix = new Matrix();
+        // matrix.postScale(viewWidth, bitHeight);
+        // Bitmap newbm = Bitmap.createBitmap(oldBitmap, 0, 0,
+        // oldBitmap.getWidth(),oldBitmap.getHeight(), matrix, true);
+        // return newbm;
     }
 }

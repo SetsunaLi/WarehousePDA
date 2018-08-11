@@ -110,12 +110,12 @@
 
     <style name="text_style1">
         <item name="android:textColor">@color/colorHomeButton1</item>
-        <item name="android:textSize">40px</item>
+        <item name="android:textSize">29sp</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="text_style2">
         <item name="android:textColor">@color/colorHomeButton2</item>
-        <item name="android:textSize">36px</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="switch_style_1">

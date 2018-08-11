@@ -100,11 +100,6 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
         list.add(m3);
     }
     public void initView() {
-       /* if (list!=null){
-            adapter=new ArrayAdapter(getActivity(),R.layout.list_item_2,list);
-            listview.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }*/
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvList.setLayoutManager(linearLayoutManager);
@@ -118,57 +113,63 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 int action=motionEvent.getActionMasked();
                 View child = ((RecyclerView) view).findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if (child!=null)
                 switch (motionEvent.getActionMasked()) {
                     case MotionEvent.ACTION_UP:
                         TextView flagText1 = (TextView) child.findViewById(R.id.text1);
-                        int position1 = Integer.parseInt(flagText1.getText().toString());
-                        switch (position1) {
-                            case 0:
-                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg_layout2));
-                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.user));
-                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton2));
-                                break;
-                            case 1:
-                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg_layout2));
-                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.system));
-                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton2));
-                                break;
-                            case 2:
-                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg_layout2));
-                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.device));
-                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton2));
-                                break;
-                            default:
-                                break;
+                        if (flagText1!=null) {
+                            int position1 = Integer.parseInt(flagText1.getText().toString());
+                            switch (position1) {
+                                case 0:
+                                    ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg_layout2));
+                                    ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.user));
+                                    ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton2));
+                                    break;
+                                case 1:
+                                    ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg_layout2));
+                                    ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.system));
+                                    ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton2));
+                                    break;
+                                case 2:
+                                    ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg_layout2));
+                                    ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.device));
+                                    ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton2));
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         break;
                     case MotionEvent.ACTION_MOVE:
                         TextView flagText2 = (TextView) child.findViewById(R.id.text1);
-                        int position2 = Integer.parseInt(flagText2.getText().toString());
-                        switch (position2) {
-                            case 0:
-                                LinearLayout ll1 = ((LinearLayout) child.findViewById(R.id.linearlayout));
-                                ll1.setBackground(getResources().getDrawable(R.drawable.bg11));
-                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.user_selected));
-                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton1));
-                                break;
-                            case 1:
-                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg10));
-                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.system_selected));
-                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton1));
-                                break;
-                            case 2:
-                                ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg9));
-                                ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.device_selected));
-                                ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton1));
-                                break;
-                            default:
-                                break;
+                        if (flagText2!=null) {
+                            int position2 = Integer.parseInt(flagText2.getText().toString());
+                            switch (position2) {
+                                case 0:
+                                    LinearLayout ll1 = ((LinearLayout) child.findViewById(R.id.linearlayout));
+                                    ll1.setBackground(getResources().getDrawable(R.drawable.bg11));
+                                    ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.user_selected));
+                                    ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton1));
+                                    break;
+                                case 1:
+                                    ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg10));
+                                    ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.system_selected));
+                                    ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton1));
+                                    break;
+                                case 2:
+                                    ((LinearLayout) child.findViewById(R.id.linearlayout)).setBackground(getResources().getDrawable(R.drawable.bg9));
+                                    ((ImageView) child.findViewById(R.id.iv)).setImageDrawable(getResources().getDrawable(R.drawable.device_selected));
+                                    ((TextView) child.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colorHomeButton1));
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         break;
                     default:
                         break;
                 }
+
                 return true;
             }
         });
