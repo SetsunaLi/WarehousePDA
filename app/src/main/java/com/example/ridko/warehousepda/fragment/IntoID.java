@@ -1,6 +1,7 @@
 package com.example.ridko.warehousepda.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ridko.warehousepda.R;
+import com.example.ridko.warehousepda.activity.MainActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,12 +32,12 @@ public class IntoID extends Fragment {
     TextView text1;
     @Bind(R.id.text3)
     TextView text3;
-    @Bind(R.id.text4)
-    TextView text4;
-    @Bind(R.id.text5)
-    TextView text5;
-    @Bind(R.id.text6)
-    TextView text6;
+    /*    @Bind(R.id.text4)
+        TextView text4;
+        @Bind(R.id.text5)
+        TextView text5;
+        @Bind(R.id.text6)
+        TextView text6;*/
     @Bind(R.id.edit1)
     EditText edit1;
     @Bind(R.id.button_ok)
@@ -74,6 +76,14 @@ public class IntoID extends Fragment {
 
     }
 
+    private MainActivity activity;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (MainActivity) context;
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -89,16 +99,20 @@ public class IntoID extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
     private String strNO = "";
+
     @OnClick({R.id.button_ok})
     public void onViewClicked(View view) {
-        switch (view .getId()){
+        switch (view.getId()) {
             case R.id.button_ok:
-                strNO=edit1.getText().toString()+"";
+                strNO = edit1.getText().toString() + "";
 //                把缸号录入入库单
 //                返回上一层
-                getActivity().onKeyDown(KeyEvent.KEYCODE_BACK, null);
+//                activity.onKeyDown(KeyEvent.KEYCODE_BACK, new KeyEvent(KeyEvent.KEYCODE_BACK, KeyEvent.ACTION_DOWN));
+                getFragmentManager().popBackStack();
                 break;
         }
     }
+
 }

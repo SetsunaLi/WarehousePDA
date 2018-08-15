@@ -165,8 +165,8 @@
     <string name="text7">绑定布匹信息</string>
     <string name="text8">解绑布匹信息</string>
     <string name="text9">总数：10</string>
-    <string name="text10">绑定载具编号：</string>
-    <string name="text11">绑定载具EPC&#8197;：</string>
+    <string name="text10">载具编号：</string>
+    <string name="text11">载具EPC&#8197;：</string>
     <string name="text12">布号</string>
     <string name="text13">布匹名称</string>
     <string name="text14">布票号</string>
@@ -177,6 +177,7 @@
     <string name="button8">入库明细</string>
     <string name="button9">入库操作</string>
     <string name="button10">完成入库</string>
+    <string name="button11">写码上传</string>
     <string name="text42">入库信息</string>
     <string name="text43">布&#8195;号&#8195;：</string>
     <string name="text44">布匹名称：</string>
@@ -191,5 +192,6 @@
     <string name="text53">克&#8195;重&#8195;：</string>
     <string name="text54">重&#8195;量&#8195;：</string>
     <string name="text55">布票号&#8195;：</string>
-    <string name="texte56">生成EPC&#8196;：</string>
+    <string name="button12">生成EPC</string>
+    <!--<string name="texte56">生成EPC&#8197;：</string>-->
 </resources>

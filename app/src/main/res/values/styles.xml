@@ -56,74 +56,95 @@
         <item name="android:layout_marginRight">5dp</item>
     </style>
     <style name="dialog_title">
-        <item name="android:textSize">36px</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:textColor">@color/colorAboutText</item>
         <item name="android:text">@string/dialog_title</item>
     </style>
     <style name="dialog_content_text">
-     <item name="android:textSize">40px</item>
+     <item name="android:textSize">28sp</item>
     <item name="android:textColor">@color/colorDialogContent</item>
     </style>
     <style name="dialog_carrier">
-        <item name="android:textSize">30px</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/colorDialogContent</item>
     </style>
+    <!--提示框左边按钮-->
     <style name="dialog_button_no">
-        <item name="android:layout_width">280px</item>
-        <item name="android:layout_height">120px</item>
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_marginLeft">20px</item>
-        <item name="android:layout_marginBottom">20px</item>
-        <item name="android:textSize">40px</item>
+        <item name="android:layout_height">60dip</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/colorDialogContent</item>
         <item name="android:background">@drawable/dialog_button_no</item>
     </style>
+    <!--提示框右边按钮-->
     <style name="dialog_button_yes">
-        <item name="android:layout_width">280px</item>
-        <item name="android:layout_height">120px</item>
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_marginRight">20px</item>
-        <item name="android:layout_marginBottom">20px</item>
-        <item name="android:textSize">40px</item>
+        <item name="android:layout_height">60dip</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/colorHomeButton1</item>
         <item name="android:background">@drawable/dialog_button_yes</item>
     </style>
+    <!--左边按钮-->
     <style name="button_style5">
-        <item name="android:layout_height">120px</item>
-        <item name="android:textSize">40px</item>
+        <item name="android:layout_height">60dip</item>
+        <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/colorHomeButton1</item>
         <item name="android:background">@drawable/button_style_1</item>
     </style>
+    <!--右边按钮-->
     <style name="button_style6">
-        <item name="android:layout_height">120px</item>
-        <item name="android:textSize">40px</item>
+        <item name="android:layout_height">60dip</item>
+        <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/colorHomeButton1</item>
         <item name="android:background">@drawable/dialog_button_yes</item>
     </style>
-
+<!---->
     <style name="edit_style1">
-    <item name="android:textSize">40px</item>
+    <item name="android:textSize">22sp</item>
     <item name="android:textColor">@color/colorHomeButton2</item>
     <item name="android:background">@drawable/edit_style1</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="text_style1">
         <item name="android:textColor">@color/colorHomeButton1</item>
-        <item name="android:textSize">29sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:gravity">center</item>
     </style>
+    <!--特殊入库title-文字-->
     <style name="text_style2">
         <item name="android:textColor">@color/colorHomeButton2</item>
         <item name="android:textSize">25sp</item>
         <item name="android:gravity">center</item>
     </style>
+    <!--特殊入库item-文字-->
+    <style name="text_style3">
+        <item name="android:textColor">@color/colorHomeButton2</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="text_style4">
+        <item name="android:textColor">@color/colorHomeButton1</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!--特殊入库title高度-->
+    <style name="layout_style1">
+        <item name="android:layout_height">50dip</item>
+    </style>
+    <!--特殊入库item高度-->
+    <style name="layout_style2">
+        <item name="android:layout_height">45dip</item>
+        <item name="android:layout_marginTop">1dip</item>
+    </style>
+    <!--设备管理选择按钮-->
     <style name="switch_style_1">
         <item name="android:track">@drawable/switch_track_1</item>
         <item name="android:thumb">@drawable/switch_thumb_1</item>
         <item name="android:switchMinWidth">80px</item>
         <item name="android:maxHeight">10px</item>
     </style>
+    <!--设备管理seekbar滑块-->
     <style name="seekbar_style_1">
         <item name="android:thumb">@drawable/switch_open</item>
         <item name="android:progressDrawable">@drawable/seekbar_img</item>

@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -59,11 +60,6 @@ public class RuKuFragement extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    private ArrayList<ListEntity> mlist = new ArrayList<>();
-    private ListDataAdapter mAdapter;
-    private int selectID = 0;
-
     //    这里加载视图
     @Nullable
     @Override
@@ -116,11 +112,14 @@ public class RuKuFragement extends Fragment {
         View blinkView = inflater.inflate(R.layout.dialog_bind, null);
         Button no = (Button) blinkView.findViewById(R.id.dialog_no);
         Button yes = (Button) blinkView.findViewById(R.id.dialog_yes);
-        final EditText editNo = (EditText) blinkView.findViewById(R.id.editNO);
+        EditText editNo = (EditText) blinkView.findViewById(R.id.editNO);
         ImageView img = (ImageView) blinkView.findViewById(R.id.imgSearch);
         dialog = new AlertDialog.Builder(getActivity()).create();
         dialog.show();
         dialog.getWindow().setContentView(blinkView);
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

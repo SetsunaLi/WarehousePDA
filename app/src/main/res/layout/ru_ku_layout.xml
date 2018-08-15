@@ -38,7 +38,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                style="@style/layout_style2"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
@@ -50,22 +50,19 @@
                     android:layout_marginRight="20px"
                     android:gravity="center_vertical"
                     android:text="@string/text49"
-                    android:textColor="@color/colorHomeButton2"
-                    android:textSize="36px" />
+                    style="@style/text_style3" />
 
                 <EditText
                     android:id="@+id/edit1"
                     style="@style/edit_style1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false" />
+                    android:layout_height="match_parent"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90px"
+                style="@style/layout_style2"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="3dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -75,22 +72,20 @@
                     android:layout_marginRight="20px"
                     android:gravity="center"
                     android:text="@string/text50"
-                    android:textColor="@color/colorHomeButton2"
-                    android:textSize="36px" />
+                    style="@style/text_style3" />
 
                 <Spinner
                     android:id="@+id/spinner1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10px"
                     android:layout_weight="7"
-                    android:gravity="center_vertical"></Spinner>
+                    android:gravity="center_vertical"
+                    style="@style/text_style3" ></Spinner>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90px"
-                android:layout_marginTop="3dp"
+                style="@style/layout_style2"
                 android:orientation="horizontal">
 
                 <TextView
@@ -100,22 +95,20 @@
                     android:layout_marginRight="20px"
                     android:gravity="center_vertical"
                     android:text="@string/text51"
-                    android:textColor="@color/colorHomeButton2"
-                    android:textSize="36px" />
+                    style="@style/text_style3"  />
 
                 <Spinner
                     android:id="@+id/spinner2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10px"
                     android:layout_weight="7"
-                    android:gravity="center_vertical"></Spinner>
+                    android:gravity="center_vertical"
+                    style="@style/text_style3" ></Spinner>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90px"
-                android:layout_marginTop="3dp"
+                style="@style/layout_style2"
                 android:orientation="horizontal">
 
                 <TextView
@@ -125,22 +118,20 @@
                     android:layout_marginRight="20px"
                     android:gravity="center_vertical"
                     android:text="@string/text52"
-                    android:textColor="@color/colorHomeButton2"
-                    android:textSize="36px" />
+                    style="@style/text_style3" />
 
                 <Spinner
                     android:id="@+id/spinner3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10px"
                     android:layout_weight="7"
-                    android:gravity="center_vertical"></Spinner>
+                    android:gravity="center_vertical"
+                    style="@style/text_style3" ></Spinner>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                style="@style/layout_style2"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -150,21 +141,18 @@
                     android:layout_marginRight="20px"
                     android:gravity="center_vertical"
                     android:text="@string/text55"
-                    android:textColor="@color/colorHomeButton2"
-                    android:textSize="36px" />
+                    style="@style/text_style3" />
 
                 <EditText
                     android:id="@+id/edit2"
                     style="@style/edit_style1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false" />
+                    android:layout_height="match_parent"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                style="@style/layout_style2"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -174,21 +162,18 @@
                     android:layout_marginRight="20px"
                     android:gravity="center_vertical"
                     android:text="@string/text48"
-                    android:textColor="@color/colorHomeButton2"
-                    android:textSize="36px" />
+                    style="@style/text_style3" />
 
                 <EditText
                     android:id="@+id/edit3"
                     style="@style/edit_style1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false" />
+                    android:layout_height="match_parent"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                style="@style/layout_style2"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -198,39 +183,47 @@
                     android:layout_marginRight="20px"
                     android:gravity="center_vertical"
                     android:text="@string/text54"
-                    android:textColor="@color/colorHomeButton2"
-                    android:textSize="36px" />
+                    style="@style/text_style3" />
 
                 <EditText
                     android:id="@+id/edit4"
                     style="@style/edit_style1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:focusable="false" />
+                    android:layout_height="match_parent"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                style="@style/layout_style2"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
 
-                <TextView
+      <!--          <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
                     android:gravity="center_vertical"
                     android:text="@string/texte56"
-                    android:textColor="@color/colorHomeButton2"
-                    android:textSize="36px" />
+                    style="@style/text_style3" />-->
 
                 <EditText
                     android:id="@+id/edit5"
                     style="@style/edit_style1"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:focusable="false" />
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"/>
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="wrap_content"
+                    style="@style/button_style6"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dip"
+                    android:layout_marginBottom="2dip"
+                    android:text="@string/button12"
+                    android:textSize="22sp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -238,16 +231,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="6">
+        android:gravity="center"
+        android:layout_weight="7">
 
         <Button
             android:id="@+id/button_ok"
-            style="@style/button_style6"
+            style="@style/button_style5"
             android:layout_width="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="45px"
             android:layout_weight="1"
-            android:text="@string/button7" />
+            android:text="@string/button11" />
     </LinearLayout>
 </LinearLayout>

@@ -105,11 +105,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
+ /*   @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
     /* Called whenever we call invalidateOptionsMenu() */
     boolean drawerOpen = false;

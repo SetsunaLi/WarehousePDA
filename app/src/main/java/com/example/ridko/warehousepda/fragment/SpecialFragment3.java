@@ -106,7 +106,7 @@ public class SpecialFragment3 extends Fragment {
         switch (view.getId()) {
             case R.id.button_blink:
 //                录入mlist中selectID的缸号
-                IntoID intoID=new IntoID();
+                RuKuFragement intoID=new RuKuFragement();
                 FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.add(R.id.content_frame,intoID);
                 transaction.show(intoID);
