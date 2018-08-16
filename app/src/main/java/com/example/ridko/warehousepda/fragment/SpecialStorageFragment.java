@@ -25,12 +25,7 @@ import android.widget.Toast;
 
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.application.App;
-import com.example.ridko.warehousepda.client.ClientService;
 import com.example.ridko.warehousepda.picture.CutToBitmap;
-import com.ridko.termial.api.inventory.RegionService;
-import com.ridko.termial.api.inventory.model.Region;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -189,7 +184,7 @@ public class SpecialStorageFragment extends Fragment {
                 text1.setText(getResources().getString(R.string.text41));
                 break;
             case R.id.tvSearch:
-             /*   strNO = edit1.getText().toString() + "";
+                strNO = edit1.getText().toString() + "";
                 if (strNO!=null) {
                     if (f1==null)
                         f1=new SpecialFragment2();
@@ -199,15 +194,15 @@ public class SpecialStorageFragment extends Fragment {
                     transaction.commit();
                 } else {
                     App.toastShow(getContext(), getResources().getString(R.string.stockRemoval_hint), Toast.LENGTH_SHORT);
-                }*/
-               try {
+                }
+               /*try {
                 RegionService regionService = ClientService.getBean(RegionService.class);
                 List<Region> regions = regionService.getRegion();
                 Log.i("client",regions.toString());
                }catch (Exception e){
                    e.fillInStackTrace();
                    Log.i("client",e.getMessage());
-               }
+               }*/
                 break;
         }
     }

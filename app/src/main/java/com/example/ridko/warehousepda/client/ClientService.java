@@ -1,3 +1,4 @@
+/*
 package com.example.ridko.warehousepda.client;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
@@ -39,3 +40,4 @@ public class ClientService {
         }
     }
 }
+*/

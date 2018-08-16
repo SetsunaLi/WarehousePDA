@@ -2,6 +2,8 @@ package com.example.ridko.warehousepda.fragment;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,6 +33,7 @@ import com.example.ridko.warehousepda.adapter.ListDataAdapter;
 import com.example.ridko.warehousepda.application.App;
 import com.example.ridko.warehousepda.entity.ListEntity;
 import com.example.ridko.warehousepda.entity.ListEntity2;
+import com.example.ridko.warehousepda.picture.CutToBitmap;
 
 import java.util.ArrayList;
 
@@ -86,17 +89,27 @@ public class UnBindAndBindFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(getActivity());
-        buttonBind.setImageDrawable(getResources().getDrawable(R.drawable.bind3));
-        buttonUnbind.setImageDrawable(getResources().getDrawable(R.drawable.unbind1));
+        buttonBind.setImageBitmap(cutToBitmap(buttonBind,R.drawable.bind3));
+        buttonUnbind.setImageBitmap(cutToBitmap(buttonUnbind,R.drawable.unbind1));
         buttonUnbind.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.unbind2));
-                }/*else if(event.getAction()==MotionEvent.ACTION_UP){
-                    ((ImageButton)view).setImageDrawable(getResources().getDrawable(R.drawable.unbind3));
-                    buttonBind.setImageDrawable(getResources().getDrawable(R.drawable.bind1));
-                }*/
+                }else if (event.getAction()==MotionEvent.ACTION_MOVE){
+                    int[] location=new int[2];
+                    view.getLocationOnScreen(location);
+                    if ((event.getRawX() >= location[0] && event.getRawX()<=location[0]+view.getWidth())
+                            &&(event.getRawY()>= location[1] &&event.getRawY()<= location[1]+view.getHeight())){
+//                        ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy3));
+                    }else {
+                        if (App.BIND){
+                            buttonUnbind.setImageBitmap(cutToBitmap(buttonUnbind,R.drawable.unbind1));
+                        }else {
+                            buttonUnbind.setImageBitmap(cutToBitmap(buttonUnbind,R.drawable.unbind3));
+                        }
+                    }
+                }
                 return false;
             }
         });
@@ -105,10 +118,20 @@ public class UnBindAndBindFragment extends Fragment {
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.bind2));
-                }/*else if (event.getAction()==MotionEvent.ACTION_UP){
-                    ((ImageButton)view).setImageDrawable(getResources().getDrawable(R.drawable.bind3));
-                    buttonUnbind.setImageDrawable(getResources().getDrawable(R.drawable.unbind1));
-                }*/
+                }else if (event.getAction()==MotionEvent.ACTION_MOVE){
+                    int[] location=new int[2];
+                    view.getLocationOnScreen(location);
+                    if ((event.getRawX() >= location[0] && event.getRawX()<=location[0]+view.getWidth())
+                            &&(event.getRawY()>= location[1] &&event.getRawY()<= location[1]+view.getHeight())){
+//                        ib1.setImageDrawable(getResources().getDrawable(R.drawable.buy3));
+                    }else {
+                        if (App.BIND){
+                            buttonBind.setImageBitmap(cutToBitmap(buttonBind,R.drawable.bind3));
+                        }else {
+                            buttonBind.setImageBitmap(cutToBitmap(buttonBind,R.drawable.bind1));
+                        }
+                    }
+                }
                 return false;
             }
         });
@@ -210,17 +233,26 @@ public class UnBindAndBindFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_unbind:
-                ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.unbind3));
+                buttonUnbind.setImageBitmap(cutToBitmap(buttonUnbind,R.drawable.unbind3));
+                buttonBind.setImageBitmap(cutToBitmap(buttonBind,R.drawable.bind3));
                 buttonBind.setImageDrawable(getResources().getDrawable(R.drawable.bind1));
                 App.BIND = false;
                 break;
             case R.id.button_bind:
-                ((ImageButton) view).setImageDrawable(getResources().getDrawable(R.drawable.bind3));
-                buttonUnbind.setImageDrawable(getResources().getDrawable(R.drawable.unbind1));
+                buttonBind.setImageBitmap(cutToBitmap(buttonBind,R.drawable.bind3));
+                buttonUnbind.setImageBitmap(cutToBitmap(buttonUnbind,R.drawable.unbind1));
                 App.BIND = true;
                 break;
             case R.id.inventory:
                 break;
         }
+    }
+    /** 图片转化Bitmap **/
+    public Bitmap cutToBitmap(View view, int resId) {
+        Resources res = getResources();
+        int imageViewWidth = view.getWidth();
+        int imageViewHeight = view.getHeight();
+        return CutToBitmap.decodeResourceBySampleRate(res, resId,
+                imageViewWidth, imageViewHeight);
     }
 }

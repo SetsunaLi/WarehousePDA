@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
  */
 
 public class CutToBitmap {
+
     public static Bitmap decodeResourceBySampleRate(Resources res, int resId,
                                                     int imageViewWidth, int imageViewHeight) {
 
