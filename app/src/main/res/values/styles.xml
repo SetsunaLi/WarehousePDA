@@ -150,4 +150,7 @@
         <item name="android:progressDrawable">@drawable/seekbar_img</item>
         <item name="android:progress">200</item>
     </style>
+    <style name="search_drawable">
+        <item name="android:background">@drawable/search_anim_drawable</item>
+    </style>
 </resources>

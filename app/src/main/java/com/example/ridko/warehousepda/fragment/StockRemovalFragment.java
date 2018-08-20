@@ -2,6 +2,7 @@ package com.example.ridko.warehousepda.fragment;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -48,12 +49,8 @@ public class StockRemovalFragment extends Fragment {
     LinearLayout layout1;
     @Bind(R.id.edit2)
     EditText edit2;
-    @Bind(R.id.layout2)
-    LinearLayout layout2;
     @Bind(R.id.edit3)
     EditText edit3;
-    @Bind(R.id.layout3)
-    LinearLayout layout3;
     @Bind(R.id.button_blink)
     Button buttonBlink;
     @Bind(R.id.button_ok)
@@ -89,13 +86,12 @@ public class StockRemovalFragment extends Fragment {
         ButterKnife.bind(getActivity());
         initView();
     }
-
+    private AnimationDrawable frameanim;
     public void initView() {
         layout1.setVisibility(View.GONE);
-        layout2.setVisibility(View.GONE);
-        layout3.setVisibility(View.GONE);
-        buttonBlink.setVisibility(View.GONE);
-        buttonOk.setVisibility(View.GONE);
+//        buttonBlink.setVisibility(View.GONE);
+//        buttonOk.setVisibility(View.GONE);
+//        frameanim=(AnimationDrawable)imgSearch.getBackground();
     }
 
     @Override
@@ -116,7 +112,7 @@ public class StockRemovalFragment extends Fragment {
 
     private String strNO = "";
     private boolean flag=false;
-    @OnClick({R.id.tvSearch,R.id.button_blink, R.id.button_ok})
+    @OnClick({R.id.tvSearch,R.id.button_blink, R.id.button_ok,R.id.imgSearch})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvSearch:
@@ -137,6 +133,13 @@ public class StockRemovalFragment extends Fragment {
                 if (!false){
 
                 }
+                break;
+            case R.id.imgSearch:
+//                播放一次
+//                android:oneshot="true"\\false为循环播放
+                frameanim=(AnimationDrawable)getContext().getResources().getDrawable(R.drawable.search_anim_drawable);
+                imgSearch.setImageDrawable(frameanim);
+                frameanim.start();
                 break;
         }
     }

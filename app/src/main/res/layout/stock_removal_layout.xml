@@ -57,7 +57,7 @@
             android:id="@+id/imgSearch"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/search_img"
+            style="@style/search_drawable"
             android:layout_centerInParent="true"
             />
         <TextView
@@ -72,8 +72,11 @@
         <LinearLayout
             android:id="@+id/layout1"
             android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:layout_marginTop="20px"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            style="@style/layout_style2"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px">
             <TextView
@@ -81,22 +84,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/text1"
-                android:textColor="@color/colorHomeButton2"
-                android:textSize="45px"
+                style="@style/text_style3"
                 />
             <EditText
                 android:id="@+id/edit1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 style="@style/edit_style1"
-                android:focusable="false"
                 />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/layout2"
             android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:layout_marginTop="120px"
+            style="@style/layout_style2"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px">
             <TextView
@@ -104,21 +103,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/text2"
-                android:textColor="@color/colorHomeButton2"
-                android:textSize="45px"
+                style="@style/text_style3"
                 />
             <EditText
                 android:id="@+id/edit2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/edit_style1"
-                android:focusable="false"/>
+                style="@style/edit_style1"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/layout3"
             android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:layout_marginTop="220px"
+            style="@style/layout_style2"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px">
             <TextView
@@ -126,28 +121,27 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/text3"
-                android:textColor="@color/colorHomeButton2"
-                android:textSize="45px"
+                style="@style/text_style3"
                 />
             <EditText
                 android:id="@+id/edit3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/edit_style1"
-                android:focusable="false"/>
+                style="@style/edit_style1"/>
+        </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="6">
+        android:layout_weight="7"
+        android:gravity="center">
     <Button
         android:id="@+id/button_blink"
         style="@style/button_style5"
         android:layout_width="match_parent"
         android:text="@string/button_1"
-        android:layout_marginLeft="40px"
-        android:layout_marginTop="40px"
+        android:layout_marginLeft="30px"
         android:layout_marginRight="20px"
         android:layout_weight="1"
         />
@@ -157,8 +151,7 @@
             android:layout_width="match_parent"
             android:text="@string/button_2"
             android:layout_marginLeft="20px"
-            android:layout_marginTop="40px"
-            android:layout_marginRight="40px"
+            android:layout_marginRight="30px"
             android:layout_weight="1"
             />
     </LinearLayout>

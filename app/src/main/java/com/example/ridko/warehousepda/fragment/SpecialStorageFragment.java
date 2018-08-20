@@ -3,6 +3,7 @@ package com.example.ridko.warehousepda.fragment;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -138,8 +139,12 @@ public class SpecialStorageFragment extends Fragment {
                 return false;
             }
         });
+//        initView();
     }
-
+    private AnimationDrawable frameanim;
+    public void initView(){
+        frameanim=(AnimationDrawable)imgSearch.getBackground();
+    }
     //当客户点击MENU按钮的时候，调用该方法
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -164,7 +169,7 @@ public class SpecialStorageFragment extends Fragment {
     }
     private String strNO = "";
     private Fragment f1;
-    @OnClick({R.id.ib1, R.id.ib2,R.id.tvSearch})
+    @OnClick({R.id.ib1, R.id.ib2,R.id.tvSearch,R.id.imgSearch})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ib1:
@@ -204,6 +209,10 @@ public class SpecialStorageFragment extends Fragment {
                    Log.i("client",e.getMessage());
                }*/
                 break;
+            case R.id.imgSearch:
+                frameanim=(AnimationDrawable)getContext().getResources().getDrawable(R.drawable.search_anim_drawable);
+                imgSearch.setImageDrawable(frameanim);
+                frameanim.start();
         }
     }
     /** 图片转化Bitmap **/

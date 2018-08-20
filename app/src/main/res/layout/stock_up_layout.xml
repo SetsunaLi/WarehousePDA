@@ -56,8 +56,8 @@
             android:id="@+id/imgSearch"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/search_img"
             android:layout_centerInParent="true"
+            style="@style/search_drawable"
             />
         <TextView
             android:id="@+id/tvNosearch"

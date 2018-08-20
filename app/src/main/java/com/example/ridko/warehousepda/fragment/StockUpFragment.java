@@ -1,6 +1,9 @@
 package com.example.ridko.warehousepda.fragment;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ridko.warehousepda.R;
+import com.example.ridko.warehousepda.picture.CutToBitmap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -54,9 +58,13 @@ public class StockUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.stock_up_layout, container, false);
         ButterKnife.bind(this, view);
+//        initView();
         return view;
     }
-
+    private AnimationDrawable frameanim;
+    public void initView(){
+        frameanim=(AnimationDrawable)imgSearch.getBackground();
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -85,7 +93,7 @@ public class StockUpFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 private StockUPTwo f1=new StockUPTwo();
-    @OnClick({R.id.tvSearch,})
+    @OnClick({R.id.tvSearch,R.id.imgSearch})
     public void onViewClicked(View view) {
         switch (view.getId()){
             case R.id.tvSearch:
@@ -94,6 +102,21 @@ private StockUPTwo f1=new StockUPTwo();
                 transaction.show(f1);
                 transaction.commit();
                 break;
+            case R.id.imgSearch:
+//                播放一次
+//                android:oneshot="true"\\false为循环播放
+                frameanim=(AnimationDrawable)getContext().getResources().getDrawable(R.drawable.search_anim_drawable);
+                imgSearch.setImageDrawable(frameanim);
+                frameanim.start();
+                break;
         }
+    }
+    /** 图片转化Bitmap **/
+    public Bitmap cutToBitmap(View view, int resId) {
+        Resources res = getResources();
+        int imageViewWidth = view.getWidth();
+        int imageViewHeight = view.getHeight();
+        return CutToBitmap.decodeResourceBySampleRate(res, resId,
+                imageViewWidth, imageViewHeight);
     }
 }
