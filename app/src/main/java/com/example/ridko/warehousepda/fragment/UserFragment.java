@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -109,6 +110,7 @@ public class UserFragment extends Fragment {
                 blinkDialog();
                 break;
             case R.id.button:
+
                 break;
         }
     }
@@ -124,6 +126,9 @@ public class UserFragment extends Fragment {
         dialog = new AlertDialog.Builder(getActivity()).create();
         dialog.show();
         dialog.getWindow().setContentView(blinkView);
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -4,9 +4,9 @@
     android:background="@color/colorHomeButton1">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        android:layout_height="300dip"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -19,31 +19,18 @@
                 android:text="@string/text23"
                 />
         </RelativeLayout>
-        <!--<TextView
-            android:id="@+id/dialog_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/dialog_content_text"
-            android:text="@string/dialog_blink"
-            android:layout_centerInParent="true"
-            />-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:layout_marginBottom="140px"
-            android:layout_marginLeft="20px"
-            android:layout_marginRight="20px"
             android:orientation="vertical"
             >
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                style="@style/layout_style2">
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
                     style="@style/dialog_carrier"
                     android:text="@string/text25"
                     android:gravity="center_vertical"/>
@@ -51,20 +38,20 @@
                     android:id="@+id/edit1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="7"
+                    android:layout_weight="1"
                     style="@style/edit_style1"
+                    android:focusable="true"
+                    android:textColor="@color/colorDialogContent"
                     android:inputType="textPassword"
                     android:password="true"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp">
+                style="@style/layout_style2"
+                android:layout_marginTop="5dp">
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
                     style="@style/dialog_carrier"
                     android:text="@string/text26"
                     android:gravity="center_vertical"/>
@@ -72,20 +59,20 @@
                     android:id="@+id/edit2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="7"
+                    android:layout_weight="1"
                     style="@style/edit_style1"
+                    android:focusable="true"
+                    android:textColor="@color/colorDialogContent"
                     android:inputType="textPassword"
                     android:password="true"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp">
+                style="@style/layout_style2"
+                android:layout_marginTop="5dp">
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
                     style="@style/dialog_carrier"
                     android:text="@string/text27"
                     android:gravity="center_vertical"/>
@@ -93,22 +80,36 @@
                     android:id="@+id/edit3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="7"
+                    android:layout_weight="1"
                     style="@style/edit_style1"
+                    android:focusable="true"
+                    android:textColor="@color/colorDialogContent"
                     android:inputType="textPassword"
                     android:password="true"/>
             </LinearLayout>
 
         </LinearLayout>
-        <Button
-            android:id="@+id/dialog_no"
-            style="@style/dialog_button_no"
-            android:text="@string/button_no"
-            />
-        <Button
-            android:id="@+id/dialog_yes"
-            style="@style/dialog_button_yes"
-            android:text="@string/button_yes"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <Button
+                android:id="@+id/dialog_no"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/dialog_button_no"
+                android:text="@string/button_no"
+                />
+            <Button
+                android:id="@+id/dialog_yes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/dialog_button_yes"
+                android:text="@string/button_yes"
+                />
+        </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

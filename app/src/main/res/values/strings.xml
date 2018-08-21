@@ -86,13 +86,13 @@
     <string name="text18">陈某某</string>
     <string name="text19">&#8195;ID:YF0987654&#8195;</string>
     <string name="text20">16:57:30</string>
-    <string name="text21">岗位</string>
+    <string name="text21">岗&#8195;位&#8195;：</string>
     <string name="text22">杂工</string>
     <string name="text23">修改密码</string>
     <string name="text24">退出/切换账号</string>
-    <string name="text25">原密码</string>
-    <string name="text26">新密码</string>
-    <string name="text27">确认密码</string>
+    <string name="text25">原密码&#8195;:&#8197;</string>
+    <string name="text26">新密码&#8195;:&#8197;</string>
+    <string name="text27">确认密码:&#8197;</string>
     <string name="text28">请输入相同的新密码</string>
     <string name="text29">请输入正确的原密码</string>
     <string name="text30">重置</string>

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -204,10 +205,12 @@ public class UnBindAndBindFragment extends Fragment {
         Button yes = (Button) blinkView.findViewById(R.id.dialog_yes);
         final EditText editNo = (EditText) blinkView.findViewById(R.id.editNO);
         ImageView img = (ImageView) blinkView.findViewById(R.id.imgSearch);
-
         dialog = new AlertDialog.Builder(getActivity()).create();
         dialog.show();
         dialog.getWindow().setContentView(blinkView);
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

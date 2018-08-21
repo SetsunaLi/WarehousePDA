@@ -98,6 +98,13 @@
         <item name="android:textColor">@color/colorHomeButton1</item>
         <item name="android:background">@drawable/dialog_button_yes</item>
     </style>
+    <!--左边按钮-->
+    <style name="button_style7">
+        <item name="android:layout_height">60dip</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/colorHomeButton1</item>
+        <item name="android:background">@drawable/button_style_2</item>
+    </style>
 <!---->
     <style name="edit_style1">
     <item name="android:textSize">22sp</item>
@@ -149,6 +156,7 @@
         <item name="android:thumb">@drawable/switch_open</item>
         <item name="android:progressDrawable">@drawable/seekbar_img</item>
         <item name="android:progress">200</item>
+        <item name="android:maxHeight">12dip</item>
     </style>
     <style name="search_drawable">
         <item name="android:background">@drawable/search_anim_drawable</item>
