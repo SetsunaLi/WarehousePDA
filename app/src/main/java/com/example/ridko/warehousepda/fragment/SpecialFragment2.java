@@ -97,7 +97,7 @@ public class SpecialFragment2 extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
+    protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     @OnClick({R.id.button_blink, R.id.button_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -105,7 +105,7 @@ public class SpecialFragment2 extends Fragment {
 //                录入mlist中selectID的缸号
                 IntoID intoID=new IntoID();
                 FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content_frame,intoID);
+                transaction.add(R.id.content_frame,intoID,TAG_CONTENT_FRAGMENT);
                 transaction.show(intoID);
                 transaction.commit();
                 break;
@@ -113,7 +113,7 @@ public class SpecialFragment2 extends Fragment {
 //                获取mlist中selectID的详细数据
                 SpecialFragment3 specialFragment3=new SpecialFragment3();
                 FragmentTransaction transaction2=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction2.add(R.id.content_frame,specialFragment3);
+                transaction2.add(R.id.content_frame,specialFragment3,TAG_CONTENT_FRAGMENT);
                 transaction2.show(specialFragment3);
                 transaction2.commit();
                 break;

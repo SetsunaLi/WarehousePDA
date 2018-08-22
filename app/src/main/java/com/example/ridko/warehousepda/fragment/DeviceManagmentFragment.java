@@ -191,28 +191,28 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
+    protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     @Override
     public void onItemClick(View view, Object data, int position) {
         switch (position) {
             case 0:
                 UserFragment f1 = new UserFragment();
                 FragmentTransaction transaction1 = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction1.add(R.id.content_frame, f1);
+                transaction1.replace(R.id.content_frame, f1,TAG_CONTENT_FRAGMENT);
                 transaction1.show(f1);
                 transaction1.commit();
                 break;
             case 1:
                 SystemFragment f2 = new SystemFragment();
                 FragmentTransaction transaction2 = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction2.add(R.id.content_frame, f2);
+                transaction2.replace(R.id.content_frame, f2,TAG_CONTENT_FRAGMENT);
                 transaction2.show(f2);
                 transaction2.commit();
                 break;
             case 2:
                 DeviceFragment f3 = new DeviceFragment();
                 FragmentTransaction transaction3 = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction3.add(R.id.content_frame, f3);
+                transaction3.replace(R.id.content_frame, f3,TAG_CONTENT_FRAGMENT);
                 transaction3.show(f3);
                 transaction3.commit();
                 break;

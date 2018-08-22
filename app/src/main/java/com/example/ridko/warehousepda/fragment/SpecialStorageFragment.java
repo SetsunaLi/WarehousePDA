@@ -169,6 +169,7 @@ public class SpecialStorageFragment extends Fragment {
     }
     private String strNO = "";
     private Fragment f1;
+    protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     @OnClick({R.id.ib1, R.id.ib2,R.id.tvSearch,R.id.imgSearch})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -194,7 +195,7 @@ public class SpecialStorageFragment extends Fragment {
                     if (f1==null)
                         f1=new SpecialFragment2();
                     FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.add(R.id.content_frame,f1);
+                    transaction.add(R.id.content_frame,f1,TAG_CONTENT_FRAGMENT);
                     transaction.show(f1);
                     transaction.commit();
                 } else {

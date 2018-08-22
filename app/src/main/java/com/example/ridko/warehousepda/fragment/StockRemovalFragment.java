@@ -112,6 +112,7 @@ public class StockRemovalFragment extends Fragment {
 
     private String strNO = "";
     private boolean flag=false;
+    protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     @OnClick({R.id.tvSearch,R.id.button_blink, R.id.button_ok,R.id.imgSearch})
     public void onViewClicked(View view) {
         switch (view.getId()) {

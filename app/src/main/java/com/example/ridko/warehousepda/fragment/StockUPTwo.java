@@ -100,13 +100,14 @@ public class StockUPTwo extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
- StockUPThree f3=new StockUPThree();
+    StockUPThree f3=new StockUPThree();
+    protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     @OnClick({R.id.button_blink, R.id.button_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_blink:
                 FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content_frame,f3);
+                transaction.add(R.id.content_frame,f3,TAG_CONTENT_FRAGMENT);
                 transaction.show(f3);
                 transaction.commit();
                 break;

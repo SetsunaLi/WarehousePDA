@@ -105,6 +105,7 @@
     <string name="text37">最大Q</string>
     <string name="text38">存储</string>
     <string name="text39">区域</string>
+    <string name="text56">恢复设置</string>
     <string-array name="arithmetic_array">
         <item>固态</item>
         <item>动态</item>

@@ -83,7 +83,7 @@
                         android:text="@string/text34"
                         />
                     <Spinner
-                        android:id="@+id/spinner1"
+                        android:id="@+id/sys_spinner1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="7"
@@ -104,7 +104,7 @@
                         android:text="@string/text35"
                         />
                     <Spinner
-                        android:id="@+id/spinner2"
+                        android:id="@+id/sys_spinner2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="7"
@@ -125,7 +125,7 @@
                         android:text="@string/text36"
                         />
                     <Spinner
-                        android:id="@+id/spinner3"
+                        android:id="@+id/sys_spinner3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="7"
@@ -146,7 +146,7 @@
                         android:text="@string/text37"
                         />
                     <Spinner
-                        android:id="@+id/spinner4"
+                        android:id="@+id/sys_spinner4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="7"
@@ -181,7 +181,7 @@
                         android:text="@string/text38"
                         />
                     <Spinner
-                        android:id="@+id/spinner5"
+                        android:id="@+id/sys_spinner5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="7"
@@ -202,7 +202,7 @@
                         android:text="@string/text39"
                         />
                     <Spinner
-                        android:id="@+id/spinner6"
+                        android:id="@+id/sys_spinner6"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="7"
@@ -292,6 +292,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="65535"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:text="@string/text56"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    style="@style/button_style7"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

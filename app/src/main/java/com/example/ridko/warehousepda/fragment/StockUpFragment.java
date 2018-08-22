@@ -92,13 +92,14 @@ public class StockUpFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-private StockUPTwo f1=new StockUPTwo();
+    protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
+    private StockUPTwo f1=new StockUPTwo();
     @OnClick({R.id.tvSearch,R.id.imgSearch})
     public void onViewClicked(View view) {
         switch (view.getId()){
             case R.id.tvSearch:
                 FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content_frame,f1);
+                transaction.add(R.id.content_frame,f1,TAG_CONTENT_FRAGMENT);
                 transaction.show(f1);
                 transaction.commit();
                 break;
