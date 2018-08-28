@@ -59,7 +59,7 @@ public class SpecialFragment3 extends Fragment {
         list.mListHead=head;
         mAdapter=new ListDataAdapter(mlist,getContext());
         list.setAdapter(mAdapter);
-        mAdapter.setData(mlist);
+//        mAdapter.setData(mlist);
         mAdapter.notifyDataSetChanged();
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -101,15 +101,16 @@ public class SpecialFragment3 extends Fragment {
         ButterKnife.unbind(this);
     }
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
+    private Fragment fragment;
     @OnClick({R.id.button_blink, R.id.button_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_blink:
 //                录入mlist中selectID的缸号
-                RuKuFragement intoID=new RuKuFragement();
+                fragment=new RuKuFragement();
                 FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content_frame,intoID,TAG_CONTENT_FRAGMENT);
-                transaction.show(intoID);
+                transaction.add(R.id.content_frame,fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                transaction.show(fragment);
                 transaction.commit();
                 break;
             case R.id.button_ok:

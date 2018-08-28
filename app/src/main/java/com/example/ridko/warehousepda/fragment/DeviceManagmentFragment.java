@@ -108,12 +108,12 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
         mgAdapter.setState(BasePullUpRecyclerAdapter.STATE_INVISIBLE);
         mgAdapter.notifyDataSetChanged();
         mgAdapter.setOnItemClickListener(this);
+        rvList.setAdapter(mgAdapter);
         rvList.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 int action=motionEvent.getActionMasked();
                 View child = ((RecyclerView) view).findChildViewUnder(motionEvent.getX(), motionEvent.getY());
-                if (child!=null)
                 switch (motionEvent.getActionMasked()) {
                     case MotionEvent.ACTION_UP:
                         TextView flagText1 = (TextView) child.findViewById(R.id.text1);
@@ -173,7 +173,7 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
                 return true;
             }
         });
-        rvList.setAdapter(mgAdapter);
+
     }
 
     @Override
@@ -192,28 +192,29 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
         ButterKnife.unbind(this);
     }
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
+    private Fragment fragment;
     @Override
     public void onItemClick(View view, Object data, int position) {
         switch (position) {
             case 0:
-                UserFragment f1 = new UserFragment();
+                fragment = new UserFragment();
                 FragmentTransaction transaction1 = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction1.replace(R.id.content_frame, f1,TAG_CONTENT_FRAGMENT);
-                transaction1.show(f1);
+                transaction1.replace(R.id.content_frame, fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                transaction1.show(fragment);
                 transaction1.commit();
                 break;
             case 1:
-                SystemFragment f2 = new SystemFragment();
+                fragment = new SystemFragment();
                 FragmentTransaction transaction2 = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction2.replace(R.id.content_frame, f2,TAG_CONTENT_FRAGMENT);
-                transaction2.show(f2);
+                transaction2.replace(R.id.content_frame, fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                transaction2.show(fragment);
                 transaction2.commit();
                 break;
             case 2:
-                DeviceFragment f3 = new DeviceFragment();
+                fragment= new DeviceFragment();
                 FragmentTransaction transaction3 = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction3.replace(R.id.content_frame, f3,TAG_CONTENT_FRAGMENT);
-                transaction3.show(f3);
+                transaction3.replace(R.id.content_frame, fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                transaction3.show(fragment);
                 transaction3.commit();
                 break;
         }

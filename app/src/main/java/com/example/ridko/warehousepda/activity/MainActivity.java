@@ -163,25 +163,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
-        if (fragment != null && (fragment instanceof AboutFragment || fragment instanceof HomeFragment || fragment instanceof
+        if (fragment != null && (fragment instanceof AboutFragment  ||fragment instanceof HomeFragment || fragment instanceof
                 CheckClothFragment || fragment instanceof CutClothFragment || fragment instanceof DeviceManagmentFragment
                 || fragment instanceof SpecialStorageFragment || fragment instanceof StockUpFragment || fragment instanceof StockRemovalFragment
         )) {
 
             //update the selected item in the drawer and the title
-            mDrawerList.setItemChecked(0, true);
+//            mDrawerList.setItemChecked(0, true);
+            selectItem(0);
             setTitle(mOptionTitles[0]);
             //We are handling back pressed for saving pre-filters settings. Notify the appropriate fragment.
             //{@link BaseReceiverActivity # onBackPressed should be called by the fragment when the processing is done}
             //super.onBackPressed();
 
-            if (fragment != null && fragment instanceof HomeFragment) {
+            if (fragment instanceof HomeFragment) {
                 ((HomeFragment) fragment).onBackPressed();
             } else {
-                super.onBackPressed();
+
             }
         } else {
-            super.onBackPressed();
+            getSupportFragmentManager().popBackStack();
         }
     }
 
@@ -305,6 +306,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (position == 0) {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT).commit();
+        } else if (position==2){
+            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT).addToBackStack(null).commit();
         } else {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT).addToBackStack(null).commit();

@@ -25,7 +25,7 @@
         android:background="@color/colorDialogContent"
         android:layout_weight="3"
         android:layout_marginTop="20px">
-        <include layout="@layout/no_table_item_layout"></include>
+        <include layout="@layout/no_title_item_layout"></include>
         <com.example.ridko.warehousepda.view.HVListView
             android:id="@+id/list"
              android:fastScrollEnabled="true"

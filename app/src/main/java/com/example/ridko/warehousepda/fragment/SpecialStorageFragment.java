@@ -168,7 +168,7 @@ public class SpecialStorageFragment extends Fragment {
         ButterKnife.unbind(this);
     }
     private String strNO = "";
-    private Fragment f1;
+    private Fragment fragment;
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     @OnClick({R.id.ib1, R.id.ib2,R.id.tvSearch,R.id.imgSearch})
     public void onViewClicked(View view) {
@@ -192,11 +192,11 @@ public class SpecialStorageFragment extends Fragment {
             case R.id.tvSearch:
                 strNO = edit1.getText().toString() + "";
                 if (strNO!=null) {
-                    if (f1==null)
-                        f1=new SpecialFragment2();
+                    if (fragment==null)
+                        fragment=new SpecialFragment2();
                     FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.add(R.id.content_frame,f1,TAG_CONTENT_FRAGMENT);
-                    transaction.show(f1);
+                    transaction.add(R.id.content_frame,fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                    transaction.show(fragment);
                     transaction.commit();
                 } else {
                     App.toastShow(getContext(), getResources().getString(R.string.stockRemoval_hint), Toast.LENGTH_SHORT);

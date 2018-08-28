@@ -8,6 +8,8 @@
     <color name="colerUserText">#555555</color>
     <color name="colorHomeButton1">#ffffff</color>
     <color name="colorHomeButton2">#adb9e5</color>
+    <color name="colorTableText">#cad5ff</color>
+    <color name="colorTableLine">#0a132c</color>
     <color name="colorZERO">#00000000</color>
     <color name="colorHalfZERO">#e0000000</color>
     <color name="colorEditText">#04a0ff</color>

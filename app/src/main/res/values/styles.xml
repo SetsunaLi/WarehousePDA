@@ -135,6 +135,16 @@
         <item name="android:textSize">25sp</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="text_style5">
+        <item name="android:textColor">@color/colorTableText</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="text_style6">
+        <item name="android:textColor">@color/colorTableLine</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:gravity">center</item>
+    </style>
     <!--特殊入库title高度-->
     <style name="layout_style1">
         <item name="android:layout_height">50dip</item>
@@ -160,5 +170,19 @@
     </style>
     <style name="search_drawable">
         <item name="android:background">@drawable/search_anim_drawable</item>
+    </style>
+    <style name="view_item_mid">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:background">@color/colorTableLine</item>
+    </style>
+    <style name="view_item_bottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:background">@color/colorTableLine</item>
     </style>
 </resources>

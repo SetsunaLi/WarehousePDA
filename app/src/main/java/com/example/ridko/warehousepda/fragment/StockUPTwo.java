@@ -60,7 +60,7 @@ public class StockUPTwo extends Fragment {
         list.mListHead=head;
         mAdapter=new ListDataAdapter(mlist,getContext());
         list.setAdapter(mAdapter);
-        mAdapter.setData(mlist);
+//        mAdapter.setData(mlist);
         mAdapter.notifyDataSetChanged();
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,15 +100,16 @@ public class StockUPTwo extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-    StockUPThree f3=new StockUPThree();
+    private StockUPThree fragment;
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     @OnClick({R.id.button_blink, R.id.button_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_blink:
+                fragment=new StockUPThree();
                 FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content_frame,f3,TAG_CONTENT_FRAGMENT);
-                transaction.show(f3);
+                transaction.add(R.id.content_frame,fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                transaction.show(fragment);
                 transaction.commit();
                 break;
             case R.id.button_ok:
