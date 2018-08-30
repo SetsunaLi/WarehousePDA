@@ -134,4 +134,35 @@
             android:text="@string/btn_about"
             android:onClick="aboutClicked"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/btn_outdemo_managment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            style="@style/DashboardButton"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/default_top_padding"
+            android:layout_marginTop="@dimen/home_icon_margin_2"
+            android:layout_marginLeft="@dimen/home_icon_margin_2"
+            android:layout_marginRight="@dimen/home_icon_margin_1"
+            android:layout_marginBottom="@dimen/home_icon_margin_1"
+            android:text="@string/btn_out_demo"
+            android:onClick="outDemoClick"/>
+        <Button
+            android:id="@+id/btn_connect_pda"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            style="@style/DashboardButton"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/default_top_padding"
+            android:layout_marginTop="@dimen/home_icon_margin_2"
+            android:layout_marginLeft="@dimen/home_icon_margin_2"
+            android:layout_marginRight="@dimen/home_icon_margin_1"
+            android:layout_marginBottom="@dimen/home_icon_margin_1"
+            android:text="@string/btn_connect_pda"
+            android:onClick="connectPDA"/>
+    </LinearLayout>
 </LinearLayout>

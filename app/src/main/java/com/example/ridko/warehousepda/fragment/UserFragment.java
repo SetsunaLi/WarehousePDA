@@ -22,10 +22,6 @@ import android.widget.Toast;
 
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.application.App;
-import com.example.ridko.warehousepda.entity.Managment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

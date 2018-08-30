@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/RFIDAPI3Library/RFIDAPI3Library.iml" filepath="$PROJECT_DIR$/RFIDAPI3Library/RFIDAPI3Library.iml" />
       <module fileurl="file://$PROJECT_DIR$/WarehousePDA.iml" filepath="$PROJECT_DIR$/WarehousePDA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

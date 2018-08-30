@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@android:style/Theme.Holo.Light.DarkActionBar"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="@dimen/default_top_margin"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/bondedReadersTitle"
+        style="@style/text_style7"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="left"
+        android:text="@string/available_readers_title" />
+
+    <View
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@android:color/holo_blue_dark" />
+    <ListView
+        android:id="@+id/bondedReadersList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="95"
+        android:dividerHeight="0.25dp"
+        >
+    </ListView>
+    <TextView android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="95"
+        style="@style/text_style7"
+        android:padding="@dimen/default_padding"
+        android:text="@string/none_paired"
+        android:visibility="gone"/>
+</LinearLayout>

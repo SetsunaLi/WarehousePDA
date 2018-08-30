@@ -30,6 +30,8 @@ public class DrawerListContent {
         addItem(new DrawerItem("7", "出库管理", R.drawable.about));
         addItem(new DrawerItem("8", "设备管理", R.drawable.about));
         addItem(new DrawerItem("9", "关于", R.drawable.about));
+        addItem(new DrawerItem("10", "测试Demo", R.drawable.about));
+        addItem(new DrawerItem("11", "连接PDA", R.drawable.about));
     }
 
     /**

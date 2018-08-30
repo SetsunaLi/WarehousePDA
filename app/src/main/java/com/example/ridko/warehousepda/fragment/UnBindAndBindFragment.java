@@ -26,13 +26,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.ridko.warehousepda.R;
-import com.example.ridko.warehousepda.adapter.ListDataAdapter;
 import com.example.ridko.warehousepda.application.App;
-import com.example.ridko.warehousepda.entity.ListEntity;
 import com.example.ridko.warehousepda.entity.ListEntity2;
 import com.example.ridko.warehousepda.picture.CutToBitmap;
 

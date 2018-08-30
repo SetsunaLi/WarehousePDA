@@ -145,6 +145,11 @@
         <item name="android:textSize">25sp</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="text_style7">
+        <item name="android:textColor">@color/colorTableLine</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:gravity">center</item>
+    </style>
     <!--特殊入库title高度-->
     <style name="layout_style1">
         <item name="android:layout_height">50dip</item>
