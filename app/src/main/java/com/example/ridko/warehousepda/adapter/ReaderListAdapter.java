@@ -40,6 +40,7 @@ public class ReaderListAdapter extends ArrayAdapter<ReaderDevice> {
             convertView = layoutInflater.inflate(resourceId, null);
         }
         CheckedTextView checkedTextView = (CheckedTextView) convertView.findViewById(R.id.reader_checkedtextview);
+        checkedTextView.setTextColor(context.getResources().getColor(R.color.colorHomeButton2));
         checkedTextView.setText(reader.getName() + "\n" + reader.getAddress());
 
         LinearLayout readerDetail = (LinearLayout) convertView.findViewById(R.id.reader_detail);
@@ -59,7 +60,7 @@ public class ReaderListAdapter extends ArrayAdapter<ReaderDevice> {
 
         } else {
             readerDetail.setVisibility(View.GONE);
-            checkedTextView.setChecked(false);
+//            checkedTextView.setChecked(false);
         }
         return convertView;
     }

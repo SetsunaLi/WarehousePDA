@@ -3,10 +3,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginTop="@dimen/default_top_margin"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg2">
     <TextView
         android:id="@+id/bondedReadersTitle"
-        style="@style/text_style7"
+        style="@style/text_style3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
@@ -30,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="95"
-        style="@style/text_style7"
+        style="@style/text_style3"
         android:padding="@dimen/default_padding"
         android:text="@string/none_paired"
         android:visibility="gone"/>

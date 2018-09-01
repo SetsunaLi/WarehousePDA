@@ -199,6 +199,12 @@
     <string name="text55">布票号&#8195;：</string>
     <string name="button12">生成EPC</string>
     <!--<string name="texte56">生成EPC&#8197;：</string>-->
+    <string name="text57">申请单号</string>
+    <string name="text58">申请条数</string>
+    <string name="text59">配货条数</string>
+    <string name="text60">状态</string>
+    <string name="button13">查询</string>
+    <string name="button14">扫描</string>
 
 
 
