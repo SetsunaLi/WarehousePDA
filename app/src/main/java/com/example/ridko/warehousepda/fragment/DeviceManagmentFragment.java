@@ -305,7 +305,7 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
 
     class ManagementAdapter extends BasePullUpRecyclerAdapter<Managment> {
         //        在适配器做做item 触摸监听监听
-        private MyItemOnTouchListener myItemOnTouchListener;
+//        private MyItemOnTouchListener myItemOnTouchListener;
 
         //        private GestureDetectorCompat mGestureDetector;
         public ManagementAdapter(final RecyclerView rv, Collection<Managment> datas, int itemLayoutId
@@ -384,9 +384,9 @@ public class DeviceManagmentFragment extends Fragment implements BasePullUpRecyc
             }
         }
 
-        public void setMyItemOnTouchListener(MyItemOnTouchListener myItemOnTouchListener) {
+       /* public void setMyItemOnTouchListener(MyItemOnTouchListener myItemOnTouchListener) {
             this.myItemOnTouchListener = myItemOnTouchListener;
-        }
+        }*/
 
      /*   @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {

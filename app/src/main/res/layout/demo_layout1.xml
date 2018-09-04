@@ -62,68 +62,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/text_noresult"
             android:textColor="@color/colorHomeButton2"/>
-        <LinearLayout
-            android:id="@+id/layout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dip"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="25dip"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/set_up"
-                    />
-                <View
-                    style="@style/view_item_mid"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    style="@style/text_style3"
-                    android:text="@string/text57"/>
-                <View
-                    style="@style/view_item_mid"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    style="@style/text_style3"
-                    android:text="@string/text12"/>
-                <View
-                    style="@style/view_item_mid"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    style="@style/text_style3"
-                    android:text="@string/text58"/>
-                <View
-                    style="@style/view_item_mid"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    style="@style/text_style3"
-                    android:text="@string/text59"/>
-                <View
-                    style="@style/view_item_mid"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    style="@style/text_style3"
-                    android:text="@string/text60"/>
-            </LinearLayout>
-            <View
-                style="@style/view_item_bottom"/>
-            <ListView
-                android:id="@+id/listview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></ListView>
-        </LinearLayout>
+
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"

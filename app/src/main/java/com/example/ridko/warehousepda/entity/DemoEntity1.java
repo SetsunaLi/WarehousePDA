@@ -5,18 +5,45 @@ package com.example.ridko.warehousepda.entity;
  */
 
 public class DemoEntity1 {
-    private String applyNO;
+    private String dyelotNO;
     private int buNO;
-    private float applyCount;
-    private float practicalCount;
+    private int applyCount;
+    private int practicalCount;
+    private int readCount;
     private String state;
 
-    public String getApplyNO() {
-        return applyNO;
+    public int getApplyCount() {
+        return applyCount;
     }
 
-    public void setApplyNO(String applyNO) {
-        this.applyNO = applyNO;
+    public void setApplyCount(int applyCount) {
+        this.applyCount = applyCount;
+    }
+
+    public int getPracticalCount() {
+        return practicalCount;
+    }
+
+    public void setPracticalCount(int practicalCount) {
+        this.practicalCount = practicalCount;
+    }
+
+    public int getReadCount() {
+        return readCount;
+    }
+
+    public void setReadCount(int readCount) {
+        this.readCount = readCount;
+    }
+
+
+
+    public String getDyelotNO() {
+        return dyelotNO;
+    }
+
+    public void setDyelotNO(String dyelotNO) {
+        this.dyelotNO = dyelotNO;
     }
 
     public int getBuNO() {
@@ -27,21 +54,7 @@ public class DemoEntity1 {
         this.buNO = buNO;
     }
 
-    public float getApplyCount() {
-        return applyCount;
-    }
 
-    public void setApplyCount(float applyCount) {
-        this.applyCount = applyCount;
-    }
-
-    public float getPracticalCount() {
-        return practicalCount;
-    }
-
-    public void setPracticalCount(float practicalCount) {
-        this.practicalCount = practicalCount;
-    }
 
     public String getState() {
         return state;

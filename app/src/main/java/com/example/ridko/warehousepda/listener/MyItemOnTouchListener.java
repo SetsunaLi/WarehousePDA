@@ -11,10 +11,10 @@ import android.view.View;
 public interface MyItemOnTouchListener {
 
 //    void onItemTouchClick(View view, int postion,MotionEvent motionEvent);
-    void onItemClick(RecyclerView.ViewHolder holder);
-
+    void onItemClick(int position);
+/*
     void onItemLongClick(RecyclerView.ViewHolder holder);
 
-    boolean startDragging(RecyclerView.ViewHolder holder, View view,MotionEvent e);
+    boolean startDragging(RecyclerView.ViewHolder holder, View view,MotionEvent e);*/
 
 }

@@ -17,42 +17,51 @@
             style="@style/view_item_mid"/>
         <TextView
             android:id="@+id/item2"
-            android:layout_width="0dp"
+            android:layout_width="120dip"
             android:layout_height="match_parent"
-            android:layout_weight="5"
             style="@style/text_style3"/>
         <View
             style="@style/view_item_mid"/>
         <TextView
             android:id="@+id/item3"
-            android:layout_width="0dp"
+            android:layout_width="60dip"
             android:layout_height="match_parent"
-            android:layout_weight="2"
             style="@style/text_style3"/>
         <View
             style="@style/view_item_mid"/>
         <TextView
             android:id="@+id/item4"
-            android:layout_width="0dp"
+            android:layout_width="60dip"
             android:layout_height="match_parent"
-            android:layout_weight="2"
             style="@style/text_style3"/>
         <View
             style="@style/view_item_mid"/>
         <TextView
             android:id="@+id/item5"
-            android:layout_width="0dp"
+            android:layout_width="60dip"
             android:layout_height="match_parent"
-            android:layout_weight="2"
             style="@style/text_style3"/>
         <View
             style="@style/view_item_mid"/>
         <TextView
             android:id="@+id/item6"
-            android:layout_width="0dp"
+            android:layout_width="60dip"
             android:layout_height="match_parent"
-            android:layout_weight="2"
             style="@style/text_style3"/>
+        <View
+            style="@style/view_item_mid"/>
+        <TextView
+            android:id="@+id/item7"
+            android:layout_width="80dip"
+            android:layout_height="match_parent"
+            style="@style/text_style3"/>
+        <View
+            style="@style/view_item_mid"/>
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="80dip"
+            android:layout_height="match_parent"
+            />
     </LinearLayout>
     <View
         style="@style/view_item_bottom"/>
