@@ -44,6 +44,8 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener{
     @Bind(R.id.button_ok)
     Button buttonOk;
 
+    private String memoryBankID = "none";
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.demo_layout, container, false);
         ButterKnife.bind(this, view);
@@ -103,6 +105,18 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener{
                 break;
         }
     }
+    public void resetTagsInfo(){
+
+
+    }
+    /*方法在寻读状态设置为在读写器断开连接是停止*/
+    public void resetInventoryDetail(){
+
+    }
+    public String getMemoryBankID() {
+        return memoryBankID;
+    }
+
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     private Fragment fragment;
     @Override

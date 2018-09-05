@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -15,8 +16,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.adapter.DrawerListAdapter;
@@ -24,24 +28,31 @@ import com.example.ridko.warehousepda.application.App;
 import com.example.ridko.warehousepda.been.DrawerListContent;
 import com.example.ridko.warehousepda.common.Constants;
 import com.example.ridko.warehousepda.common.Inventorytimer;
+import com.example.ridko.warehousepda.data_export.DataExportTask;
 import com.example.ridko.warehousepda.fragment.AboutFragment;
 import com.example.ridko.warehousepda.fragment.CheckClothFragment;
 import com.example.ridko.warehousepda.fragment.ConnectPDAFragment;
 import com.example.ridko.warehousepda.fragment.CutClothFragment;
 import com.example.ridko.warehousepda.fragment.DeviceManagmentFragment;
 import com.example.ridko.warehousepda.fragment.HomeFragment;
+import com.example.ridko.warehousepda.fragment.OutDemoFragment1;
 import com.example.ridko.warehousepda.fragment.OutDemoManagmentFragment;
 import com.example.ridko.warehousepda.fragment.SpecialStorageFragment;
 import com.example.ridko.warehousepda.fragment.StockRemovalFragment;
 import com.example.ridko.warehousepda.fragment.StockUpFragment;
 import com.example.ridko.warehousepda.fragment.UnBindAndBindFragment;
+import com.zebra.rfid.api3.BATCH_MODE;
 import com.zebra.rfid.api3.InvalidUsageException;
+import com.zebra.rfid.api3.MEMORY_BANK;
 import com.zebra.rfid.api3.OperationFailureException;
 import com.zebra.rfid.api3.ReaderDevice;
 import com.zebra.rfid.api3.Readers;
 import com.zebra.rfid.api3.RfidEventsListener;
 import com.zebra.rfid.api3.RfidReadEvents;
 import com.zebra.rfid.api3.RfidStatusEvents;
+import com.zebra.rfid.api3.START_TRIGGER_TYPE;
+import com.zebra.rfid.api3.TAG_FIELD;
+import com.zebra.rfid.api3.TagAccess;
 import com.zebra.rfid.api3.TagData;
 
 import java.util.Timer;
@@ -69,7 +80,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ActionBarDrawerToggle mActionBarDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-
+    private Boolean isTriggerRepeat;
+    private boolean pc = false;
+    private boolean rssi = false;
+    private boolean phase = false;
+    private boolean channelIndex = false;
+    private boolean tagSeenCount = false;
+    private boolean isDeviceDisconnected = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -306,7 +323,256 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //    连接手持机
     public void connectPDA(View view){selectItem(10);}
+//    寻读开关按钮
+    protected boolean isInventoryAborted;
+    public  void inventoryStatOrStop(View v){
+        Button button = (Button) v;
+        if (isBluetoothEnabled()) {
+            if (App.mConnectedReader != null && App.mConnectedReader.isConnected()) {
+                Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
+                if (!App.mIsInventoryRunning) {//如果不在扫描
+                    clearInventoryData();
+                    button.setText("STOP");
+                    //Here we send the inventory command to start reading the tags
+//                    设置询标的寻读区域，demo通过Spinner选择
+                  /*  if (fragment != null && fragment instanceof OutDemoFragment1) {//如果是询标的界面，则通过复选框设置询标模式
+                        Spinner memoryBankSpinner = ((Spinner) findViewById(R.id.inventoryOptions));
+                        memoryBankSpinner.setSelection(App.memoryBankId);
+                        memoryBankSpinner.setEnabled(false);
+//                      重置
+                        ((OutDemoFragment1) fragment).resetTagsInfo();
+                    }*/
+                    //set flag value
+                    isInventoryAborted = false;
+                    App.mIsInventoryRunning = true;
+                    getTagReportingfields();//没看懂，JDK固定方法？
+                    //判断是否为轮询操作，和询标模式
+                    if (fragment != null && fragment instanceof OutDemoFragment1 && !((OutDemoFragment1) fragment).getMemoryBankID().equalsIgnoreCase("none")) {//匹配字段，忽略大小写
+                        //If memory bank is selected, call read command with appropriate memory bank
+                        inventoryWithMemoryBank(((OutDemoFragment1) fragment).getMemoryBankID());
+                    } else {
+                        /*if (fragment != null && fragment instanceof RapidReadFragment) {
+                            App.memoryBankId = -1;
+                            ((RapidReadFragment) fragment).resetTagsInfo();
+                        }*/
+                        // unique read is enabled启用了独特的阅读
+                        if(App.reportUniquetags!= null && App.reportUniquetags.getValue() == 1) {
+                            App.mConnectedReader.Actions.purgeTags();
+                        }
+                        //Perform inventory 执行库存
+//                        寻读
+                        if (App.inventoryMode == 0) {
+                            try {
+                                App.mConnectedReader.Actions.Inventory.perform();
+                            } catch (InvalidUsageException e) {
+                                e.printStackTrace();
+                            } catch (final OperationFailureException e) {
+                                e.printStackTrace();
+                                {
+//                                    没电操作
+                                  /*  runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
+                                            if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
+                                                ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(e.getResults());
+                                            sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getVendorMessage());
+                                        }
+                                    });*/
+                                }
+                            }
+                            if (App.batchMode != -1) {
+                                if (App.batchMode == BATCH_MODE.ENABLE.getValue())
+                                    App.isBatchModeInventoryRunning = true;
+                            }
+                        }
+                    }
+                } else if (App.mIsInventoryRunning) {
+                    button.setText("START");
+                    isInventoryAborted = true;
+                    //Here we send the abort command to stop the inventory
+//                    停止指令
+                    try {
+                        App.mConnectedReader.Actions.Inventory.stop();
+                        if (((App.settings_startTrigger != null && (App.settings_startTrigger.getTriggerType() == START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD || App.settings_startTrigger.getTriggerType() == START_TRIGGER_TYPE.START_TRIGGER_TYPE_PERIODIC)))
+                                || (App.isBatchModeInventoryRunning != null && App.isBatchModeInventoryRunning))
+                            operationHasAborted();
+                    } catch (InvalidUsageException e) {
+                        e.printStackTrace();
+                    } catch (OperationFailureException e) {
+                        e.printStackTrace();
+                    }
 
+                }
+            } else
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_bluetooth_disabled), Toast.LENGTH_SHORT).show();
+    }
+    private void getTagReportingfields() {
+        pc = false;
+        phase = false;
+        channelIndex = false;
+        rssi = false;
+        if (App.tagStorageSettings != null) {
+            TAG_FIELD[] tag_field = App.tagStorageSettings.getTagFields();
+            for (int idx = 0; idx < tag_field.length; idx++) {
+                if (tag_field[idx] == TAG_FIELD.PEAK_RSSI)
+                    rssi = true;
+                if (tag_field[idx] == TAG_FIELD.PHASE_INFO)
+                    phase = true;
+                if (tag_field[idx] == TAG_FIELD.PC)
+                    pc = true;
+                if (tag_field[idx] == TAG_FIELD.CHANNEL_INDEX)
+                    channelIndex = true;
+                if (tag_field[idx] == TAG_FIELD.TAG_SEEN_COUNT)
+                    tagSeenCount = true;
+            }
+        }
+    }
+    /**
+     * Method to call when we want inventory to happen with memory bank parameters
+     *
+     * @param memoryBankID id of the memory bank
+     */
+    public void inventoryWithMemoryBank(String memoryBankID) {
+        if (isBluetoothEnabled()) {
+            if (App.mConnectedReader != null && App.mConnectedReader.isConnected()) {
+                TagAccess tagAccess = new TagAccess();
+                TagAccess.ReadAccessParams readAccessParams = tagAccess.new ReadAccessParams();
+                //Set the param values
+                readAccessParams.setByteCount(0);
+                readAccessParams.setByteOffset(0);
+
+                if ("RESERVED".equalsIgnoreCase(memoryBankID))
+                    readAccessParams.setMemoryBank(MEMORY_BANK.MEMORY_BANK_RESERVED);
+                if ("EPC".equalsIgnoreCase(memoryBankID))
+                    readAccessParams.setMemoryBank(MEMORY_BANK.MEMORY_BANK_EPC);
+                if ("TID".equalsIgnoreCase(memoryBankID))
+                    readAccessParams.setMemoryBank(MEMORY_BANK.MEMORY_BANK_TID);
+                if ("USER".equalsIgnoreCase(memoryBankID))
+                    readAccessParams.setMemoryBank(MEMORY_BANK.MEMORY_BANK_USER);
+                try {//配置读写器
+                    //Read command with readAccessParams and accessFilter as null to read all the tags
+//                    读取命令，使用readAccessParams和accessFilter作为null来读取所有标签（开始读标）
+                    App.mConnectedReader.Actions.TagAccess.readEvent(readAccessParams, null, null);
+                } catch (InvalidUsageException e) {
+                    e.printStackTrace();
+                } catch (OperationFailureException e) {
+                    e.printStackTrace();
+//                    没电
+                   /* Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
+                    if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
+                        ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(e.getResults());*/
+                    Toast.makeText(getApplicationContext(), e.getVendorMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            } else
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_bluetooth_disabled), Toast.LENGTH_SHORT).show();
+    }
+    /**
+     * Method to change operation status and ui in app on recieving abort status
+     * 在接收中断状态下改变操作状态和ui的方法
+     */
+    private void operationHasAborted() {
+        //retrieve get tags if inventory in batch mode got aborted
+        final Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
+        if (App.isBatchModeInventoryRunning != null && App.isBatchModeInventoryRunning) {
+            if (isInventoryAborted) {
+                App.isBatchModeInventoryRunning = false;
+                isInventoryAborted = true;
+                App.isGettingTags = true;
+                if (App.settings_startTrigger == null) {
+                    new AsyncTask<Void, Void, Boolean>() {
+                        @Override
+                        protected Boolean doInBackground(Void... voids) {
+                            try {
+                                if (App.mConnectedReader.isCapabilitiesReceived())
+                                    UpdateReaderConnection(false);
+                                else
+                                    UpdateReaderConnection(true);
+                                // update fields before getting tags
+                                getTagReportingfields();
+                                //
+                                App.mConnectedReader.Actions.getBatchedTags();
+                            } catch (InvalidUsageException e) {
+                                e.printStackTrace();
+                            } catch (OperationFailureException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute();
+                } else
+                    App.mConnectedReader.Actions.getBatchedTags();
+            }
+        }
+
+        if (App.mIsInventoryRunning) {
+            if (isInventoryAborted) {
+                App.mIsInventoryRunning = false;
+                isInventoryAborted = false;
+                isTriggerRepeat = null;
+                if (Inventorytimer.getInstance().isTimerRunning())
+                    Inventorytimer.getInstance().stopTimer();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (fragment instanceof OutDemoFragment1)
+                            ((OutDemoFragment1) fragment).resetInventoryDetail();
+                      /*  else if (fragment instanceof RapidReadFragment)
+                            ((RapidReadFragment) fragment).resetInventoryDetail();*/
+                        //export Data to the file
+                        if (App.EXPORT_DATA)
+                            if (App.tagsReadInventory != null && !App.tagsReadInventory.isEmpty()) {
+                                new DataExportTask(getApplicationContext(), App.tagsReadInventory, App.mConnectedReader.getHostName(), App.TOTAL_TAGS, App.UNIQUE_TAGS, App.mRRStartedTime).execute();
+                            }
+                    }
+                });
+            }
+        }//定位的时候
+        /*else if (App.isLocatingTag) {
+            if (isLocationingAborted) {
+                App.isLocatingTag = false;
+                isLocationingAborted = false;
+                if (fragment instanceof LocationingFragment)
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((LocationingFragment) fragment).resetLocationingDetails(false);
+                        }
+                    });
+            }
+        }*/
+    }
+
+    //pda按钮监听？
+   /* private void readerReconnected(ReaderDevice readerDevice) {
+        // store app reader
+        App.mConnectedDevice = readerDevice;
+        App.mConnectedReader = readerDevice.getRFIDReader();
+        //
+        if (App.isBatchModeInventoryRunning != null && App.isBatchModeInventoryRunning) {
+            clearInventoryData();
+            App.mIsInventoryRunning = true;
+            App.memoryBankId = 0;
+            startTimer();
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
+            if (fragment instanceof ResponseHandlerInterfaces.BatchModeEventHandler)
+                ((ResponseHandlerInterfaces.BatchModeEventHandler) fragment).batchModeEventReceived();
+        } else
+            try {
+                UpdateReaderConnection(false);
+            } catch (InvalidUsageException e) {
+                e.printStackTrace();
+            } catch (OperationFailureException e) {
+                e.printStackTrace();
+            }
+        // connect call
+        bluetoothDeviceConnected(readerDevice);
+    }*/
     //点击以改变当前UI状态
     private void selectItem(int position) {
         Fragment fragment = null;
@@ -394,6 +660,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mDrawerlayout.closeDrawers();
         }
     }
+
+    /**
+     * method lear inventory data like total tags, unique tags, read rate etc..
+     */
+    public void clearInventoryData() {
+        App.TOTAL_TAGS = 0;
+        App.mRRStartedTime = 0;
+        App.UNIQUE_TAGS = 0;
+        App.TAG_READ_RATE = 0;
+        if (App.tagIDs != null)
+            App.tagIDs.clear();
+        if (App.tagsReadInventory.size() > 0)
+            App.tagsReadInventory.clear();
+        if (App.tagsReadInventory.size() > 0)
+            App.tagsReadInventory.clear();
+        if (App.inventoryList != null && App.inventoryList.size() > 0)
+            App.inventoryList.clear();
+    }
 //    以下内容全为开机和连接斑马手持机操作，包括实现两个监听
     private void initializeConnectionSettings() {
         SharedPreferences settings = getSharedPreferences(Constants.APP_SETTINGS_STATUS, 0);
@@ -429,7 +713,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         App.BatteryData = null;
         App.is_disconnection_requested = false;
         App.mConnectedDevice = null;
-//        Application.mConnectedReader = null;
+//        App.mConnectedReader = null;
     }
     public static void UpdateReaderConnection(Boolean fullUpdate) throws InvalidUsageException, OperationFailureException {
         App.mConnectedReader.Events.setBatchModeEvent(true);
@@ -458,7 +742,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         App.batchMode = App.mConnectedReader.Config.getBatchModeConfig().getValue();
         App.reportUniquetags = App.mConnectedReader.Config.getUniqueTagReport();
         App.mConnectedReader.Config.getDeviceVersionInfo(App.versionInfo);
-        //Log.d("RFIDDEMO","SCANNERNAME: " + Application.mConnectedReader.ReaderCapabilities.getScannerName());
+        //Log.d("RFIDDEMO","SCANNERNAME: " + App.mConnectedReader.ReaderCapabilities.getScannerName());
 //        获取电池状态线程
         startTimer();
     }

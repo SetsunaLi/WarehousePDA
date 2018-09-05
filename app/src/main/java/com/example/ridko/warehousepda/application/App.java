@@ -5,6 +5,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.ridko.warehousepda.activity.MainActivity;
+import com.example.ridko.warehousepda.common.MaxLimitArrayList;
+import com.example.ridko.warehousepda.inventory.InventoryListItem;
 import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.BEEPER_VOLUME;
 import com.zebra.rfid.api3.DYNAMIC_POWER_OPTIMIZATION;
@@ -83,7 +85,7 @@ public class App extends  android.app.Application {
     public static HashMap<String, String> versionInfo = new HashMap<>(5);
 
     //Arraylist to keeptrack of the tags read for Inventory
-//    public static ArrayList<InventoryListItem> tagsReadInventory = new MaxLimitArrayList();
+    public static ArrayList<InventoryListItem> tagsReadInventory = new MaxLimitArrayList();
     public static boolean isGettingTags;
     public static boolean EXPORT_DATA;
     public static ReaderDevice mConnectedDevice;
