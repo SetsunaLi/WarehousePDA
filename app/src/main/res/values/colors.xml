@@ -20,6 +20,8 @@
     <color name="colorAlphaDialogContent2">#31467259</color>
     <color name="colorDialogButtonYes1">#489eff</color>
     <color name="colorStroke1">#1c2338</color>
-    <color name="colorQuiet">#ff2879</color>
-
+    <color name="colorQuiet">#cb3786</color>
+    <color name="colorFindEpc">#4c9d81</color>
+    <color name="colorDataYesText">#00fffc</color>
+    <color name="colorDataNoText">#ffff4c</color>
 </resources>

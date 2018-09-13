@@ -10,6 +10,19 @@ public class DemoEntity2 {
     private float weight;
     private String dyelotNO;
     private String epcNO;
+    /*0代表默认状态原色
+    * 1代表找到状态绿色
+    * 2代表串读状态红色
+    * 点击状态蓝色*/
+    private int flag=0;
+
+    public int isFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
 
     public int getClothingNO() {
         return clothingNO;

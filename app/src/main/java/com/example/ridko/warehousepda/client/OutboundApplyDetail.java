@@ -32,7 +32,17 @@ public class OutboundApplyDetail implements Serializable {
      * 申请布匹条数
      */
     private Integer num;
-
+    /*
+    * 扫描布匹条数
+    * */
+    private Integer readNum=0;
+    /*
+        * 布匹状态属性
+        * 0为正常未读 原色
+        * 1为正常读全 绿色
+        * 2为非正常串读 红色
+        * */
+    private int flag=0;
     public OutboundApplyDetail() {
     }
 
@@ -100,5 +110,26 @@ public class OutboundApplyDetail implements Serializable {
 
     public void setNum(Integer num) {
         this.num = num;
+    }
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+
+    public void addReadNum(){
+        readNum++;
+    }
+    public void clearReadNum(){
+        readNum=0;
+    }
+    public Integer getReadNum() {
+        return readNum;
+    }
+
+    public void setReadNum(Integer readNum) {
+        this.readNum = readNum;
     }
 }

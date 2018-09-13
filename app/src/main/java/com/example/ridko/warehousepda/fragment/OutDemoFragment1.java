@@ -1,5 +1,7 @@
 package com.example.ridko.warehousepda.fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -8,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,22 +22,41 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.ridko.warehousepda.R;
+import com.example.ridko.warehousepda.activity.MainActivity;
+import com.example.ridko.warehousepda.application.App;
+import com.example.ridko.warehousepda.client.OkHttpClientManager;
+import com.example.ridko.warehousepda.client.OutboundApplyDetail;
+import com.example.ridko.warehousepda.client.OutboundDetail;
+import com.example.ridko.warehousepda.common.ResponseHandlerInterfaces;
 import com.example.ridko.warehousepda.entity.DemoEntity1;
+import com.example.ridko.warehousepda.entity.DemoEntity2;
+import com.example.ridko.warehousepda.inventory.InventoryListItem;
 import com.example.ridko.warehousepda.listener.MyItemOnTouchListener;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by mumu on 2018/9/4.
  */
 
-public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener{
+public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener, ResponseHandlerInterfaces.ResponseTagHandler,
+        ResponseHandlerInterfaces.TriggerEventHandler {
     @Bind(R.id.listview)
     ListView listview;
     @Bind(R.id.layout1)
@@ -52,9 +74,14 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener{
         return view;
     }
 
-    private List<DemoEntity1> mlist = new ArrayList<>();
+    /*//    private List<DemoEntity1> mlist = new ArrayList<>();
+        private List<DemoEntity2> mylist=new ArrayList<>();*/
     private MyAdapter myAdapter;
-    private int selectID = -1;
+    private HashSet<String> epcSet;
+    private List<OutboundApplyDetail> outboundApplyDetailList;
+    private Map<String, List<OutboundDetail>> outBoundDetailList;
+    protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
+    private Fragment fragment;
 
     //可以不要
     @Override
@@ -62,7 +89,10 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener{
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(getActivity());
         initData();
-        myAdapter = new MyAdapter(getContext(), R.layout.list_item_3_demo, mlist);
+        if (outboundApplyDetailList != null)
+            myAdapter = new MyAdapter(getContext(), R.layout.list_item_3_demo, outboundApplyDetailList);
+//        myAdapter = new MyAdapter(getContext(), R.layout.list_item_3_demo, mlist);
+        myAdapter.setMyItemOnTouchListener(this);
         listview.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,71 +100,277 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 myAdapter.selectItem(i);
                 myAdapter.notifyDataSetChanged();
-                selectID = i;
-                buttonOk.setText(getResources().getString(R.string.button13));
-
             }
         });
     }
 
     private void initData() {
-        for (int i = 0; i < 10; i++) {
-            DemoEntity1 demoEntity1 = new DemoEntity1();
-            demoEntity1.setDyelotNO("JQ997" + i * 3);
-            demoEntity1.setApplyCount(7 + i * 3);
-            demoEntity1.setPracticalCount(7 + i * 3);
-            demoEntity1.setReadCount(7 + i * 3);
-            demoEntity1.setBuNO(04 + i * 3);
-            demoEntity1.setState("正常");
-            mlist.add(i, demoEntity1);
+        if (epcSet == null)
+            epcSet = new HashSet<>();
+        epcSet.clear();
+        if (outBoundDetailList == null)
+            outBoundDetailList = new HashMap<>();
+        outBoundDetailList.clear();
+
+    }
+
+    private void cleanData() {
+        if (epcSet == null)
+            epcSet.clear();
+        if (outBoundDetailList == null)
+            outBoundDetailList.clear();
+        for (OutboundApplyDetail detail : outboundApplyDetailList) {
+            if(detail.getFlag()==2)
+                outboundApplyDetailList.remove(detail);
+            else {
+                detail.clearReadNum();
+                detail.setFlag(0);
+            }
         }
+        myAdapter.notifyDataSetChanged();
+    }
+
+    public void setOutboundApplyDetail(List<OutboundApplyDetail> outboundApplyDetailList) {
+        this.outboundApplyDetailList = outboundApplyDetailList;
+    }
+
+    public void resetTagsInfo() {
+    }
+
+    /*方法在寻读状态设置为在读写器断开连接是停止*/
+    public void resetInventoryDetail() {
+        if (getActivity() != null) {
+            if (buttonBlink != null)
+                buttonBlink.setText(getString(R.string.start_title));
+        }
+    }
+
+    public String getMemoryBankID() {
+        return memoryBankID;
+    }
+
+    //    去空
+    public String delSpacing(String str){
+        str=str.trim();
+        return str;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (App.isReturn)
+            if (App.detilList!=null&&App.detilList.size()!=0)
+                for(OutboundApplyDetail detail:outboundApplyDetailList){
+                    if (detail.getVatDyeNo().equals(App.detilList.get(0).getVateDye())){
+                        detail.clearReadNum();
+                        detail.setFlag(0);
+                        for (OutboundDetail od:App.detilList)
+                            if (od.getFlag()==1)
+                                detail.addReadNum();
+                    }
+                }
+            myAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        if (App.detilList!=null)
+        App.detilList.clear();
     }
 
     @OnClick({R.id.button_blink, R.id.button_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_blink:
+                if (!App.mIsInventoryRunning)
+                    cleanData();
+//                扫描开始
+                ((MainActivity) getActivity()).inventoryStartOrStop(buttonBlink);
                 break;
             case R.id.button_ok:
+                blinkDialog();
                 break;
         }
     }
-    public void resetTagsInfo(){
 
-
+    private void blinkDialog() {
+        final Dialog dialog;
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View blinkView = inflater.inflate(R.layout.dialog_stock_removal, null);
+        Button no = (Button) blinkView.findViewById(R.id.dialog_no);
+        Button yes = (Button) blinkView.findViewById(R.id.dialog_yes);
+        TextView text = (TextView) blinkView.findViewById(R.id.dialog_text);
+        text.setText(R.string.text61);
+        dialog = new AlertDialog.Builder(getActivity()).create();
+        dialog.show();
+        dialog.getWindow().setContentView(blinkView);
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                返回上一层
+                try {
+                    OkHttpClientManager.postJsonAsyn(OkHttpClientManager.outBoundURL, new OkHttpClientManager.ResultCallback() {
+                        @Override
+                        public void onError(Request request, Exception e) {
+//                            上传错误
+                        }
+                        @Override
+                        public void onResponse(Object response) {
+                            if(((Response)response).isSuccessful()){
+                                //打印服务端返回结果
+                                Log.i("上传","成功");
+                            }
+                        }
+                    },new JSONObject());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+            }
+        });
     }
-    /*方法在寻读状态设置为在读写器断开连接是停止*/
-    public void resetInventoryDetail(){
 
-    }
-    public String getMemoryBankID() {
-        return memoryBankID;
-    }
-
-    protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
-    private Fragment fragment;
     @Override
-    public void onItemClick(int position) {
-        fragment=new OutDemoFragment2();
-        FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.content_frame,fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
-        transaction.show(fragment);
-        transaction.commit();
+    public void onItemClick(final int position) {
+        if (App.mIsInventoryRunning)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ((MainActivity) getActivity()).inventoryStartOrStop(buttonBlink);
+                }
+            });
+        OkHttpClientManager.getAsyn(OkHttpClientManager.applyDetailURL + outboundApplyDetailList.get(position).getVatDyeNo(), new OkHttpClientManager.ResultCallback<List<OutboundDetail>>() {
+            @Override
+            public void onError(Request request, Exception e) {
+//                申请详情失败
+                Log.i("报错","检查错误");
+            }
+
+            @Override
+            public void onResponse(List<OutboundDetail> responseList) {
+                if (responseList!=null){
+                    for (OutboundDetail detail:responseList){
+                        detail.setEpc(delSpacing(detail.getEpc()));
+                        detail.setClothNo(delSpacing(detail.getClothNo()));
+                        detail.setTicketNo(delSpacing(detail.getTicketNo()));
+                        detail.setVateDye(delSpacing(detail.getVateDye()));
+                        if (outBoundDetailList.containsKey(outboundApplyDetailList.get(position).getClothNo()+outboundApplyDetailList.get(position).getVatDyeNo()))
+                        for (OutboundDetail detail2:outBoundDetailList.get(outboundApplyDetailList.get(position).getClothNo()+outboundApplyDetailList.get(position).getVatDyeNo())){
+                            if (detail2.getEpc().equals(detail.getEpc()))
+                                detail.setFlag(1);
+                        }
+                    }
+                    fragment = new OutDemoFragment2();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.add(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                    transaction.show(fragment);
+                    transaction.commit();
+                    App.detilList=responseList;
+
+                }
+            }
+        });
+
     }
 
-    class MyAdapter extends ArrayAdapter<DemoEntity1> {
-        private List<DemoEntity1> list;
+    //读数据返回
+    @Override
+    public void handleTagResponse(InventoryListItem inventoryListItem, boolean isAddedToList) {
+        if (isAddedToList) {
+            if (!epcSet.contains(inventoryListItem.getText())) {
+                epcSet.add(inventoryListItem.getText());
+                OkHttpClientManager.getAsyn(OkHttpClientManager.epcClothURL + inventoryListItem.getText(),
+                        new OkHttpClientManager.ResultCallback<OutboundDetail>() {
+                            @Override
+                            public void onError(Request request, Exception e) {
+//                申请epc返回为空或者错误
+                            }
+
+                            @Override
+                            public void onResponse(OutboundDetail response) {
+                                if (response != null) {
+                                    response.setEpc(delSpacing(response.getEpc()));
+                                    response.setClothNo(delSpacing(response.getClothNo()));
+                                    response.setTicketNo(delSpacing(response.getTicketNo()));
+                                    response.setVateDye(delSpacing(response.getVateDye()));
+                                    boolean isInList = false;
+                                    //判断在第一个列表是否存在
+                                    // 若存在即存放到对应item里的outBoundDetailList里面
+                                    //若不存在即在列表新建item并标致状态为串读
+                                    for (OutboundApplyDetail applyDetail : outboundApplyDetailList) {
+                                        if (response.getClothNo().equals(applyDetail.getClothNo())
+                                                && response.getVateDye().equals(applyDetail.getVatDyeNo())) {
+                                            if (!isInList)
+                                                isInList = true;
+                                            applyDetail.addReadNum();
+                                            if (applyDetail.getNum() == applyDetail.getReadNum())
+                                                applyDetail.setFlag(1);
+                                            if (outBoundDetailList.containsKey(applyDetail.getClothNo() + applyDetail.getVatDyeNo())) {
+                                                outBoundDetailList.get(applyDetail.getClothNo() + applyDetail.getVatDyeNo()).add(response);
+                                            } else {
+                                                ArrayList<OutboundDetail> list = new ArrayList<OutboundDetail>();
+                                                list.add(response);
+                                                outBoundDetailList.put(applyDetail.getClothNo() + applyDetail.getVatDyeNo(), list);
+                                            }
+                                        }
+                                        if (isInList)
+                                            break;
+                                    }
+                                    if (!isInList) {
+                                        OutboundApplyDetail applyDetail1 = new OutboundApplyDetail("", response.getClothNo(), "", "", "", response.getVateDye(), 0);
+                                        applyDetail1.addReadNum();
+                                        applyDetail1.setFlag(2);
+                                        outboundApplyDetailList.add(applyDetail1);
+                                        ArrayList<OutboundDetail> list = new ArrayList<OutboundDetail>();
+                                        list.add(response);
+                                        outBoundDetailList.put(response.getClothNo() + response.getVateDye(), list);
+                                    }
+                                    myAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+            }
+        }
+    }
+
+    //手持机扫描键监听
+    @Override
+    public void triggerPressEventRecieved() {
+        if (!App.mIsInventoryRunning)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ((MainActivity) getActivity()).inventoryStartOrStop(buttonBlink);
+                }
+            });
+    }
+
+    @Override
+    public void triggerReleaseEventRecieved() {
+        if (App.mIsInventoryRunning)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ((MainActivity) getActivity()).inventoryStartOrStop(buttonBlink);
+                }
+            });
+    }
+
+    class MyAdapter extends ArrayAdapter<OutboundApplyDetail> {
+        private List<OutboundApplyDetail> list;
         private LayoutInflater mInflater;
         //        在适配器做做item 触摸监听监听
         private MyItemOnTouchListener myItemOnTouchListener;
 
-        public MyAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<DemoEntity1> objects) {
+        public MyAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<OutboundApplyDetail> objects) {
             super(context, resource, objects);
             this.list = objects;
             this.mInflater = LayoutInflater.from(context);
@@ -145,9 +381,16 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener{
         public void selectItem(int id) {
             this.id = id;
         }
+
         public void setMyItemOnTouchListener(MyItemOnTouchListener myItemOnTouchListener) {
-                    this.myItemOnTouchListener = myItemOnTouchListener;
+            this.myItemOnTouchListener = myItemOnTouchListener;
         }
+
+        @Override
+        public synchronized void add(@Nullable OutboundApplyDetail object) {
+            super.add(object);
+        }
+
         @NonNull
         @Override
         public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -162,30 +405,62 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener{
                 viewHolder.item5 = (TextView) convertView.findViewById(R.id.item5);
                 viewHolder.item6 = (TextView) convertView.findViewById(R.id.item6);
                 viewHolder.item7 = (TextView) convertView.findViewById(R.id.item7);
-                viewHolder.button=(Button)convertView.findViewById(R.id.button1);
+                viewHolder.item8 = (TextView) convertView.findViewById(R.id.item8);
+                viewHolder.button = (Button) convertView.findViewById(R.id.button1);
                 viewHolder.layout = (LinearLayout) convertView.findViewById(R.id.head);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             viewHolder.item1.setText(position + 1 + "");
-            viewHolder.item2.setText(mlist.get(position).getDyelotNO() + "");
-            viewHolder.item3.setText(mlist.get(position).getApplyCount() + "");
-            viewHolder.item4.setText(mlist.get(position).getPracticalCount() + "");
-            viewHolder.item5.setText(mlist.get(position).getReadCount() + "");
-            viewHolder.item6.setText(mlist.get(position).getBuNO() + "");
-            viewHolder.item7.setText(mlist.get(position).getState() + "");
+            viewHolder.item2.setText(list.get(position).getVatDyeNo() + "");
+            viewHolder.item3.setText(list.get(position).getColorNo() + "");
+            viewHolder.item4.setText(list.get(position).getClothNo() + "");
+            viewHolder.item5.setText(list.get(position).getNum() + "");
+            viewHolder.item6.setText(list.get(position).getReadNum() + "");
+            viewHolder.item8.setText(list.get(position).getApplyNo()+"");
+            switch (list.get(position).getFlag()){
+                case 0:
+                    viewHolder.item7.setText("盘亏");
+                    break;
+                case 1:
+                    viewHolder.item7.setText("正常");
+                    break;
+                case 2:
+                    viewHolder.item7.setText("异常");
+                    break;
+            }
+//            设置字体颜色
+            if (list.get(position).getNum() == list.get(position).getReadNum())
+                viewHolder.item6.setTextColor(getResources().getColor(R.color.colorDataYesText));
+            else
+                viewHolder.item6.setTextColor(getResources().getColor(R.color.colorDataNoText));
+
             viewHolder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (myItemOnTouchListener!=null)
+
+                    if (myItemOnTouchListener != null)
                         myItemOnTouchListener.onItemClick(position);
                 }
             });
+//          设置背景颜色
             if (position == id) {
+                viewHolder.button.setVisibility(View.VISIBLE);
                 viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorDialogTitleBG));
             } else {
-                viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorZERO));
+                viewHolder.button.setVisibility(View.GONE);
+                switch (list.get(position).getFlag()) {
+                    case 0:
+                        viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorZERO));
+                        break;
+                    case 1:
+                        viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorFindEpc));
+                        break;
+                    case 2:
+                        viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorAccent));
+                        break;
+                }
             }
             return convertView;
         }
@@ -198,6 +473,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener{
             TextView item5;
             TextView item6;
             TextView item7;
+            TextView item8;
             Button button;
             LinearLayout layout;
         }

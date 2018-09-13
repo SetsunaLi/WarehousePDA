@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.ridko.warehousepda.activity.MainActivity;
+import com.example.ridko.warehousepda.client.OutboundDetail;
 import com.example.ridko.warehousepda.common.MaxLimitArrayList;
 import com.example.ridko.warehousepda.inventory.InventoryListItem;
 import com.zebra.rfid.api3.Antennas;
@@ -23,6 +24,7 @@ import com.zebra.rfid.api3.UNIQUE_TAG_REPORT_SETTING;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.TreeMap;
 
 /**
@@ -52,6 +54,8 @@ public class App extends  android.app.Application {
     public static int PRWOER=30;
     public static int WORK_TIME=65535;
     public static int FREE_TIME=65535;
+    public static List<OutboundDetail> detilList;
+    public static boolean isReturn=false;
 
     public static boolean  ISBUY=true;
     public static boolean BIND=true;

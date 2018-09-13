@@ -5,10 +5,13 @@ import java.io.Serializable;
 
 public class OutboundDetail implements Serializable {
     private String epc;
-
+//    匹配一
     private String clothNo;
     private String ticketNo;
     private Double weight;
+//    匹配二
+    private String vateDye;
+    private int flag=0;
 
     public String getEpc() {
         return epc;
@@ -50,12 +53,18 @@ public class OutboundDetail implements Serializable {
         this.vateDye = vateDye;
     }
 
-    private String vateDye;
-
     public OutboundDetail() {
     }
 
     public OutboundDetail(String epc) {
         this.epc = epc;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 }

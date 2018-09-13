@@ -105,6 +105,14 @@
         <item name="android:textColor">@color/colorHomeButton1</item>
         <item name="android:background">@drawable/button_style_2</item>
     </style>
+    <style name="button_style8">
+        <item name="android:layout_width">120dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/colorHomeButton1</item>
+        <item name="android:background">@color/colorZERO</item>
+    </style>
 <!---->
     <style name="edit_style1">
     <item name="android:textSize">22sp</item>
@@ -129,6 +137,7 @@
         <item name="android:textColor">@color/colorHomeButton2</item>
         <item name="android:textSize">22sp</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
     </style>
     <style name="text_style4">
         <item name="android:textColor">@color/colorHomeButton1</item>

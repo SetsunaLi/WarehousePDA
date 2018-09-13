@@ -5,7 +5,7 @@
     android:background="@drawable/bg2">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_layout"
         android:layout_weight="2">
@@ -19,14 +19,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="50dip"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="25dip"
-                android:layout_height="match_parent"
-                android:src="@drawable/set_up"
-                />
+           <TextView
+               android:layout_width="50dip"
+               android:layout_height="match_parent"
+               style="@style/text_style7"
+               android:text="@string/text68"
+               />
             <View
                 style="@style/view_item_mid"/>
             <TextView
@@ -37,10 +38,17 @@
             <View
                 style="@style/view_item_mid"/>
             <TextView
-                android:layout_width="60dip"
+                android:layout_width="100dip"
                 android:layout_height="match_parent"
                 style="@style/text_style7"
                 android:text="@string/text58"/>
+            <View
+                style="@style/view_item_mid"/>
+            <TextView
+                android:layout_width="100dip"
+                android:layout_height="match_parent"
+                style="@style/text_style7"
+                android:text="@string/text12"/>
             <View
                 style="@style/view_item_mid"/>
             <TextView
@@ -55,13 +63,7 @@
                 android:layout_height="match_parent"
                 style="@style/text_style7"
                 android:text="@string/text62"/>
-            <View
-                style="@style/view_item_mid"/>
-            <TextView
-                android:layout_width="60dip"
-                android:layout_height="match_parent"
-                style="@style/text_style7"
-                android:text="@string/text12"/>
+
             <View
                 style="@style/view_item_mid"/>
 
@@ -72,20 +74,29 @@
                 android:text="@string/text60"/>
             <View
                 style="@style/view_item_mid"/>
-
             <TextView
-                android:layout_width="80dip"
+                android:layout_width="220dip"
                 android:layout_height="match_parent"
                 style="@style/text_style7"
-                android:text="@string/text60"/>
+                android:text="@string/text66"
+                />
+            <View
+                style="@style/view_item_mid"/>
+
+            <TextView
+                android:layout_width="120dip"
+                android:layout_height="match_parent"
+                style="@style/text_style7"
+                android:text="@string/text63"/>
         </LinearLayout>
         <View
             style="@style/view_item_bottom"/>
-        <ListView
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
-    </LinearLayout>
+
+                <ListView
+                    android:id="@+id/listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></ListView>
+            </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
     <LinearLayout

@@ -49,6 +49,13 @@ dependencies {
     //    compile files('libs/wms-termial-api-1.0-SNAPSHOT.jar')
     //    apply plugin: 'groovy'
     //要从file new modle里面导入依赖，再从配置文件加载（否则直接复制有时候可以直接导入有时候无法识别）
-//    compile(name: 'API3_LIB-release', ext: 'aar')
+    //    compile(name: 'API3_LIB-release', ext: 'aar')
     compile project(':RFIDAPI3Library')
+    compile 'com.github.nkzawa:socket.io-client:0.3.0'
+    compile 'cz.msebera.android:httpclient:4.4.1.1'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okio:okio:1.5.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile files('libs/fastjson-1.2.37.jar')
+    compile files('libs/socket.io-client-1.0.0.jar')
 }

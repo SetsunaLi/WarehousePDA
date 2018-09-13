@@ -145,7 +145,7 @@
         <item>Japan</item>
     </string-array>
     <!--出库-->
-    <string name="edittext_title">请输入出库单号</string>
+    <string name="edittext_title">请输入申请单号</string>
     <string name="text_search">搜索</string>
     <string name="text_noresult">暂无搜索结果</string>
     <string name="stockRemoval_hint">请输入正确出库信息</string>
@@ -200,7 +200,7 @@
     <string name="button12">生成EPC</string>
     <!--<string name="texte56">生成EPC&#8197;：</string>-->
     <string name="text57">缸号</string>
-    <string name="text58">申请条数</string>
+    <string name="text58">色号</string>
     <string name="text59">配货条数</string>
     <string name="text60">状态</string>
     <string name="button13">查询</string>
@@ -208,6 +208,12 @@
     <string name="text61">是否生成出库单出库？</string>
     <string name="text62">读取条数</string>
     <string name="text63">操作</string>
+    <string name="text64">查找不到该申请单号信息，请查询单号或检查网络后尝试！</string>
+    <string name="text65">所输入的申请单号为空，请查询后重试！</string>
+    <string name="text66">申请单号</string>
+    <string name="text67">查看详情</string>
+    <string name="button15">返回</string>
+    <string name="text68">编号</string>
 
 
 

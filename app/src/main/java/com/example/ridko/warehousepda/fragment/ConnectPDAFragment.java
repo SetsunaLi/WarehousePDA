@@ -247,6 +247,41 @@ public class ConnectPDAFragment extends Fragment {
         App.mConnectedReader = null;
         App.mConnectedDevice = null;
     }
+
+    public void readerDisconnected(ReaderDevice device) {
+        if (device != null) {
+            if (App.mConnectedReader != null && !App.AUTO_RECONNECT_READERS) {
+                try {
+                    App.mConnectedReader.disconnect();
+                } catch (InvalidUsageException e) {
+                    e.printStackTrace();
+                } catch (OperationFailureException e) {
+                    e.printStackTrace();
+                }
+                App.mConnectedReader = null;
+            }
+            for (int idx = 0; idx < readersList.size(); idx++) {
+                if (readersList.get(idx).getName().equalsIgnoreCase(device.getName()))
+                    changeTextStyle(readersList.get(idx));
+            }
+        }
+    }
+    /**
+     * method to update serial and model of connected reader device
+     */
+    public void capabilitiesRecievedforDevice() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (readerListAdapter.getPosition(App.mConnectedDevice) >= 0) {
+                    ReaderDevice readerDevice = readerListAdapter.getItem(readerListAdapter.getPosition(App.mConnectedDevice));
+                    //readerDevice.setModel(Application.mConnectedDevice.getModel());
+                    //readerDevice.setSerial(Application.mConnectedDevice.getSerial());
+                    readerListAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
     /**
      * async task to go for BT connection with reader
      */

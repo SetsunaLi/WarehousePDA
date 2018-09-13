@@ -35,7 +35,10 @@ import android.widget.Toast;
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.adapter.ListDataAdapter;
 import com.example.ridko.warehousepda.application.App;
+import com.example.ridko.warehousepda.client.OkHttpClientManager;
+import com.example.ridko.warehousepda.client.OutboundApplyDetail;
 import com.example.ridko.warehousepda.entity.DemoEntity1;
+import com.squareup.okhttp.Request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,11 +152,7 @@ public class OutDemoManagmentFragment extends Fragment {
         @Override
         public void run() {
             buttonOk.setFocusable(true);
-            fragment=new OutDemoFragment1();
-            FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.content_frame,fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
-            transaction.show(fragment);
-            transaction.commit();
+
         }
     };
     private void loadNO(){
@@ -170,22 +169,60 @@ public class OutDemoManagmentFragment extends Fragment {
         editNO.setFocusable(false);
         Handler handler=new Handler();
         handler.postDelayed(load,1500);
-    }
 
+//        OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + strNO,
+        OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + "MKQ201808310023",
+                new OkHttpClientManager.ResultCallback<List<OutboundApplyDetail>>() {
+            @Override
+            public void onError(Request request, Exception e) {
+//                请求失败或者请求为空
+                App.toastShow(getContext(), getResources().getString(R.string.text64), Toast.LENGTH_LONG);
+            }
+
+            @Override
+            public void onResponse(List<OutboundApplyDetail> outboundApplyDetailList) {
+                if (outboundApplyDetailList!=null&&outboundApplyDetailList.size()!=0){
+                    for (OutboundApplyDetail detail:outboundApplyDetailList){
+                        detail.setApplyNo(delSpacing(detail.getApplyNo()));
+                        detail.setClothNo(delSpacing(detail.getClothNo()));
+                        detail.setClothName(delSpacing(detail.getClothName()));
+                        detail.setColorName(delSpacing(detail.getColorName()));
+                        detail.setColorNo(delSpacing(detail.getColorNo()));
+                        detail.setVatDyeNo(delSpacing(detail.getVatDyeNo()));
+                    }
+//            可能要做异步操作
+                    fragment=new OutDemoFragment1();
+                    FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.add(R.id.content_frame,fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                    transaction.show(fragment);
+                    transaction.commit();
+                    ((OutDemoFragment1)fragment).setOutboundApplyDetail(outboundApplyDetailList);
+                }else {
+                    App.toastShow(getContext(), getResources().getString(R.string.text65), Toast.LENGTH_LONG);
+                }
+            }
+        });
+    }
+//    去空
+    public String delSpacing(String str){
+        str=str.trim();
+        return str;
+    }
     @OnClick({ R.id.button_ok, R.id.imgSearch,R.id.editNO})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_ok:
                 strNO = editNO.getText().toString() + "";
-                if (strNO!= "0000") {
+                loadNO();
+               /* if (strNO!=null&&strNO.length()!=0) {
                     loadNO();
                 } else {
                     App.toastShow(getContext(), getResources().getString(R.string.stockRemoval_hint), Toast.LENGTH_SHORT);
-                }
+                }*/
                 break;
             case R.id.imgSearch:
                 strNO = editNO.getText().toString() + "";
-                if (strNO!= "0000") {
+                if (strNO!=null&&strNO.length()!=0) {
                     loadNO();
                 } else {
                     App.toastShow(getContext(), getResources().getString(R.string.stockRemoval_hint), Toast.LENGTH_SHORT);
