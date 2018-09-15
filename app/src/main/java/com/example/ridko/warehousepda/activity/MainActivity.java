@@ -175,16 +175,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-/*    @Override
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode== KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
             final Fragment fragment=getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
-            if (fragment instanceof OutDemoFragment2){
-
-            }
+            if (fragment instanceof OutDemoFragment2)
+                    App.isReturn=true;
         }
         return super.onKeyDown(keyCode, event);
-    }*/
+    }
 
     /* Called whenever we call invalidateOptionsMenu() */
     boolean drawerOpen = false;
@@ -261,9 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             getSupportFragmentManager().popBackStack();
         }
-        if (fragment instanceof OutDemoFragment2){
-            App.isReturn=true;
-        }
+
     }
 
     @Override

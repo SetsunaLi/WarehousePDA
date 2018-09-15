@@ -187,10 +187,16 @@ public class OkHttpClientManager {
      * @param callback
      * @param object
      */
-    private void _postAsyn(String url, final ResultCallback callback,JSONObject object)throws IOException
+    private void _postAsyn(String url, final ResultCallback callback,String object)throws IOException
     {
         Request request = postJson(url, object);
         deliveryResult(callback, request);
+    }
+    private Response _postAsyn(String url, String object) throws IOException
+    {
+        Request request = postJson(url, object);
+        Response response = mOkHttpClient.newCall(request).execute();
+        return response;
     }
     /**
      * 同步基于post的文件上传
@@ -337,10 +343,10 @@ public class OkHttpClientManager {
      * @param json
      * @throws IOException
      */
-    private Request postJson(String url,JSONObject json)throws IOException{
+    private Request postJson(String url,String json)throws IOException{
         //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
         //json为String类型的json数据
-        RequestBody requestBody = RequestBody.create(JSON,json.toJSONString());
+        RequestBody requestBody = RequestBody.create(JSON,json);
         return new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -489,8 +495,11 @@ public class OkHttpClientManager {
         return getInstance()._post(url, file, fileKey, params);
     }
 //post 异步上传JSON对象
-    public static void postJsonAsyn(String url, ResultCallback callback,JSONObject object)throws IOException{
+    public static void postJsonAsyn(String url, ResultCallback callback,String object)throws IOException{
         getInstance()._postAsyn(url,callback,object);
+    }
+    public static Response postJsonAsyn(String url,String object)throws IOException{
+        return getInstance()._postAsyn(url,object);
     }
 
     public static void postAsyn(String url, ResultCallback callback, File[] files, String[] fileKeys, Param... params) throws IOException

@@ -117,6 +117,9 @@ public class OutDemoFragment2 extends Fragment implements ResponseHandlerInterfa
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        epcSet.clear();
+        if (App.mIsInventoryRunning)
+            ((MainActivity) getActivity()).inventoryStartOrStop(buttonBlink);
     }
 
     private void blinkDialog() {
@@ -156,6 +159,7 @@ public class OutDemoFragment2 extends Fragment implements ResponseHandlerInterfa
                 ((MainActivity) getActivity()).inventoryStartOrStop(buttonBlink);
                 break;
             case R.id.button_ok:
+                App.isReturn=true;
                 getFragmentManager().popBackStack();
 //                出库
 //                blinkDialog();

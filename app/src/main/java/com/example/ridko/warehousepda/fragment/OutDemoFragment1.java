@@ -4,34 +4,36 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.activity.MainActivity;
 import com.example.ridko.warehousepda.application.App;
 import com.example.ridko.warehousepda.client.OkHttpClientManager;
+import com.example.ridko.warehousepda.client.Outbound;
 import com.example.ridko.warehousepda.client.OutboundApplyDetail;
 import com.example.ridko.warehousepda.client.OutboundDetail;
 import com.example.ridko.warehousepda.common.ResponseHandlerInterfaces;
-import com.example.ridko.warehousepda.entity.DemoEntity1;
-import com.example.ridko.warehousepda.entity.DemoEntity2;
 import com.example.ridko.warehousepda.inventory.InventoryListItem;
 import com.example.ridko.warehousepda.listener.MyItemOnTouchListener;
 import com.squareup.okhttp.Request;
@@ -43,13 +45,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by mumu on 2018/9/4.
@@ -68,6 +67,15 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
 
     private String memoryBankID = "none";
 
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            String val = data.getString("value");
+        }
+    };
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.demo_layout, container, false);
         ButterKnife.bind(this, view);
@@ -79,7 +87,8 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
     private MyAdapter myAdapter;
     private HashSet<String> epcSet;
     private List<OutboundApplyDetail> outboundApplyDetailList;
-    private Map<String, List<OutboundDetail>> outBoundDetailList;
+    //    key=布号+缸号  value=List<OutboundDetail>  其中OutboundDetail为大界面读到的epc信息
+    private Map<String, List<OutboundDetail>> epcDetailList;
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     private Fragment fragment;
 
@@ -107,24 +116,24 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
     private void initData() {
         if (epcSet == null)
             epcSet = new HashSet<>();
-        epcSet.clear();
-        if (outBoundDetailList == null)
-            outBoundDetailList = new HashMap<>();
-        outBoundDetailList.clear();
+//        epcSet.clear();
+        if (epcDetailList == null)
+            epcDetailList = new HashMap<>();
+//        epcDetailList.clear();
 
     }
 
     private void cleanData() {
-        if (epcSet == null)
+        if (epcSet != null)
             epcSet.clear();
-        if (outBoundDetailList == null)
-            outBoundDetailList.clear();
-        for (OutboundApplyDetail detail : outboundApplyDetailList) {
-            if(detail.getFlag()==2)
-                outboundApplyDetailList.remove(detail);
+        if (epcDetailList != null)
+            epcDetailList.clear();
+        for (int i = 0; i < outboundApplyDetailList.size(); i++) {
+            if (outboundApplyDetailList.get(i).getFlag() == 2)
+                outboundApplyDetailList.remove(outboundApplyDetailList.get(i));
             else {
-                detail.clearReadNum();
-                detail.setFlag(0);
+                outboundApplyDetailList.get(i).clearReadNum();
+                outboundApplyDetailList.get(i).setFlag(0);
             }
         }
         myAdapter.notifyDataSetChanged();
@@ -150,34 +159,50 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
     }
 
     //    去空
-    public String delSpacing(String str){
-        str=str.trim();
+    public String delSpacing(String str) {
+        str = str.trim();
         return str;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (App.isReturn)
-            if (App.detilList!=null&&App.detilList.size()!=0)
-                for(OutboundApplyDetail detail:outboundApplyDetailList){
-                    if (detail.getVatDyeNo().equals(App.detilList.get(0).getVateDye())){
-                        detail.clearReadNum();
-                        detail.setFlag(0);
-                        for (OutboundDetail od:App.detilList)
-                            if (od.getFlag()==1)
-                                detail.addReadNum();
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            if (App.isReturn) {
+                App.isReturn = false;
+                if (App.detilList != null && App.detilList.size() != 0)
+                    for (OutboundApplyDetail detail : outboundApplyDetailList) {
+                        if (detail.getVatDyeNo().equals(App.detilList.get(0).getVateDye())) {
+                            detail.clearReadNum();
+                            if (detail.getFlag()!=2)
+                            detail.setFlag(0);
+                            if (epcDetailList.containsKey(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye()))
+                                epcDetailList.get(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye()).clear();
+                            else
+                                epcDetailList.put(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye(),new ArrayList<OutboundDetail>());
+                            for (OutboundDetail od : App.detilList)
+                                if (od.getFlag() == 1) {
+                                    detail.addReadNum();
+                                    epcDetailList.get(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye()).add(od);
+                                    if (!epcSet.contains(od.getEpc()))
+                                        epcSet.add(od.getEpc());
+                                } else {
+                                    if (epcSet.contains(od.getEpc()))
+                                        epcSet.remove(od.getEpc());
+                                }
+                        }
                     }
-                }
-            myAdapter.notifyDataSetChanged();
+                myAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        if (App.detilList!=null)
-        App.detilList.clear();
+    /*    if (App.detilList!=null)
+        App.detilList.clear();*/
     }
 
     @OnClick({R.id.button_blink, R.id.button_ok})
@@ -198,10 +223,11 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
     private void blinkDialog() {
         final Dialog dialog;
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View blinkView = inflater.inflate(R.layout.dialog_stock_removal, null);
+        View blinkView = inflater.inflate(R.layout.dialog_outbound, null);
         Button no = (Button) blinkView.findViewById(R.id.dialog_no);
         Button yes = (Button) blinkView.findViewById(R.id.dialog_yes);
         TextView text = (TextView) blinkView.findViewById(R.id.dialog_text);
+        final EditText editText=(EditText)blinkView.findViewById(R.id.edit1);
         text.setText(R.string.text61);
         dialog = new AlertDialog.Builder(getActivity()).create();
         dialog.show();
@@ -215,24 +241,33 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                返回上一层
-                try {
-                    OkHttpClientManager.postJsonAsyn(OkHttpClientManager.outBoundURL, new OkHttpClientManager.ResultCallback() {
-                        @Override
-                        public void onError(Request request, Exception e) {
-//                            上传错误
-                        }
-                        @Override
-                        public void onResponse(Object response) {
-                            if(((Response)response).isSuccessful()){
-                                //打印服务端返回结果
-                                Log.i("上传","成功");
-                            }
-                        }
-                    },new JSONObject());
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                List<OutboundDetail> outboundDetails=new ArrayList<OutboundDetail>();
+                for (List<OutboundDetail> od:epcDetailList.values()){
+                    if (od.get(0).getFlag()!=2) {
+                        outboundDetails.addAll(od);
+                    }
                 }
+                final String jsonString=JSON.toJSONString(
+                        new Outbound(outboundApplyDetailList.get(0).getApplyNo(),editText.getText().toString()+"",outboundDetails));
+                new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        Response response= null;
+                        try {
+                            response = OkHttpClientManager.postJsonAsyn(OkHttpClientManager.outBoundURL, jsonString);
+                            if (response.isSuccessful()) {
+                                Log.i("上传", "success");
+                                Message msg = handler.obtainMessage();
+                                msg.obj=true;
+                                handler.sendMessage(msg);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+
                 dialog.dismiss();
             }
         });
@@ -251,29 +286,37 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
             @Override
             public void onError(Request request, Exception e) {
 //                申请详情失败
-                Log.i("报错","检查错误");
+                Log.i("报错", "检查错误");
             }
 
             @Override
             public void onResponse(List<OutboundDetail> responseList) {
-                if (responseList!=null){
-                    for (OutboundDetail detail:responseList){
-                        detail.setEpc(delSpacing(detail.getEpc()));
+                if (responseList != null) {
+                    for (OutboundDetail detail : responseList) {
+                       /* detail.setEpc(delSpacing(detail.getEpc()));
                         detail.setClothNo(delSpacing(detail.getClothNo()));
                         detail.setTicketNo(delSpacing(detail.getTicketNo()));
-                        detail.setVateDye(delSpacing(detail.getVateDye()));
-                        if (outBoundDetailList.containsKey(outboundApplyDetailList.get(position).getClothNo()+outboundApplyDetailList.get(position).getVatDyeNo()))
-                        for (OutboundDetail detail2:outBoundDetailList.get(outboundApplyDetailList.get(position).getClothNo()+outboundApplyDetailList.get(position).getVatDyeNo())){
-                            if (detail2.getEpc().equals(detail.getEpc()))
-                                detail.setFlag(1);
-                        }
+                        detail.setVateDye(delSpacing(detail.getVateDye()));*/
+                        if (epcDetailList.containsKey(outboundApplyDetailList.get(position).getClothNo() + outboundApplyDetailList.get(position).getVatDyeNo()))
+                            for (OutboundDetail detail2 : epcDetailList.get(outboundApplyDetailList.get(position).getClothNo() + outboundApplyDetailList.get(position).getVatDyeNo())) {
+                                if (detail2.getEpc().equals(detail.getEpc()))
+                                    detail.setFlag(1);
+                            }
                     }
+                    App.detilList = responseList;
+
                     fragment = new OutDemoFragment2();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    Fragment f = getActivity().getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
+                    if (f instanceof OutDemoFragment1) {
+                        transaction.hide(f);
+                    }
                     transaction.add(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT).addToBackStack(null);
+//                    transaction.replace(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT).addToBackStack(null);
+
                     transaction.show(fragment);
                     transaction.commit();
-                    App.detilList=responseList;
+
 
                 }
             }
@@ -297,10 +340,10 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                             @Override
                             public void onResponse(OutboundDetail response) {
                                 if (response != null) {
-                                    response.setEpc(delSpacing(response.getEpc()));
+                                 /*   response.setEpc(delSpacing(response.getEpc()));
                                     response.setClothNo(delSpacing(response.getClothNo()));
                                     response.setTicketNo(delSpacing(response.getTicketNo()));
-                                    response.setVateDye(delSpacing(response.getVateDye()));
+                                    response.setVateDye(delSpacing(response.getVateDye()));*/
                                     boolean isInList = false;
                                     //判断在第一个列表是否存在
                                     // 若存在即存放到对应item里的outBoundDetailList里面
@@ -313,12 +356,14 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                                             applyDetail.addReadNum();
                                             if (applyDetail.getNum() == applyDetail.getReadNum())
                                                 applyDetail.setFlag(1);
-                                            if (outBoundDetailList.containsKey(applyDetail.getClothNo() + applyDetail.getVatDyeNo())) {
-                                                outBoundDetailList.get(applyDetail.getClothNo() + applyDetail.getVatDyeNo()).add(response);
+                                            if (applyDetail.getNum() < applyDetail.getReadNum())
+                                                applyDetail.setFlag(2);
+                                            if (epcDetailList.containsKey(applyDetail.getClothNo() + applyDetail.getVatDyeNo())) {
+                                                epcDetailList.get(applyDetail.getClothNo() + applyDetail.getVatDyeNo()).add(response);
                                             } else {
                                                 ArrayList<OutboundDetail> list = new ArrayList<OutboundDetail>();
                                                 list.add(response);
-                                                outBoundDetailList.put(applyDetail.getClothNo() + applyDetail.getVatDyeNo(), list);
+                                                epcDetailList.put(applyDetail.getClothNo() + applyDetail.getVatDyeNo(), list);
                                             }
                                         }
                                         if (isInList)
@@ -331,13 +376,14 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                                         outboundApplyDetailList.add(applyDetail1);
                                         ArrayList<OutboundDetail> list = new ArrayList<OutboundDetail>();
                                         list.add(response);
-                                        outBoundDetailList.put(response.getClothNo() + response.getVateDye(), list);
+                                        epcDetailList.put(response.getClothNo() + response.getVateDye(), list);
                                     }
                                     myAdapter.notifyDataSetChanged();
                                 }
                             }
                         });
             }
+
         }
     }
 
@@ -379,6 +425,9 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
         private int id = -255;
 
         public void selectItem(int id) {
+            if (this.id==id)
+                id=-255;
+            else
             this.id = id;
         }
 
@@ -418,8 +467,8 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
             viewHolder.item4.setText(list.get(position).getClothNo() + "");
             viewHolder.item5.setText(list.get(position).getNum() + "");
             viewHolder.item6.setText(list.get(position).getReadNum() + "");
-            viewHolder.item8.setText(list.get(position).getApplyNo()+"");
-            switch (list.get(position).getFlag()){
+            viewHolder.item8.setText(list.get(position).getApplyNo() + "");
+            switch (list.get(position).getFlag()) {
                 case 0:
                     viewHolder.item7.setText("盘亏");
                     break;

@@ -19,6 +19,11 @@ public class Outbound implements Serializable {
      */
     private List<OutboundDetail> outboundDetails;
 
+    public Outbound(String applyNo, String remarks, List<OutboundDetail> outboundDetails) {
+        this.applyNo = applyNo;
+        this.remarks = remarks;
+        this.outboundDetails = outboundDetails;
+    }
 
     public String getApplyNo() {
         return applyNo;

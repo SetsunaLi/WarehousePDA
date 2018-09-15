@@ -25,7 +25,7 @@
            <TextView
                android:layout_width="50dip"
                android:layout_height="match_parent"
-               style="@style/text_style7"
+               style="@style/text_style3"
                android:text="@string/text68"
                />
             <View
@@ -33,35 +33,35 @@
             <TextView
                 android:layout_width="120dip"
                 android:layout_height="match_parent"
-                style="@style/text_style7"
+                style="@style/text_style3"
                 android:text="@string/text57"/>
             <View
                 style="@style/view_item_mid"/>
             <TextView
                 android:layout_width="100dip"
                 android:layout_height="match_parent"
-                style="@style/text_style7"
+                style="@style/text_style3"
                 android:text="@string/text58"/>
             <View
                 style="@style/view_item_mid"/>
             <TextView
                 android:layout_width="100dip"
                 android:layout_height="match_parent"
-                style="@style/text_style7"
+                style="@style/text_style3"
                 android:text="@string/text12"/>
             <View
                 style="@style/view_item_mid"/>
             <TextView
                 android:layout_width="60dip"
                 android:layout_height="match_parent"
-                style="@style/text_style7"
+                style="@style/text_style3"
                 android:text="@string/text59"/>
             <View
                 style="@style/view_item_mid"/>
             <TextView
                 android:layout_width="60dip"
                 android:layout_height="match_parent"
-                style="@style/text_style7"
+                style="@style/text_style3"
                 android:text="@string/text62"/>
 
             <View
@@ -70,14 +70,14 @@
             <TextView
                 android:layout_width="80dip"
                 android:layout_height="match_parent"
-                style="@style/text_style7"
+                style="@style/text_style3"
                 android:text="@string/text60"/>
             <View
                 style="@style/view_item_mid"/>
             <TextView
                 android:layout_width="220dip"
                 android:layout_height="match_parent"
-                style="@style/text_style7"
+                style="@style/text_style3"
                 android:text="@string/text66"
                 />
             <View
@@ -86,7 +86,7 @@
             <TextView
                 android:layout_width="120dip"
                 android:layout_height="match_parent"
-                style="@style/text_style7"
+                style="@style/text_style3"
                 android:text="@string/text63"/>
         </LinearLayout>
         <View
