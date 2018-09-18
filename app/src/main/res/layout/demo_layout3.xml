@@ -1,7 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg0915">
+    android:background="@drawable/bg0915"
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg8"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_style4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text70" />
+
+            <TextView
+                android:id="@+id/text1"
+                style="@style/text_style1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="123456789" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_style4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text71" />
+
+            <TextView
+                android:id="@+id/text2"
+                style="@style/text_style1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:singleLine="true"
+                android:text="2018-09-17 11:22" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View style="@style/view_line" />
+
+        <TextView
+            android:id="@+id/text3"
+            style="@style/text_style2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/text72" />
+
+        <View style="@style/view_line" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/layout_style2."
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/layout_style2"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_style3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"
+                        android:text="@string/text73" />
+
+                    <EditText
+                        android:id="@+id/edit1"
+                        style="@style/edit_style1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10px"
+                        android:enabled="false"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layout_style2"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_style3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"
+                        android:text="@string/text74" />
+
+                    <EditText
+                        android:id="@+id/edit2"
+                        style="@style/edit_style1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10px"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:text="出仓" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layout_style2"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_style3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"
+                        android:text="@string/text75" />
+
+                    <EditText
+                        android:id="@+id/edit3"
+                        style="@style/edit_style1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10px"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:text="模拟出库" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layout_style2"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_style3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"
+                        android:text="@string/text76" />
+
+                    <EditText
+                        android:id="@+id/edit4"
+                        style="@style/edit_style1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10px"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:text="客户" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layout_style2."
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/layout_style2"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_style3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"
+                        android:text="@string/text77" />
+
+                    <EditText
+                        android:id="@+id/edit5"
+                        style="@style/edit_style1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10px"
+                        android:layout_weight="2.5"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:text="anonymousUser" />
+
+                    <EditText
+                        android:id="@+id/edit6"
+                        style="@style/edit_style1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10px"
+                        android:layout_weight="6"
+                        android:enabled="false"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layout_style2"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_style3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10px"
+                        android:gravity="center_vertical"
+                        android:text="@string/text78" />
+
+                    <EditText
+                        android:id="@+id/edit7"
+                        style="@style/edit_style1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10px"
+                        android:layout_weight="2.5"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:text="anonymousUser" />
+
+                    <EditText
+                        android:id="@+id/edit8"
+                        style="@style/edit_style1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10px"
+                        android:layout_weight="6"
+                        android:enabled="false"
+                        android:gravity="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_layout">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ListView
+                        android:id="@+id/list1"
+                        android:layout_width="match_parent"
+                        android:layout_height="500dip"></ListView>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_ok"
+        style="@style/button_style6"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="@string/button_yes" />
 </LinearLayout>

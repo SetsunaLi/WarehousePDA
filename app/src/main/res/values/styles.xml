@@ -119,6 +119,7 @@
     <item name="android:textColor">@color/colorHomeButton2</item>
     <item name="android:background">@drawable/edit_style1</item>
         <item name="android:gravity">center_vertical</item>
+
     </style>
 
     <style name="text_style1">
@@ -168,6 +169,11 @@
         <item name="android:layout_height">45dip</item>
         <item name="android:layout_marginTop">1dip</item>
     </style>
+    <style name="layout_style2.">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_layout</item>
+    </style>
     <!--设备管理选择按钮-->
     <style name="switch_style_1">
         <item name="android:track">@drawable/switch_track_1</item>
@@ -198,5 +204,12 @@
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:background">@color/colorTableLine</item>
+    </style>
+    <style name="view_line">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:background">@drawable/view_dash_line</item>
+        <item name="android:layerType">software</item>
     </style>
 </resources>

@@ -48,6 +48,7 @@
                     style="@style/edit_style1"
                     android:focusable="true"
                     android:textColor="@color/colorDialogContent"
+                    android:gravity="center"
                     android:hint="模拟出库"/>
             </LinearLayout>
         </LinearLayout>

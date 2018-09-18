@@ -5,6 +5,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.ridko.warehousepda.activity.MainActivity;
+import com.example.ridko.warehousepda.client.Outbound;
+import com.example.ridko.warehousepda.client.OutboundApplyDetail;
 import com.example.ridko.warehousepda.client.OutboundDetail;
 import com.example.ridko.warehousepda.common.MaxLimitArrayList;
 import com.example.ridko.warehousepda.inventory.InventoryListItem;
@@ -31,11 +33,11 @@ import java.util.TreeMap;
  * Created by mumu on 2018/4/3.
  */
 
-public class App extends  android.app.Application {
+public class App extends android.app.Application {
 
     private static boolean activityVisible;
-    private static final int PROWER_MAX=30;
-    private static final int PROWER_MIN=5;
+    private static final int PROWER_MAX = 30;
+    private static final int PROWER_MIN = 5;
     public static String USER_NAME;
     public static String USER_ID;
     public static String LOADTIME;
@@ -44,21 +46,21 @@ public class App extends  android.app.Application {
     public static String IP;
     public static String PORT;
     public static String DEVICE_NO;
-    public static boolean SYSTEM_PUSH=true;
-    public static int ARITHMETIC=1;
-    public static int START_Q=4;
-    public static int MIN_Q=0;
-    public static int MAX_Q=15;
-    public static int STORAGE=0;
-    public static int AREA=3;
-    public static int PRWOER=30;
-    public static int WORK_TIME=65535;
-    public static int FREE_TIME=65535;
+    public static boolean SYSTEM_PUSH = true;
+    public static int ARITHMETIC = 1;
+    public static int START_Q = 4;
+    public static int MIN_Q = 0;
+    public static int MAX_Q = 15;
+    public static int STORAGE = 0;
+    public static int AREA = 3;
+    public static int PRWOER = 30;
+    public static int WORK_TIME = 65535;
+    public static int FREE_TIME = 65535;
     public static List<OutboundDetail> detilList;
-    public static boolean isReturn=false;
-
-    public static boolean  ISBUY=true;
-    public static boolean BIND=true;
+    public static List<OutboundApplyDetail> outboundApplyDetailList;
+    public static boolean isReturn = false;
+    public static boolean ISBUY = true;
+    public static boolean BIND = true;
     public static RFIDReader mConnectedReader;
 
     //Variable to keep track of the unique tags seen
@@ -123,18 +125,22 @@ public class App extends  android.app.Application {
     public static int[] antennaPowerLevel;
     public static Readers readers;
     public static ReaderDevice mReaderDisappeared;
+
     public static boolean isActivityVisible() {
         return activityVisible;
     }
+
     public static UNIQUE_TAG_REPORT_SETTING reportUniquetags = null;
 
-    public static void activityResumed(){
-        activityVisible=true;
+    public static void activityResumed() {
+        activityVisible = true;
     }
-    public static void activityPaused(){
-        activityVisible=false;
+
+    public static void activityPaused() {
+        activityVisible = false;
     }
-    public static void toastShow(Context context,String string,int flag){
-            Toast.makeText(context, string, flag).show();
+
+    public static void toastShow(Context context, String string, int flag) {
+        Toast.makeText(context, string, flag).show();
     }
 }

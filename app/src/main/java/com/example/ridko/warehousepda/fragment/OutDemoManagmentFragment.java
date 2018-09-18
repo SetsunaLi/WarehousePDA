@@ -152,7 +152,39 @@ public class OutDemoManagmentFragment extends Fragment {
         @Override
         public void run() {
             buttonOk.setFocusable(true);
+            imgSearch.setFocusable(true);
+//        OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + strNO,
+            OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + "MKQ201808310023",
+                    new OkHttpClientManager.ResultCallback<List<OutboundApplyDetail>>() {
+                        @Override
+                        public void onError(Request request, Exception e) {
+//                请求失败或者请求为空
+                            App.toastShow(getContext(), getResources().getString(R.string.text64), Toast.LENGTH_LONG);
+                        }
 
+                        @Override
+                        public void onResponse(List<OutboundApplyDetail> outboundApplyDetailList) {
+                            if (outboundApplyDetailList!=null&&outboundApplyDetailList.size()!=0){
+                                for (OutboundApplyDetail detail:outboundApplyDetailList){
+                                    detail.setVatDyeNo(delSpacing(detail.getVatDyeNo()));
+                                    detail.setColorNo(delSpacing(detail.getColorNo()));
+                                    detail.setClothNo(delSpacing(detail.getClothNo()));
+                                    detail.setColorName(delSpacing(detail.getColorName()));
+                                    detail.setClothName(delSpacing(detail.getClothName()));
+                                    detail.setApplyNo(delSpacing(detail.getApplyNo()));
+                                }
+//            可能要做异步操作
+                                fragment=new OutDemoFragment1();
+                                FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
+                                transaction.add(R.id.content_frame,fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                                transaction.show(fragment);
+                                transaction.commit();
+                                App.outboundApplyDetailList=outboundApplyDetailList;
+                            }else {
+                                App.toastShow(getContext(), getResources().getString(R.string.text65), Toast.LENGTH_LONG);
+                            }
+                        }
+                    });
         }
     };
     private void loadNO(){
@@ -167,41 +199,11 @@ public class OutDemoManagmentFragment extends Fragment {
         }
         buttonOk.setFocusable(false);
         editNO.setFocusable(false);
+        imgSearch.setFocusable(false);
         Handler handler=new Handler();
         handler.postDelayed(load,1500);
 
-//        OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + strNO,
-        OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + "MKQ201808310023",
-                new OkHttpClientManager.ResultCallback<List<OutboundApplyDetail>>() {
-            @Override
-            public void onError(Request request, Exception e) {
-//                请求失败或者请求为空
-                App.toastShow(getContext(), getResources().getString(R.string.text64), Toast.LENGTH_LONG);
-            }
 
-            @Override
-            public void onResponse(List<OutboundApplyDetail> outboundApplyDetailList) {
-                if (outboundApplyDetailList!=null&&outboundApplyDetailList.size()!=0){
-                    for (OutboundApplyDetail detail:outboundApplyDetailList){
-                        detail.setApplyNo(delSpacing(detail.getApplyNo()));
-                        detail.setClothNo(delSpacing(detail.getClothNo()));
-                        detail.setClothName(delSpacing(detail.getClothName()));
-                        detail.setColorName(delSpacing(detail.getColorName()));
-                        detail.setColorNo(delSpacing(detail.getColorNo()));
-                        detail.setVatDyeNo(delSpacing(detail.getVatDyeNo()));
-                    }
-//            可能要做异步操作
-                    fragment=new OutDemoFragment1();
-                    FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.add(R.id.content_frame,fragment,TAG_CONTENT_FRAGMENT).addToBackStack(null);
-                    transaction.show(fragment);
-                    transaction.commit();
-                    ((OutDemoFragment1)fragment).setOutboundApplyDetail(outboundApplyDetailList);
-                }else {
-                    App.toastShow(getContext(), getResources().getString(R.string.text65), Toast.LENGTH_LONG);
-                }
-            }
-        });
     }
 //    去空
     public String delSpacing(String str){
@@ -214,7 +216,7 @@ public class OutDemoManagmentFragment extends Fragment {
             case R.id.button_ok:
                 strNO = editNO.getText().toString() + "";
                 loadNO();
-               /* if (strNO!=null&&strNO.length()!=0) {
+              /*  if (strNO!=null&&strNO.length()!=0) {
                     loadNO();
                 } else {
                     App.toastShow(getContext(), getResources().getString(R.string.stockRemoval_hint), Toast.LENGTH_SHORT);

@@ -39,6 +39,7 @@ import com.example.ridko.warehousepda.fragment.ConnectPDAFragment;
 import com.example.ridko.warehousepda.fragment.CutClothFragment;
 import com.example.ridko.warehousepda.fragment.DeviceManagmentFragment;
 import com.example.ridko.warehousepda.fragment.HomeFragment;
+import com.example.ridko.warehousepda.fragment.OutBoundNoFragment;
 import com.example.ridko.warehousepda.fragment.OutDemoFragment1;
 import com.example.ridko.warehousepda.fragment.OutDemoFragment2;
 import com.example.ridko.warehousepda.fragment.OutDemoManagmentFragment;
@@ -242,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (fragment != null && (fragment instanceof AboutFragment || fragment instanceof HomeFragment || fragment instanceof
                 CheckClothFragment || fragment instanceof CutClothFragment || fragment instanceof DeviceManagmentFragment
                 || fragment instanceof SpecialStorageFragment || fragment instanceof StockUpFragment || fragment instanceof StockRemovalFragment
+                ||fragment instanceof OutBoundNoFragment
         )) {
 
             //update the selected item in the drawer and the title

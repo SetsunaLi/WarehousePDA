@@ -215,6 +215,20 @@
     <string name="button15">返回</string>
     <string name="text68">编号</string>
     <string name="text69">备&#8195;注：</string>
+    <string name="text70">申请单号：</string>
+    <string name="text71">入库时间：</string>
+    <string name="text72">成品出仓</string>
+    <string name="text73">申请编号：</string>
+    <string name="text74">申请类型：</string>
+    <string name="text75">申请备注：</string>
+    <string name="text76">客户名称：</string>
+    <string name="text77">创建：</string>
+    <string name="text78">修改：</string>
+    <string name="text79">布匹条数</string>
+    <string name="text80">布种名称</string>
+    <string name="text81">布匹色号</string>
+    <string name="text82">布匹颜色</string>
+    <string name="outBoundUploadFail">出库信息上传失败！</string>
 
 
 
