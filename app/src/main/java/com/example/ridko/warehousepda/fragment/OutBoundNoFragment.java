@@ -110,7 +110,7 @@ public class OutBoundNoFragment extends Fragment {
     }
     public void initView() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss
-//获取当前时间
+        //获取当前时间
         Date date = new Date(System.currentTimeMillis());
         text2.setText(simpleDateFormat.format(date) + "");
         edit6.setText(simpleDateFormat.format(date) + "");

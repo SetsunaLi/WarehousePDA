@@ -3,6 +3,44 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/headNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <View style="@style/view_line" />
+
+        <TextView
+            android:id="@+id/text1"
+            style="@style/text_style2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/text72" />
+
+        <View style="@style/view_line" />
+        <CheckBox
+            android:id="@+id/checkbox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            />
+        <!--<CheckedTextView
+            android:id="@+id/reader_checkedtextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:textSize="25sp"
+            android:textColor="@color/colorTableText"
+            />-->
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="50dip"

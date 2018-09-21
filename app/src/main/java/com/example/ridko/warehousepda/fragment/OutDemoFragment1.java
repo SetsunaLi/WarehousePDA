@@ -20,6 +20,9 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -112,7 +115,6 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
         initData();
         if (App.outboundApplyDetailList != null)
             myAdapter = new MyAdapter(getContext(), R.layout.list_item_3_demo, App.outboundApplyDetailList);
-//        myAdapter = new MyAdapter(getContext(), R.layout.list_item_3_demo, mlist);
         myAdapter.setMyItemOnTouchListener(this);
         listview.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
@@ -267,12 +269,12 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Message msg = handler.obtainMessage();
+                      /*  Message msg = handler.obtainMessage();
                         Bundle bundle = new Bundle();
                         bundle.putBoolean("UpLoading", true);
                         msg.setData(bundle);
-                        handler.sendMessage(msg);
-                      /*  Response response = null;
+                        handler.sendMessage(msg);*/
+                        Response response = null;
                         try {
                             response = OkHttpClientManager.postJsonAsyn(OkHttpClientManager.outBoundURL, jsonString);
                             if (response.isSuccessful()) {
@@ -290,7 +292,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
-                        }*/
+                        }
                     }
                 }).start();
                 dialog.dismiss();
@@ -380,7 +382,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                                             if (applyDetail.getNum() == applyDetail.getReadNum())
                                                 applyDetail.setFlag(1);
                                             if (applyDetail.getNum() < applyDetail.getReadNum())
-                                                applyDetail.setFlag(2);
+                                                applyDetail.setFlag(3);
                                             if (epcDetailList.containsKey(applyDetail.getClothNo() + applyDetail.getVatDyeNo())) {
                                                 epcDetailList.get(applyDetail.getClothNo() + applyDetail.getVatDyeNo()).add(response);
                                             } else {
@@ -449,7 +451,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
 
         public void selectItem(int id) {
             if (this.id == id)
-                id = -255;
+                this.id = -255;
             else
                 this.id = id;
         }
@@ -480,9 +482,20 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                 viewHolder.item8 = (TextView) convertView.findViewById(R.id.item8);
                 viewHolder.button = (Button) convertView.findViewById(R.id.button1);
                 viewHolder.layout = (LinearLayout) convertView.findViewById(R.id.head);
+                viewHolder.headNo = (LinearLayout) convertView.findViewById(R.id.headNo);
+                viewHolder.text1 = (TextView) convertView.findViewById(R.id.text1);
+                viewHolder.check = (CheckBox) convertView.findViewById(R.id.checkbox1);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
+            }
+            if (list.get(position).getOutBoundNo()!=null){
+                if(list.get(position).getOutBoundNo().isHead()){
+                    viewHolder.headNo.setVisibility(View.VISIBLE);
+                    viewHolder.text1.setText(list.get(position).getOutBoundNo().getApplyNo());
+                }
+            }else {
+                viewHolder.headNo.setVisibility(View.GONE);
             }
             viewHolder.item1.setText(position + 1 + "");
             viewHolder.item2.setText(list.get(position).getVatDyeNo() + "");
@@ -501,6 +514,9 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                 case 2:
                     viewHolder.item7.setText("异常");
                     break;
+                case 3:
+                    viewHolder.item7.setText("盘盈");
+                    break;
             }
 //            设置字体颜色
             if (list.get(position).getNum() == list.get(position).getReadNum())
@@ -514,6 +530,13 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
 
                     if (myItemOnTouchListener != null)
                         myItemOnTouchListener.onItemClick(position);
+                }
+            });
+            viewHolder.check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked){
+                        if (App.outboundApplyDetailList.get(position).getOutBoundNo()!=null)
+                            App.outboundApplyDetailList.get(position).getOutBoundNo().setOut(isChecked);
                 }
             });
 //          设置背景颜色
@@ -532,6 +555,9 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                     case 2:
                         viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorAccent));
                         break;
+                    case 3:
+                        viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorDataNoText));
+                        break;
                 }
             }
             return convertView;
@@ -548,6 +574,10 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
             TextView item8;
             Button button;
             LinearLayout layout;
+            LinearLayout headNo;
+            TextView text1;
+            CheckBox check;
+
         }
     }
 }

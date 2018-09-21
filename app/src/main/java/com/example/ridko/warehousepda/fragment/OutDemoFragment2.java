@@ -161,8 +161,6 @@ public class OutDemoFragment2 extends Fragment implements ResponseHandlerInterfa
             case R.id.button_ok:
                 App.isReturn=true;
                 getFragmentManager().popBackStack();
-//                出库
-//                blinkDialog();
                 break;
         }
     }

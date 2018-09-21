@@ -36,6 +36,7 @@ import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.adapter.ListDataAdapter;
 import com.example.ridko.warehousepda.application.App;
 import com.example.ridko.warehousepda.client.OkHttpClientManager;
+import com.example.ridko.warehousepda.client.OutBoundNo;
 import com.example.ridko.warehousepda.client.OutboundApplyDetail;
 import com.example.ridko.warehousepda.entity.DemoEntity1;
 import com.squareup.okhttp.Request;
@@ -154,7 +155,7 @@ public class OutDemoManagmentFragment extends Fragment {
             buttonOk.setFocusable(true);
             imgSearch.setFocusable(true);
 //        OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + strNO,
-            OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + "MKQ201808310023",
+            OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + "201809181342106987",
                     new OkHttpClientManager.ResultCallback<List<OutboundApplyDetail>>() {
                         @Override
                         public void onError(Request request, Exception e) {
@@ -173,6 +174,7 @@ public class OutDemoManagmentFragment extends Fragment {
                                     detail.setClothName(delSpacing(detail.getClothName()));
                                     detail.setApplyNo(delSpacing(detail.getApplyNo()));
                                 }
+                                outboundApplyDetailList.get(0).setOutBoundNo(new OutBoundNo(true,outboundApplyDetailList.get(0).getApplyNo(),true));
 //            可能要做异步操作
                                 fragment=new OutDemoFragment1();
                                 FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
@@ -215,12 +217,12 @@ public class OutDemoManagmentFragment extends Fragment {
         switch (view.getId()) {
             case R.id.button_ok:
                 strNO = editNO.getText().toString() + "";
-                loadNO();
-              /*  if (strNO!=null&&strNO.length()!=0) {
+                    loadNO();
+                if (strNO!=null&&strNO.length()!=0) {
                     loadNO();
                 } else {
                     App.toastShow(getContext(), getResources().getString(R.string.stockRemoval_hint), Toast.LENGTH_SHORT);
-                }*/
+                }
                 break;
             case R.id.imgSearch:
                 strNO = editNO.getText().toString() + "";

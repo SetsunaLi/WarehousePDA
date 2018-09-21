@@ -40,13 +40,13 @@ import java.util.Set;
 
 public class OkHttpClientManager {
     /*请求出库申请单*/
-    public static final String applyNoURL="http://192.168.1.103:10000/app/outbound/outbound_apply/";
+    public static final String applyNoURL="http://192.168.1.103:9999/app/outbound/outbound_apply/";
     /*请求缸号信息列表*/
-    public static final String applyDetailURL="http://192.168.1.103:10000/app/outbound/detail_vatedye/";
+    public static final String applyDetailURL="http://192.168.1.103:9999/app/outbound/detail_vatedye/";
     /*请求EPC布匹信息*/
-    public static final String epcClothURL="http://192.168.1.103:10000/app/outbound/detail/";
+    public static final String epcClothURL="http://192.168.1.103:9999/app/outbound/detail/";
     /*上传出库布匹信息*/
-    public static final String outBoundURL="http://192.168.1.103:10000/app/outbound";
+    public static final String outBoundURL="http://192.168.1.103:9999/app/outbound";
     private static OkHttpClientManager mInstance;
     private OkHttpClient mOkHttpClient;
     private Handler mDelivery;

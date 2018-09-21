@@ -43,6 +43,7 @@ public class OutboundApplyDetail implements Serializable {
         * 2为非正常串读 红色
         * */
     private int flag=0;
+    private OutBoundNo outBoundNo;
     public OutboundApplyDetail() {
     }
 
@@ -54,6 +55,14 @@ public class OutboundApplyDetail implements Serializable {
         this.colorNo = colorNo;
         this.vatDyeNo = vatDyeNo;
         this.num = num;
+    }
+
+    public OutBoundNo getOutBoundNo() {
+        return outBoundNo;
+    }
+
+    public void setOutBoundNo(OutBoundNo outBoundNo) {
+        this.outBoundNo = outBoundNo;
     }
 
     public String getApplyNo() {
