@@ -119,7 +119,12 @@
     <item name="android:textColor">@color/colorHomeButton2</item>
     <item name="android:background">@drawable/edit_style1</item>
         <item name="android:gravity">center_vertical</item>
-
+    </style>
+    <style name="edit_style2">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorHomeButton2</item>
+        <item name="android:background">@drawable/edit_style2</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="text_style1">

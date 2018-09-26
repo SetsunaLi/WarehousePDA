@@ -10,7 +10,8 @@
         android:layout_marginRight="10dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:descendantFocusability="blocksDescendants">
 
         <View style="@style/view_line" />
 
@@ -27,7 +28,6 @@
             android:id="@+id/checkbox1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
             />
         <!--<CheckedTextView
             android:id="@+id/reader_checkedtextview"

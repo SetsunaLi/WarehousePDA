@@ -9,13 +9,14 @@
         android:layout_width="match_parent"
         style="@style/layout_style2"
         android:background="@drawable/bg_layout"
-        android:layout_marginTop="20px"
-        android:orientation="horizontal">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        >
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
             style="@style/text_style3"
             android:text="@string/system_version_key"
@@ -25,7 +26,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
-            android:layout_marginLeft="10px"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
             android:gravity="center_vertical"
             style="@style/text_style1"
             android:text="@string/system_version_summary"
@@ -40,12 +42,24 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
             style="@style/text_style3"
             android:text="@string/system_ip_key"
             />
-        <TextView
+        <EditText
+            android:id="@+id/edit1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/system_ip_summary"
+            style="@style/edit_style2"/>
+       <!-- <TextView
             android:id="@+id/tv2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -54,7 +68,7 @@
             android:gravity="center_vertical"
             style="@style/text_style1"
             android:text="@string/system_ip_summary"
-            />
+            />-->
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,21 +79,34 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
             style="@style/text_style3"
             android:text="@string/system_port_key"
             />
-        <TextView
+        <EditText
+            android:id="@+id/edit2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/system_port_summary"
+            style="@style/edit_style2"/>
+        <!--<TextView
             android:id="@+id/tv3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
             android:layout_marginLeft="10px"
+            android:layout_marginRight="20dp"
             android:gravity="center_vertical"
             style="@style/text_style1"
             android:text="@string/system_port_summary"
-            />
+            />-->
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -90,7 +117,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
             style="@style/text_style3"
             android:text="@string/system_device_number_key"
@@ -100,7 +127,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
-            android:layout_marginLeft="10px"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
             android:gravity="center_vertical"
             style="@style/text_style1"
             android:text="@string/system_device_number_summary"
@@ -123,7 +151,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
             style="@style/text_style3"
             android:text="@string/system_push_key"
@@ -132,6 +160,7 @@
             android:id="@+id/switch1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
             android:layout_weight="3"
             style="@style/switch_style_1"
             android:checked="true"

@@ -21,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -30,7 +29,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.activity.MainActivity;
 import com.example.ridko.warehousepda.application.App;
@@ -78,15 +76,10 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
             super.handleMessage(msg);
             Bundle data = msg.getData();
             if (data.getBoolean("UpLoading")) {
-                 /* Fragment f = new OutBoundNoFragment();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content_frame, f, TAG_CONTENT_FRAGMENT).addToBackStack(null);
-                transaction.show(f);
-                transaction.commit();*/
                 fragment = new OutBoundNoFragment();
                 getActivity().getSupportFragmentManager().popBackStackImmediate(OutBoundNoFragment.class.getName(),FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT).addToBackStack(null);
+                transaction.replace(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT);
                 transaction.show(fragment);
                 transaction.commit();
             } else {
@@ -103,7 +96,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
     private MyAdapter myAdapter;
     private HashSet<String> epcSet;
     //    key=布号+缸号  value=List<OutboundDetail>  其中OutboundDetail为大界面读到的epc信息
-    private Map<String, List<OutboundDetail>> epcDetailList;
+    private Map<String, List<OutboundDetail>> clotheNoVateDyeList;
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     private Fragment fragment;
 
@@ -131,17 +124,17 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
         if (epcSet == null)
             epcSet = new HashSet<>();
 //        epcSet.clear();
-        if (epcDetailList == null)
-            epcDetailList = new HashMap<>();
-//        epcDetailList.clear();
+        if (clotheNoVateDyeList == null)
+            clotheNoVateDyeList = new HashMap<>();
+//        clotheNoVateDyeList.clear();
 
     }
 
     private void cleanData() {
         if (epcSet != null)
             epcSet.clear();
-        if (epcDetailList != null)
-            epcDetailList.clear();
+        if (clotheNoVateDyeList != null)
+            clotheNoVateDyeList.clear();
         for (int i = 0; i < App.outboundApplyDetailList.size(); i++) {
             if (App.outboundApplyDetailList.get(i).getFlag() == 2)
                 App.outboundApplyDetailList.remove(App.outboundApplyDetailList.get(i));
@@ -183,14 +176,18 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                             detail.clearReadNum();
                             if (detail.getFlag() != 2)
                                 detail.setFlag(0);
-                            if (epcDetailList.containsKey(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye()))
-                                epcDetailList.get(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye()).clear();
+                            if (clotheNoVateDyeList.containsKey(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye()))
+                                clotheNoVateDyeList.get(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye()).clear();
                             else
-                                epcDetailList.put(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye(), new ArrayList<OutboundDetail>());
+                                clotheNoVateDyeList.put(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye(), new ArrayList<OutboundDetail>());
                             for (OutboundDetail od : App.detilList)
                                 if (od.getFlag() == 1) {
                                     detail.addReadNum();
-                                    epcDetailList.get(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye()).add(od);
+                                    if (detail.getNum()==detail.getReadNum())
+                                        detail.setFlag(1);
+                                    else if (detail.getNum()<detail.getReadNum())
+                                        detail.setFlag(3);
+                                    clotheNoVateDyeList.get(App.detilList.get(0).getClothNo() + App.detilList.get(0).getVateDye()).add(od);
                                     if (!epcSet.contains(od.getEpc()))
                                         epcSet.add(od.getEpc());
                                 } else {
@@ -208,10 +205,8 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        /*if (App.detilList != null)
+        if (App.detilList != null)
             App.detilList.clear();
-        if (App.outboundApplyDetailList != null)
-            App.outboundApplyDetailList.clear();*/
     }
 
     @OnClick({R.id.button_blink, R.id.button_ok})
@@ -254,26 +249,23 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Fragment f = new OutBoundNoFragment();
+                /*fragment = new OutBoundNoFragment();
+                getActivity().getSupportFragmentManager().popBackStackImmediate(OutBoundNoFragment.class.getName(),FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content_frame, f, TAG_CONTENT_FRAGMENT).addToBackStack(null);
-                transaction.show(f);
+                transaction.replace(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT);
+                transaction.show(fragment);
                 transaction.commit();*/
                 List<OutboundDetail> detilList=new ArrayList<OutboundDetail>();
-                for (List<OutboundDetail> od : epcDetailList.values()) {
+                for (List<OutboundDetail> od : clotheNoVateDyeList.values()) {
                     if (od.get(0).getFlag() != 2) {
                         detilList.addAll(od);
                     }
                 }
-                final String jsonString = JSON.toJSONString(new Outbound(App.outboundApplyDetailList.get(0).getApplyNo(), editText.getText().toString() + "", detilList));
+                App.REMARKS=editText.getText().toString() + "";
+                final String jsonString = JSON.toJSONString(new Outbound(App.outboundApplyDetailList.get(0).getApplyNo(), App.REMARKS, detilList));
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                      /*  Message msg = handler.obtainMessage();
-                        Bundle bundle = new Bundle();
-                        bundle.putBoolean("UpLoading", true);
-                        msg.setData(bundle);
-                        handler.sendMessage(msg);*/
                         Response response = null;
                         try {
                             response = OkHttpClientManager.postJsonAsyn(OkHttpClientManager.outBoundURL, jsonString);
@@ -324,8 +316,8 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                         detail.setClothNo(delSpacing(detail.getClothNo()));
                         detail.setTicketNo(delSpacing(detail.getTicketNo()));
                         detail.setVateDye(delSpacing(detail.getVateDye()));*/
-                        if (epcDetailList.containsKey(App.outboundApplyDetailList.get(position).getClothNo() + App.outboundApplyDetailList.get(position).getVatDyeNo()))
-                            for (OutboundDetail detail2 : epcDetailList.get(App.outboundApplyDetailList.get(position).getClothNo() + App.outboundApplyDetailList.get(position).getVatDyeNo())) {
+                        if (clotheNoVateDyeList.containsKey(App.outboundApplyDetailList.get(position).getClothNo() + App.outboundApplyDetailList.get(position).getVatDyeNo()))
+                            for (OutboundDetail detail2 : clotheNoVateDyeList.get(App.outboundApplyDetailList.get(position).getClothNo() + App.outboundApplyDetailList.get(position).getVatDyeNo())) {
                                 if (detail2.getEpc().equals(detail.getEpc()))
                                     detail.setFlag(1);
                             }
@@ -381,14 +373,14 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                                             applyDetail.addReadNum();
                                             if (applyDetail.getNum() == applyDetail.getReadNum())
                                                 applyDetail.setFlag(1);
-                                            if (applyDetail.getNum() < applyDetail.getReadNum())
+                                            if (applyDetail.getNum() < applyDetail.getReadNum()&&applyDetail.getFlag()!=2)
                                                 applyDetail.setFlag(3);
-                                            if (epcDetailList.containsKey(applyDetail.getClothNo() + applyDetail.getVatDyeNo())) {
-                                                epcDetailList.get(applyDetail.getClothNo() + applyDetail.getVatDyeNo()).add(response);
+                                            if (clotheNoVateDyeList.containsKey(applyDetail.getClothNo() + applyDetail.getVatDyeNo())) {
+                                                clotheNoVateDyeList.get(applyDetail.getClothNo() + applyDetail.getVatDyeNo()).add(response);
                                             } else {
                                                 ArrayList<OutboundDetail> list = new ArrayList<OutboundDetail>();
                                                 list.add(response);
-                                                epcDetailList.put(applyDetail.getClothNo() + applyDetail.getVatDyeNo(), list);
+                                                clotheNoVateDyeList.put(applyDetail.getClothNo() + applyDetail.getVatDyeNo(), list);
                                             }
                                         }
                                         if (isInList)
@@ -401,7 +393,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                                         App.outboundApplyDetailList.add(applyDetail1);
                                         ArrayList<OutboundDetail> list = new ArrayList<OutboundDetail>();
                                         list.add(response);
-                                        epcDetailList.put(response.getClothNo() + response.getVateDye(), list);
+                                        clotheNoVateDyeList.put(response.getClothNo() + response.getVateDye(), list);
                                     }
                                     myAdapter.notifyDataSetChanged();
                                 }
@@ -493,6 +485,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                 if(list.get(position).getOutBoundNo().isHead()){
                     viewHolder.headNo.setVisibility(View.VISIBLE);
                     viewHolder.text1.setText(list.get(position).getOutBoundNo().getApplyNo());
+                    viewHolder.check.setChecked(true);
                 }
             }else {
                 viewHolder.headNo.setVisibility(View.GONE);

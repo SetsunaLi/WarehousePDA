@@ -114,6 +114,7 @@ public class OutDemoManagmentFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
 //实时内容
+
             }
         });
     }
@@ -154,8 +155,8 @@ public class OutDemoManagmentFragment extends Fragment {
         public void run() {
             buttonOk.setFocusable(true);
             imgSearch.setFocusable(true);
-//        OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + strNO,
-            OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + "201809181342106987",
+        OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + strNO,
+//            OkHttpClientManager.getAsyn(OkHttpClientManager.applyNoURL + "201809181342106987",
                     new OkHttpClientManager.ResultCallback<List<OutboundApplyDetail>>() {
                         @Override
                         public void onError(Request request, Exception e) {
@@ -217,7 +218,6 @@ public class OutDemoManagmentFragment extends Fragment {
         switch (view.getId()) {
             case R.id.button_ok:
                 strNO = editNO.getText().toString() + "";
-                    loadNO();
                 if (strNO!=null&&strNO.length()!=0) {
                     loadNO();
                 } else {

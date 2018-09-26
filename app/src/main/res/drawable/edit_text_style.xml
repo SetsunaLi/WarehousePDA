@@ -3,6 +3,9 @@
     <corners android:radius="14dip"/>
     <stroke
         android:width="5dip"
-        android:color="@color/colorEditText"/>
-    <solid android:color="@color/colorEditText"/>
+        android:color="@color/colorEditText"
+
+        />
+    <solid android:color="@color/colorEditText"
+        android:paddingLeft="10dp"/>
 </shape>

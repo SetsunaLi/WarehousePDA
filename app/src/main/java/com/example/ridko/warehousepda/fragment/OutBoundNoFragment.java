@@ -104,8 +104,11 @@ public class OutBoundNoFragment extends Fragment {
             App.detilList.clear();
         if (App.outboundApplyDetailList != null)
             App.outboundApplyDetailList.clear();
+        if (outboundApplyDetailList!=null)
+            outboundApplyDetailList.clear();
     }
     private void initData(){
+        if (App.outboundApplyDetailList!=null)
         this.outboundApplyDetailList= App.outboundApplyDetailList;
     }
     public void initView() {
@@ -113,6 +116,7 @@ public class OutBoundNoFragment extends Fragment {
         //获取当前时间
         Date date = new Date(System.currentTimeMillis());
         text2.setText(simpleDateFormat.format(date) + "");
+        edit3.setText(App.REMARKS);
         edit6.setText(simpleDateFormat.format(date) + "");
         edit8.setText(simpleDateFormat.format(date) + "");
         if (outboundApplyDetailList != null && outboundApplyDetailList.size() != 0) {
@@ -125,7 +129,7 @@ public class OutBoundNoFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_ok:
-                Fragment fragment=HomeFragment.newInstance();
+                Fragment fragment=OutDemoManagmentFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_frame, fragment, TAG_CONTENT_FRAGMENT);
                 transaction.show(fragment);

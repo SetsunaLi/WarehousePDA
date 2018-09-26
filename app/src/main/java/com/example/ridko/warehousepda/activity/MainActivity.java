@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (fragment != null && (fragment instanceof AboutFragment || fragment instanceof HomeFragment || fragment instanceof
                 CheckClothFragment || fragment instanceof CutClothFragment || fragment instanceof DeviceManagmentFragment
                 || fragment instanceof SpecialStorageFragment || fragment instanceof StockUpFragment || fragment instanceof StockRemovalFragment
-                ||fragment instanceof OutBoundNoFragment
+                ||fragment instanceof OutBoundNoFragment||fragment instanceof DeviceManagmentFragment
         )) {
 
             //update the selected item in the drawer and the title

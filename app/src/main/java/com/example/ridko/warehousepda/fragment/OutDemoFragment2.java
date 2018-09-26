@@ -45,7 +45,7 @@ import butterknife.OnClick;
  */
 
 public class OutDemoFragment2 extends Fragment implements ResponseHandlerInterfaces.ResponseTagHandler,
-        ResponseHandlerInterfaces.TriggerEventHandler{
+        ResponseHandlerInterfaces.TriggerEventHandler {
 
     @Bind(R.id.list1)
     ListView list1;
@@ -54,11 +54,13 @@ public class OutDemoFragment2 extends Fragment implements ResponseHandlerInterfa
     @Bind(R.id.button_ok)
     Button buttonOk;
 
-//    private List<OutboundDetail> mylist;
-    private Map<String,Integer> epcIdMap;
+    //    private List<OutboundDetail> mylist;
+    private Map<String, Integer> epcIdMap;
     private Set<String> epcSet;
+    private ArrayList<OutboundDetail> arrayList;
     private DemoAdapter adapter;
     private String memoryBankID = "none";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,47 +69,52 @@ public class OutDemoFragment2 extends Fragment implements ResponseHandlerInterfa
         return view;
     }
 
-    private int selectID = -1;
-
     //可以不要
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(getActivity());
         initData();
-        if (adapter==null)
-        adapter = new DemoAdapter(getContext(), R.layout.list_item_4_demo, App.detilList);
+        if (adapter == null)
+            adapter = new DemoAdapter(getContext(), R.layout.list_item_4_demo, arrayList);
         list1.setAdapter(adapter);
         list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 adapter.selectItem(i);
                 adapter.notifyDataSetChanged();
-                selectID = i;
             }
         });
     }
 
     private void initData() {
-        if (epcIdMap==null)
-        epcIdMap=new HashMap<>();
+        if (epcIdMap == null)
+            epcIdMap = new HashMap<>();
         epcIdMap.clear();
-        if (epcSet==null)
-        epcSet=new ArraySet<>();
+        if (epcSet == null)
+            epcSet = new ArraySet<>();
         epcSet.clear();
-        for (int i=0;i<App.detilList.size();i++){
-            if (App.detilList.get(i).getFlag()==1)
+        if (arrayList == null)
+            arrayList = new ArrayList<>();
+        arrayList.clear();
+        if (App.detilList == null)
+            App.detilList = new ArrayList<>();
+        for (int i = 0; i < App.detilList.size(); i++) {
+            if (App.detilList.get(i).getFlag() == 1) {
                 epcSet.add(App.detilList.get(i).getEpc());
-            epcIdMap.put(App.detilList.get(i).getEpc(),i);
+                arrayList.add(App.detilList.get(i));
+            }
+            epcIdMap.put(App.detilList.get(i).getEpc(), i);
         }
-        if (App.detilList==null)
-            App.detilList=new ArrayList<>();
     }
-//    扫描刷新数据
-    private void cleanData(){
-        if (epcSet!=null)
+
+    //    扫描刷新数据
+    private void cleanData() {
+        if (epcSet != null)
             epcSet.clear();
-        for (OutboundDetail detail:App.detilList){
+        if (arrayList!=null)
+            arrayList.clear();
+        for (OutboundDetail detail : App.detilList) {
             detail.setFlag(0);
         }
         adapter.notifyDataSetChanged();
@@ -118,73 +125,53 @@ public class OutDemoFragment2 extends Fragment implements ResponseHandlerInterfa
         super.onDestroyView();
         ButterKnife.unbind(this);
         epcSet.clear();
+        epcIdMap.clear();
+        arrayList.clear();
         if (App.mIsInventoryRunning)
             ((MainActivity) getActivity()).inventoryStartOrStop(buttonBlink);
     }
 
-    private void blinkDialog() {
-        final Dialog dialog;
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View blinkView = inflater.inflate(R.layout.dialog_stock_removal, null);
-        Button no = (Button) blinkView.findViewById(R.id.dialog_no);
-        Button yes = (Button) blinkView.findViewById(R.id.dialog_yes);
-        TextView text = (TextView) blinkView.findViewById(R.id.dialog_text);
-        text.setText(R.string.text61);
-        dialog = new AlertDialog.Builder(getActivity()).create();
-        dialog.show();
-        dialog.getWindow().setContentView(blinkView);
-        no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                返回上一层
-
-                dialog.dismiss();
-            }
-        });
-    }
-
-    @OnClick({R.id.button_blink,R.id.button_ok})
+    @OnClick({R.id.button_blink, R.id.button_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_blink:
                 if (!App.mIsInventoryRunning)
-                cleanData();
+                    cleanData();
 //                扫描开始
                 ((MainActivity) getActivity()).inventoryStartOrStop(buttonBlink);
                 break;
             case R.id.button_ok:
-                App.isReturn=true;
+                App.isReturn = true;
                 getFragmentManager().popBackStack();
                 break;
         }
     }
+
     /*方法在寻读状态设置为在读写器断开连接是停止*/
-    public void resetInventoryDetail(){
+    public void resetInventoryDetail() {
         if (getActivity() != null) {
             if (buttonBlink != null)
                 buttonBlink.setText(getString(R.string.start_title));
         }
     }
+
     public String getMemoryBankID() {
         return memoryBankID;
     }
+
     String epc;
+
     @Override
     public void handleTagResponse(InventoryListItem inventoryListItem, boolean isAddedToList) {
         if (isAddedToList)
-            epc=inventoryListItem.getText();
-        if (!epcSet.contains(epc)){
+            epc = inventoryListItem.getText();
+        if (!epcSet.contains(epc)) {
             epcSet.add(epc);
-            if(epcIdMap.containsKey(epc)){
+            if (epcIdMap.containsKey(epc)) {
                 App.detilList.get(epcIdMap.get(epc)).setFlag(1);
+                arrayList.add(App.detilList.get(epcIdMap.get(epc)));
 //                可能这里要异步操作
-                if (adapter!=null)
+                if (adapter != null)
                     adapter.notifyDataSetChanged();
             }
         }
@@ -247,26 +234,26 @@ public class OutDemoFragment2 extends Fragment implements ResponseHandlerInterfa
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            viewHolder.item1.setText(position+1 + "");
-            viewHolder.item2.setText(list.get(position).getTicketNo()+"");
-            viewHolder.item3.setText(list.get(position).getClothNo()+"");
-            viewHolder.item4.setText(list.get(position).getWeight()+"");
-            viewHolder.item5.setText(list.get(position).getVateDye()+"");
-            viewHolder.item6.setText(list.get(position).getEpc()+"");
+            viewHolder.item1.setText(position + 1 + "");
+            viewHolder.item2.setText(list.get(position).getTicketNo() + "");
+            viewHolder.item3.setText(list.get(position).getClothNo() + "");
+            viewHolder.item4.setText(list.get(position).getWeight() + "");
+            viewHolder.item5.setText(list.get(position).getVateDye() + "");
+            viewHolder.item6.setText(list.get(position).getEpc() + "");
 
             if (position == id) {
                 viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorDialogTitleBG));
             } else {
-                switch (list.get(position).getFlag()){
+                switch (list.get(position).getFlag()) {
                     case 0:
-                        viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorZERO));
+//                        viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorZERO));
+                        viewHolder.layout.setVisibility(View.GONE);
                         break;
                     case 1:
+                        viewHolder.layout.setVisibility(View.VISIBLE);
                         viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorFindEpc));
                         break;
-                    case 2:
-                        viewHolder.layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorAccent));
-                        break;
+
                 }
             }
             return convertView;
