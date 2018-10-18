@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
                 if (!App.mIsInventoryRunning) {//如果不在扫描
                     clearInventoryData();
-                    button.setText("STOP");
+                    button.setText(getResources().getString(R.string.stop_title));
                     //Here we send the inventory command to start reading the tags
 //                    设置询标的寻读区域，demo通过Spinner选择
                   /*  if (fragment != null && fragment instanceof OutDemoFragment1) {//如果是询标的界面，则通过复选框设置询标模式
@@ -425,7 +425,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 } else if (App.mIsInventoryRunning) {
-                    button.setText("START");
+                    button.setText(getResources().getString(R.string.start_title));
                     isInventoryAborted = true;
                     //Here we send the abort command to stop the inventory
 //                    停止指令

@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.example.ridko.warehousepda.R;
 import com.example.ridko.warehousepda.application.App;
@@ -31,14 +30,15 @@ import butterknife.OnClick;
 
 public class SystemFragment extends Fragment {
 
-    @Bind(R.id.tv1)
-    TextView tv1;
+
+    @Bind(R.id.edit4)
+    EditText edit4;
     @Bind(R.id.edit1)
     EditText edit1;
     @Bind(R.id.edit2)
     EditText edit2;
-    @Bind(R.id.tv4)
-    TextView tv4;
+    @Bind(R.id.edit3)
+    EditText edit3;
     @Bind(R.id.switch1)
     Switch switch1;
     @Bind(R.id.button)
@@ -71,13 +71,13 @@ public class SystemFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(getActivity());
         if (App.SYSTEM_VERSION != null)
-            tv1.setText(App.SYSTEM_VERSION + "");
+            edit4.setText(App.SYSTEM_VERSION + "");
         if (App.IP != null)
             edit1.setText(App.IP + "");
         if (App.PORT != null)
             edit2.setText(App.PORT + "");
         if (App.DEVICE_NO != null)
-            tv4.setText(App.DEVICE_NO + "");
+            edit3.setText(App.DEVICE_NO + "");
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -102,7 +102,7 @@ public class SystemFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                App.IP=edit1.getText().toString()+"";
+                App.IP = edit1.getText().toString() + "";
             }
         });
         edit2.addTextChangedListener(new TextWatcher() {
@@ -118,7 +118,7 @@ public class SystemFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                App.PORT=edit2.getText().toString()+"";
+                App.PORT = edit2.getText().toString() + "";
             }
         });
     }
@@ -145,16 +145,22 @@ public class SystemFragment extends Fragment {
             case R.id.button:
 //                重新访问服务器更新信息
 //                 fuction
-
+/*
                 if (App.SYSTEM_VERSION != null)
-                    tv1.setText(App.SYSTEM_VERSION + "");
+                    edit4.setText(App.SYSTEM_VERSION + "");
                 if (App.IP != null)
-                    edit1.setText(App.IP + "");
+                    edit1.setText(App.IP
+                            + "");
                 if (App.PORT != null)
                     edit2.setText(App.PORT + "");
                 if (App.DEVICE_NO != null)
-                    tv4.setText(App.DEVICE_NO + "");
-                break;
+                    edit3.setText(App.DEVICE_NO + "");
+                break;*/
+                App.IP=edit1.getText().toString()+"";
+                App.PORT=edit2.getText().toString()+"";
+                App.SYSTEM_VERSION=edit4.getText().toString()+"";
+                App.DEVICE_NO=edit3.getText().toString()+"";
+                getFragmentManager().popBackStack();
         }
     }
 }

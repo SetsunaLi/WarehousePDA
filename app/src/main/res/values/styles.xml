@@ -122,11 +122,25 @@
     </style>
     <style name="edit_style2">
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/colorHomeButton2</item>
+        <item name="android:textColor">@color/colorHomeButton1</item>
+        <item name="android:textColorHint">@color/colorHomeButton1</item>
         <item name="android:background">@drawable/edit_style2</item>
         <item name="android:gravity">center_vertical</item>
     </style>
-
+    <style name="edit_style1.">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorHomeButton1</item>
+        <item name="android:textColorHint">@color/colorHomeButton1</item>
+        <item name="android:background">@color/colorDialogContent</item>
+        <item name="android:padding">15dp</item>
+    </style>
+    <style name="edit_style2.">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorEditNoTextSelect</item>
+        <item name="android:textColorHint">@color/colorEditNoTextSelect</item>
+        <item name="android:background">@color/colorEditNoBgSelect</item>
+        <item name="android:padding">15dp</item>
+    </style>
     <style name="text_style1">
         <item name="android:textColor">@color/colorHomeButton1</item>
         <item name="android:textSize">22sp</item>
@@ -217,4 +231,8 @@
         <item name="android:background">@drawable/view_dash_line</item>
         <item name="android:layerType">software</item>
     </style>
+    <style name="view_border">
+        <item name="android:background">@drawable/view_dash_border</item>
+    </style>
+
 </resources>

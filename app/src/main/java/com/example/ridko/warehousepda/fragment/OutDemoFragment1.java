@@ -74,6 +74,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            upLoadFlag=true;
             Bundle data = msg.getData();
             if (data.getBoolean("UpLoading")) {
                 fragment = new OutBoundNoFragment();
@@ -135,14 +136,18 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
             epcSet.clear();
         if (clotheNoVateDyeList != null)
             clotheNoVateDyeList.clear();
+        List<OutboundApplyDetail> newList=new ArrayList<>();
         for (int i = 0; i < App.outboundApplyDetailList.size(); i++) {
-            if (App.outboundApplyDetailList.get(i).getFlag() == 2)
-                App.outboundApplyDetailList.remove(App.outboundApplyDetailList.get(i));
-            else {
+            if (App.outboundApplyDetailList.get(i).getFlag() != 2) {
                 App.outboundApplyDetailList.get(i).clearReadNum();
                 App.outboundApplyDetailList.get(i).setFlag(0);
+                newList.add(App.outboundApplyDetailList.get(i));
             }
         }
+        App.outboundApplyDetailList.clear();
+        App.outboundApplyDetailList.addAll(newList);
+        newList.clear();
+        newList=null;
         myAdapter.notifyDataSetChanged();
     }
 
@@ -223,7 +228,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                 break;
         }
     }
-
+    private boolean upLoadFlag=true;
     private void blinkDialog() {
         final Dialog dialog;
         LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -257,7 +262,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                 transaction.commit();*/
                 List<OutboundDetail> detilList=new ArrayList<OutboundDetail>();
                 for (List<OutboundDetail> od : clotheNoVateDyeList.values()) {
-                    if (od.get(0).getFlag() != 2) {
+                    if (od.get(0).getFlag() == 1) {
                         detilList.addAll(od);
                     }
                 }
@@ -268,19 +273,22 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                     public void run() {
                         Response response = null;
                         try {
-                            response = OkHttpClientManager.postJsonAsyn(OkHttpClientManager.outBoundURL, jsonString);
-                            if (response.isSuccessful()) {
-                                Message msg = handler.obtainMessage();
-                                Bundle bundle = new Bundle();
-                                bundle.putBoolean("UpLoading", true);
-                                msg.setData(bundle);
-                                handler.sendMessage(msg);
-                            } else {
-                                Message msg = handler.obtainMessage();
-                                Bundle bundle = new Bundle();
-                                bundle.putBoolean("UpLoading", false);
-                                msg.setData(bundle);
-                                handler.sendMessage(msg);
+                            if (upLoadFlag) {
+                                upLoadFlag=false;
+                                response = OkHttpClientManager.postJsonAsyn(OkHttpClientManager.outBoundURL, jsonString);
+                                if (response.isSuccessful()) {
+                                    Message msg = handler.obtainMessage();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putBoolean("UpLoading", true);
+                                    msg.setData(bundle);
+                                    handler.sendMessage(msg);
+                                } else {
+                                    Message msg = handler.obtainMessage();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putBoolean("UpLoading", false);
+                                    msg.setData(bundle);
+                                    handler.sendMessage(msg);
+                                }
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -368,6 +376,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                                     for (OutboundApplyDetail applyDetail : App.outboundApplyDetailList) {
                                         if (response.getClothNo().equals(applyDetail.getClothNo())
                                                 && response.getVateDye().equals(applyDetail.getVatDyeNo())) {
+                                            response.setFlag(1);
                                             if (!isInList)
                                                 isInList = true;
                                             applyDetail.addReadNum();
@@ -387,6 +396,7 @@ public class OutDemoFragment1 extends Fragment implements MyItemOnTouchListener,
                                             break;
                                     }
                                     if (!isInList) {
+                                        response.setFlag(2);
                                         OutboundApplyDetail applyDetail1 = new OutboundApplyDetail("", response.getClothNo(), "", "", "", response.getVateDye(), 0);
                                         applyDetail1.addReadNum();
                                         applyDetail1.setFlag(2);

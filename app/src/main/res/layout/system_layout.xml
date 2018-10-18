@@ -21,17 +21,19 @@
             style="@style/text_style3"
             android:text="@string/system_version_key"
             />
-        <TextView
-            android:id="@+id/tv1"
+        <EditText
+            android:id="@+id/edit4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:gravity="center_vertical"
-            style="@style/text_style1"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:text="@string/system_version_summary"
-            />
+            style="@style/edit_style2"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -122,17 +124,19 @@
             style="@style/text_style3"
             android:text="@string/system_device_number_key"
             />
-        <TextView
-            android:id="@+id/tv4"
+        <EditText
+            android:id="@+id/edit3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:gravity="center_vertical"
-            style="@style/text_style1"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:text="@string/system_device_number_summary"
-            />
+            style="@style/edit_style2"/>
+
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"

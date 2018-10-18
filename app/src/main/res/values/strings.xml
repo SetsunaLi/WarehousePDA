@@ -229,6 +229,7 @@
     <string name="text81">布匹色号</string>
     <string name="text82">布匹颜色</string>
     <string name="outBoundUploadFail">出库信息上传失败！</string>
+    <string name="fixedText">入库单号：</string>
 
 
 
@@ -433,10 +434,10 @@
     <string name="rr_total_tag_title">TOTAL READS</string>
     <string name="rr_read_time_title">READ TIME</string>
     <string name="rr_read_rate_title">READ RATE</string>
-    <string name="start_title">START</string>
+    <string name="start_title">扫描</string>
     <string name="tag_id">Tag ID</string>
     <string name="locationing_distance_title">Relative Distance</string>
-    <string name="stop_title">STOP</string>
+    <string name="stop_title">停止</string>
     <string name="tag_pattern_title">Tag Pattern</string>
     <string name="password_title">Password</string>
     <string name="memory_bank_title">Memory Bank</string>

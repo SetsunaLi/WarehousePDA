@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.ridko.warehousepda.application.App;
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
 import com.squareup.okhttp.Call;
@@ -40,14 +41,20 @@ import java.util.Set;
 
 public class OkHttpClientManager {
 
-    /*请求出库申请单*/
+    /*请求出库申请单*//*
     public static  final String applyNoURL="http://192.168.1.103:9999/app/outbound/outbound_apply/";
-    /*请求缸号信息列表*/
+    *//*请求缸号信息列表*//*
     public static  final String applyDetailURL="http://192.168.1.103:9999/app/outbound/detail_vatedye/";
+    *//*请求EPC布匹信息*//*
+    public static  final String epcClothURL="http://192.168.1.103:9999/app/outbound/detail/"; */
+    /*请求出库申请单*/
+    public static  final String applyNoURL=App.IP+":"+App.PORT+"/app/outbound/outbound_apply/";
+    /*请求缸号信息列表*/
+    public static  final String applyDetailURL=App.IP+":"+App.PORT+"/app/outbound/detail_vatedye/";
     /*请求EPC布匹信息*/
-    public static  final String epcClothURL="http://192.168.1.103:9999/app/outbound/detail/";
+    public static  final String epcClothURL=App.IP+":"+App.PORT+"/app/outbound/detail/";
     /*上传出库布匹信息*/
-    public static  String outBoundURL="http://192.168.1.103:9999/app/outbound";
+    public static  String outBoundURL= App.IP+":"+App.PORT+"/app/outbound";
     private static OkHttpClientManager mInstance;
     private OkHttpClient mOkHttpClient;
     private Handler mDelivery;

@@ -42,8 +42,7 @@ public class App extends android.app.Application {
     public static String USER_ID;
     public static String LOADTIME;
     public static String STATION;
-    public static String SYSTEM_VERSION;
-    public static String DEVICE_NO;
+
     public static boolean SYSTEM_PUSH = true;
     public static int ARITHMETIC = 1;
     public static int START_Q = 4;
@@ -60,9 +59,12 @@ public class App extends android.app.Application {
     public static boolean ISBUY = true;
     public static boolean BIND = true;
     public static String REMARKS="模拟出库";
+    public static String OUTNO;
     public static RFIDReader mConnectedReader;
     public static String IP="http://192.168.1.103";
     public static String PORT="9999";
+    public static String SYSTEM_VERSION;
+    public static String DEVICE_NO;
 
     //Variable to keep track of the unique tags seen
     public static volatile int UNIQUE_TAGS = 0;

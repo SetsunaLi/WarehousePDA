@@ -64,7 +64,7 @@ public class OutBoundNoFragment extends Fragment {
     Button buttonOk;
 
     private MyAdapter myAdapter;
-    private List<OutboundApplyDetail> outboundApplyDetailList;
+    private List<OutboundApplyDetail> outboundApplyDetailList=new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -109,7 +109,9 @@ public class OutBoundNoFragment extends Fragment {
     }
     private void initData(){
         if (App.outboundApplyDetailList!=null)
-        this.outboundApplyDetailList= App.outboundApplyDetailList;
+            for (OutboundApplyDetail detail:App.outboundApplyDetailList)
+                if (detail.getFlag()!=2)
+        this.outboundApplyDetailList.add(detail);
     }
     public void initView() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss

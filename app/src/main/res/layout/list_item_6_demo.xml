@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      >
+<!--<com.example.ridko.warehousepda.view.FixedEditText
+    android:id="@+id/fixededit1"
+    android:layout_width="match_parent"
+    android:layout_height="60dip"
+    style="@style/edit_style2."
+    android:hint="@string/edittext_title"
+    android:focusable="false"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+     />-->
+        <EditText
+            android:id="@+id/fixededit1"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            style="@style/edit_style2."
+            android:hint="@string/edittext_title"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:focusable="false"
+            android:focusableInTouchMode="true"/>
+    </LinearLayout>
+</LinearLayout>
